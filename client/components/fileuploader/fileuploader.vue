@@ -5,15 +5,20 @@
         <div class="col-md-12">
           <h3 class="text-center">Secret file uploader</h3>
           <h3 class="text-center">Don't share!</h3>
+          <h3 class="text-center">
+            Unfortunately only works in Chrome (no firefox / safari)
+          </h3>
         </div>
       </div>
       <div class="row uploader-card">
         <div class="col-md-12">
-          <div class="card shaddow ">
+          <div class="card shaddow">
             <div class="card-body col-md-6 mx-auto">
               <form @submit.prevent="addNewAudio">
                 <div class="form-group">
-                  <label for="artist">Audio <span style="color:red">*</span> (only wavs)</label>
+                  <label for="artist"
+                    >Audio <span style="color: red">*</span> (only wavs)</label
+                  >
                   <div class="custom-file">
                     <input
                       type="file"
@@ -53,7 +58,7 @@
                       v-model="tagKeyword"
                       :tags="tagsKeyword"
                       :autocomplete-items="filteredItemsKeyword"
-                      @tags-changed="newTags => (tagsKeyword = newTags)"
+                      @tags-changed="(newTags) => (tagsKeyword = newTags)"
                     />
                   </client-only>
                 </div>
@@ -65,13 +70,15 @@
                       v-model="tagTag"
                       :tags="tagsTag"
                       :autocomplete-items="filteredItemsTag"
-                      @tags-changed="newTags => (tagsTag = newTags)"
+                      @tags-changed="(newTags) => (tagsTag = newTags)"
                     />
                   </client-only>
                 </div>
 
                 <div class="form-group">
-                  <label for="language">Language <span style="color:red">*</span></label>
+                  <label for="language"
+                    >Language <span style="color: red">*</span></label
+                  >
                   <select
                     v-model="audioDetails.language_short"
                     class="form-control"
@@ -167,9 +174,9 @@
                     v-model="audioDetails.speaker_native_language"
                     class="form-control"
                   >
-                    <option value="" disabled selected
-                      >Speaker native language</option
-                    >
+                    <option value="" disabled selected>
+                      Speaker native language
+                    </option>
                     <option value="DE">German</option>
                     <option value="EN">English</option>
                     <option value="ES">Spanish</option>
@@ -246,7 +253,9 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="language">Country <span style="color:red">*</span></label>
+                  <label for="language"
+                    >Country <span style="color: red">*</span></label
+                  >
                   <select v-model="audioDetails.country" class="form-control">
                     <option value="" disabled selected>Country</option>
                     <!-- https://www.freeformatter.com/iso-country-list-html-select.html#alpha2 -->
@@ -529,15 +538,17 @@
                   <label for="title">Coordinates</label>
                   <input
                     id="inputLat"
-                    type="number" step=".01"
+                    type="number"
+                    step=".01"
                     v-model="audioDetails.lat"
                     class="form-control"
                     placeholder="Latitude"
                   />
                   <input
                     id="inputLong"
-                    style="margin-bottom: 4px;"
-                    type="number" step=".01"
+                    style="margin-bottom: 4px"
+                    type="number"
+                    step=".01"
                     v-model="audioDetails.long"
                     class="form-control"
                     placeholder="Longitude"
@@ -707,7 +718,7 @@ export default {
         town: "",
         long: "",
         lat: "",
-        audio: ""
+        audio: "",
       },
       allAudio: [],
       audioLoading: false,
@@ -735,11 +746,11 @@ export default {
       ],
       tagTag: "",
       tagsTag: [],
-      autocompleteItemsTag: []
+      autocompleteItemsTag: [],
     };
   },
   computed: {
-    isDisabled: function() {
+    isDisabled: function () {
       if (
         this.audioDetails.language_short === "" ||
         this.audioDetails.audio === "" ||
@@ -749,12 +760,12 @@ export default {
       }
     },
     filteredItemsKeyword() {
-      return this.autocompleteItemsKeyword.filter(i => {
+      return this.autocompleteItemsKeyword.filter((i) => {
         return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
       });
     },
     filteredItemsTag() {
-      return this.autocompleteItemsTag.filter(i => {
+      return this.autocompleteItemsTag.filter((i) => {
         return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
       });
     },
@@ -763,7 +774,7 @@ export default {
     },
     getTagTags() {
       return this.tagsTag;
-    }
+    },
   },
   methods: {
     initForm() {
@@ -789,14 +800,14 @@ export default {
 
         // keywords tags
         let ktags = [];
-        this.tagsKeyword.forEach(tag => {
+        this.tagsKeyword.forEach((tag) => {
           ktags.push(tag.text);
         });
         formData.append("keywords", JSON.stringify(ktags));
 
         // tag tags
         let ttags = [];
-        this.tagsTag.forEach(tag => {
+        this.tagsTag.forEach((tag) => {
           ttags.push(tag.text);
         });
         formData.append("tags", JSON.stringify(ttags));
@@ -842,13 +853,13 @@ export default {
         this.addLoading = true;
         this.$axios
           .$post("/audio", formData)
-          .then(response => {
+          .then((response) => {
             console.log(response);
             this.addLoading = false;
             this.audioDetails = {};
             swal("Success", "New Audio Added", "success");
           })
-          .catch(err => {
+          .catch((err) => {
             this.addLoading = false;
             swal("Error", "Something Went wrong", "error");
             console.log(err);
@@ -879,9 +890,9 @@ export default {
       // somehow the data doesn't get passed, so adding it manually
       this.audioDetails.lat = document.getElementById("inputLat").value;
       this.audioDetails.long = document.getElementById("inputLong").value;
-    }
+    },
   },
   mounted() {},
-  created() {}
+  created() {},
 };
 </script>
