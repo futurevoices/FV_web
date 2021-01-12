@@ -1,0 +1,26 @@
+title: test
+filename: xxx.aiff
+version: 0.1
+literal_text: Wir bitten Sie um ein bisschen Geduld
+user_timestamp: 2020-09-12T01:49:56.000Z
+user_timestamp_string: Wed Jun 17 2020 01:09:41 GMT+0200 (Central European Summer Time)
+server_timestamp: 2020-09-11T23:50:20.043Z
+
+keywords: [this, that]
+tags: [this, that]
+
+language: german
+language_short: de
+dialect: none
+speaker_native_language: german
+
+country: Germany
+country_code: DE
+town: Berlin
+coordinates:
+  lat: 52.520008
+  long: 13.404954
+
+approved: false
+approval_date: 2020-09-12T01:49:56.000Z
+approved_by: peter
