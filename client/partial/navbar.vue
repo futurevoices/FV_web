@@ -3,6 +3,8 @@
   <header>
     <div>
       <b-navbar toggleable="lg">
+        
+
         <b-navbar-brand href="/">Future Voices</b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -36,7 +38,9 @@
               <nuxt-link to="/manager" class="nav-link">Manager</nuxt-link>
             </li> -->
             <b-nav-item-dropdown text="en" right>
-              <b-dropdown-item href="#">EN</b-dropdown-item>
+              <b-dropdown-item href="#">en</b-dropdown-item>
+              <!-- <b-dropdown-item href="#">en</b-dropdown-item>
+              <b-dropdown-item href="#">en</b-dropdown-item> -->
               <!-- <b-dropdown-item href="#">ES</b-dropdown-item>
               <b-dropdown-item href="#">RU</b-dropdown-item>
               <b-dropdown-item href="#">FA</b-dropdown-item> -->
@@ -47,11 +51,137 @@
     </div>
   </header>
 </template>
-<style scoped>
-
+<style lang="scss">
 nav {
-  background-color: blue !important;
+  height: 40px;
+  background-color: transparent;
+  padding:0 !important;
+  // padding: 10px 24px 0px 24px;
+  padding-left: 24px !important;
+  padding-right: 0px !important;
+
+  border-bottom: $black 2px solid;
+
+
+  #__BVID__88__BV_toggle_ {
+    padding: 0;
+  }
+
+  & .navbar-brand {
+    font-size: 24px !important;
+    margin-top: -3px !important;
+  }
+
+  h1, p , a, h2, h3, div {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  ul li {
+    padding-left: 20px;
+    padding-right: 20px;
+    border-left: 2.2px solid $black;
+    height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    a {
+    margin-top: -3px !important;
+    }
+  }
+
+  .dropdown-menu-right {
+    background-color: $lightweight;
+    li {
+    border: none !important;
+    background-color: $lightweight;
+    }
+  }
+
+  // u li a {
+  //   margin: 0;
+  //   padding: 0 !important;
+  // }
+ 
+  button {
+    margin: 0;
+  }
+
 }
+
+  /*==========  Non-Mobile First Method  ==========*/
+
+  /*Above */
+  @media only screen and (min-width : 1201px) {}
+
+  /* Large Devices, Wide Screens */
+  @media only screen and (max-width : 1200px) {}
+
+  /* Medium Devices, Desktops */
+  @media only screen and (max-width : 992px) {}
+
+  /* Small Devices, Tablets */
+  @media only screen and (max-width : 768px) {}
+
+  /* Extra Small Devices, Phones */
+  @media only screen and (max-width : 480px) {
+    nav {
+      height: auto;
+      min-height: 40px;
+        padding-left: 10px !important;
+
+        & .navbar-brand {
+          font-size: 21px !important;
+          margin-top: -3px !important;
+        }
+
+               
+        button:focus,
+        button:active:focus,
+        button.active:focus,
+        button.focus,
+        button:active.focus,
+        button.active.focus {
+          outline: none !important;
+        }
+
+        .navbar-toggler {
+          border: none;
+          .navbar-toggler-icon {
+            background-image: url("~static/navbar-icon.svg") !important;
+            height: 20px;
+            width: 15px;
+          }
+        }
+
+        #nav-collapse {
+          
+          padding-right: 10px;
+          ul li {
+          border-left: 0;
+          justify-content: flex-end;
+
+          a {
+            font-size: 21px !important;
+
+            span {
+               font-size: 21px !important;
+            }
+          }
+
+          }
+        
+        }
+
+
+    }
+  }
+
+  /* Custom, iPhone Retina */
+  @media only screen and (max-width : 320px) {}
+
 
 
 
