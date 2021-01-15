@@ -1,5 +1,22 @@
 // @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
 
+@font-face {
+    font-family: 'Soehne-Mono';
+    font-style: normal;
+    src: url(~assets/fonts/soehne-mono-web-buch.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Soehne-Mono';
+    font-style: italic;
+    src: url(~assets/fonts/soehne-mono-web-buch-kursiv.woff2) format('woff2');
+}
+
+
+body {
+    font-family: 'Soehne-Mono', monospace;
+}
+
 $footerRadioHeight: 70px;
 
 // html,
