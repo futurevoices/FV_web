@@ -35,6 +35,11 @@ export default {
     "@nuxtjs/pwa",
     "@nuxtjs/style-resources",
   ],
+  bootstrapVue: {
+    bootstrapCSS: false, 
+    bootstrapVueCSS: false
+  },
+
   styleResources: {
     scss: ["~/assets/scss/variables.scss"],
   },

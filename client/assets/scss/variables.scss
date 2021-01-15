@@ -1,5 +1,4 @@
 // @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
-
 @font-face {
     font-family: 'Soehne-Mono';
     font-style: normal;
@@ -12,9 +11,18 @@
     src: url(~assets/fonts/soehne-mono-web-buch-kursiv.woff2) format('woff2');
 }
 
+//colors
+$lightweight: #F1F1F1;
+$black: #000000;
+
 
 body {
     font-family: 'Soehne-Mono', monospace;
+    background-color: $lightweight;
+}
+
+p, a h1, h2, h3, span, li, ul {
+    color: $black;
 }
 
 $footerRadioHeight: 70px;
