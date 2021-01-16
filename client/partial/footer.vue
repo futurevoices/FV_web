@@ -1,12 +1,18 @@
 <template>
   <footer>
+    <audio
+      id="audioStream"
+      src="https://gencomp.medienhaus.udk-berlin.de:8443/future.mp3"
+    ></audio>
     <div class="footerWrapper">
       <div class="wrap">
         <div class="element border-right">
           <img
             src="~/static/play.svg"
             class="playbutton"
+            id="playButton"
             alt="play/pause button"
+            @click="toggleStream()"
           />
           <p>Live<span class="hide-mobile"> streaming</span></p>
         </div>
@@ -17,11 +23,6 @@
           <p>{{ time }}</p>
         </div>
       </div>
-      <!-- <p>Fixed Radio Player:</p>
-      <audio
-              controls
-              src="https://gencomp.medienhaus.udk-berlin.de:8443/future.mp3"
-            ></audio> -->
     </div>
   </footer>
 </template>
@@ -169,12 +170,30 @@ export default {
     },
     resize() {
       this.updateTime();
+    },
+    addEventListeners() {
+      window.addEventListener('resize', this.resize);
+      this.audio = document.getElementById('audioStream');
+      this.playButton = document.getElementById('playButton');
+    },
+    toggleStream() {
+      console.log(this.audio.paused);
+      if (!this.audio.paused) {
+        this.audio.pause();
+        this.playButton.src = '/play.svg';
+      } else {
+        console.log('play');
+        this.audio.load();
+        this.audio.play();
+        this.playButton.src = '/pause.svg';
+      }
     }
   },
   mounted() {
     this.toggleTimer();
     this.updateTime();
-    window.addEventListener('resize', this.resize);
+
+    this.addEventListeners();
   },
   created() {},
   destroyed() {
