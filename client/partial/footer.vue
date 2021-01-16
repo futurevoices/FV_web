@@ -8,7 +8,7 @@
             class="playbutton"
             alt="play/pause button"
           />
-          <p>Live streaming</p>
+          <p>Live<span class="hide-mobile"> streaming</span></p>
         </div>
       </div>
       <div class="wrap">
@@ -28,6 +28,7 @@
 
 <style lang="scss">
 footer {
+  z-index: 9999;
   background-color: $green;
   height: 42px;
   width: 100vw;
@@ -96,27 +97,21 @@ footer {
   }
 }
 
-.streamPlayer {
-  width: 100vw;
-  height: $footerRadioHeight;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  border-top: 1px solid black;
-  padding: 10px;
-  z-index: 9999;
-  background-color: white;
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  footer {
+    .footerWrapper {
+      .wrap {
+        .border-right {
+          border-right: 0px !important;
+          padding-right: 0px;
+        }
 
-  .playerWrapper {
-    text-align: left;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-
-    p {
-      margin: 0;
-      padding: 0;
-      margin-right: 10px;
+        .border-left {
+          border-left: 0px !important;
+          padding-left: 0px;
+        }
+      }
     }
   }
 }

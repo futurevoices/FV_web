@@ -3,27 +3,34 @@
 //     src: url('./static/fonts/soehne-mono-web-buch-kursiv.woff2') format("woff2");
 // }
 
-
 /*==========  Non-Mobile First Method  ==========*/
 
 /*Above */
-@media only screen and (min-width : 1201px) {}
+@media only screen and (min-width: 1201px) {
+}
 
 /* Large Devices, Wide Screens */
-@media only screen and (max-width : 1200px) {}
+@media only screen and (max-width: 1200px) {
+}
 
 /* Medium Devices, Desktops */
-@media only screen and (max-width : 992px) {}
+@media only screen and (max-width: 992px) {
+}
 
 /* Small Devices, Tablets */
-@media only screen and (max-width : 768px) {}
+@media only screen and (max-width: 768px) {
+}
 
 /* Extra Small Devices, Phones */
-@media only screen and (max-width : 480px) {}
+@media only screen and (max-width: 480px) {
+  .hide-mobile {
+    display: none;
+  }
+}
 
 /* Custom, iPhone Retina */
-@media only screen and (max-width : 320px) {}
-
+@media only screen and (max-width: 320px) {
+}
 
 @import 'bootstrap/scss/bootstrap.scss';
 @import 'bootstrap-vue/src/index.scss';
