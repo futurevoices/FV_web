@@ -1,24 +1,22 @@
 <template>
   <div>
-    <Stream />
+    <Index />
   </div>
 </template>
 <script>
-import Stream from "@/components/stream/stream";
+import Index from '@/components/index/index';
 export default {
   components: {
-    Stream
+    Index
   },
-  data () {
+  data() {
     return {
-      radioComponent: ""
-    }
+      radioComponent: ''
+    };
   },
   computed: {},
   methods: {},
-  mounted() {
-  },
-  created() {},
-
+  mounted() {},
+  created() {}
 };
 </script>
