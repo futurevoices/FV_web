@@ -13,6 +13,10 @@
 <script>
 import navbar from "@/partial/navbar";
 import steamFooter from "@/partial/footer";
+
+// import vhCheck from 'vh-check'
+// const test = vhCheck()
+
 export default {
   components: {
     navbar, steamFooter

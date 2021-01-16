@@ -19,7 +19,8 @@
     "iso-639-1": "^2.1.4",
     "nuxt": "^2.14.6",
     "recorder-js": "^1.0.7",
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "vh-check": "^2.0.5"
   },
   "devDependencies": {
     "@nuxtjs/router-extras": "^1.1.1",
