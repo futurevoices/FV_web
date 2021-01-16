@@ -121,7 +121,7 @@ footer {
 export default {
   data() {
     return {
-      time: '0:0:0:0',
+      time: '0:0:00:00',
       // year, month, day, hour, minute, second
       // month: 0-11
       // berlin -> utc: time should be 1 hour behind my berlin time
@@ -157,10 +157,12 @@ export default {
 
       // calculate (and subtract) whole minutes
       let minutes = Math.floor(delta / 60) % 60;
+      minutes = ('0' + minutes).slice(-2);
       delta -= minutes * 60;
 
       // what's left is seconds
-      let seconds = Math.round(delta % 60); // in theory the modulus is not required
+      let seconds = Math.floor(delta % 60); // in theory the modulus is not required
+      seconds = ('0' + seconds).slice(-2);
 
       if (window.innerWidth <= 480) {
         this.time = `${days}:${hours}:${minutes}:${seconds}`;
