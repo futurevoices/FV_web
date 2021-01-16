@@ -133,9 +133,6 @@ export default {
   computed: {},
   methods: {
     toggleTimer() {
-      console.log(new Date(Date.UTC(2021, 0, 16, 18, 0, 0)));
-      console.log(new Date().getTime());
-
       if (this.isRunning) {
         clearInterval(this.interval);
       } else {
@@ -179,12 +176,10 @@ export default {
       this.playButton = document.getElementById('playButton');
     },
     toggleStream() {
-      console.log(this.audio.paused);
       if (!this.audio.paused) {
         this.audio.pause();
         this.playButton.src = '/play.svg';
       } else {
-        console.log('play');
         this.audio.load();
         this.audio.play();
         this.playButton.src = '/pause.svg';
