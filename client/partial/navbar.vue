@@ -133,7 +133,7 @@ nav {
         padding-left: 10px !important;
 
         & .navbar-brand {
-          font-size: 21px !important;
+          font-size: 24px !important;
           margin-top: -3px !important;
         }
 
@@ -151,8 +151,11 @@ nav {
           border: none;
           .navbar-toggler-icon {
             background-image: url("~static/navbar-icon.svg") !important;
+              background-size: 20px 20px;
             height: 20px;
-            width: 15px;
+            width: 20px;
+  
+            margin-bottom: 2px;
           }
         }
 
