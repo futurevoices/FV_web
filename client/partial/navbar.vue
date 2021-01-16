@@ -5,7 +5,7 @@
       <b-navbar toggleable="lg">
         
 
-        <b-navbar-brand href="/">Future Voices</b-navbar-brand>
+        <b-navbar-brand><nuxt-link to="/">Future Voices</nuxt-link></b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 

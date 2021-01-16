@@ -2,8 +2,8 @@
   <div>
 
     <navbar />
-    <div v-if="['upload', 'explore', 'index'].indexOf($route.name) > -1">
-           <StreamPlayer />
+    <div v-if="['upload', 'explore', 'index', 'about', 'imprint'].indexOf($route.name) > -1">
+           <steamFooter />
     </div>
     <nuxt />
 
@@ -12,14 +12,14 @@
 </template>
 <script>
 import navbar from "@/partial/navbar";
-import StreamPlayer from "@/components/stream/streamPlayer";
+import steamFooter from "@/partial/footer";
 export default {
   components: {
-    navbar, StreamPlayer
+    navbar, steamFooter
   },
   data () {
     return {
-      radioComponent: "StreamPlayer"
+      radioComponent: "steamFooter"
     }
   }
 };
