@@ -57,7 +57,8 @@ header {
   top: 0;
   left: 0;
   width: 100vw;
-  z-index: 10;
+  z-index: 100;
+  background-color: $lightweight;
 }
 
 nav {
@@ -67,8 +68,7 @@ nav {
   // padding: 10px 24px 0px 24px;
   padding-left: 24px !important;
   padding-right: 0px !important;
-  z-index: 10;
-
+  z-index: 100;
   border-bottom: $black 2px solid;
 
   #__BVID__88__BV_toggle_ {

@@ -5,11 +5,12 @@
       <img src="background-image.png" alt="" />
     </div>
     <div class="contentWrapper">
+      <div id="moebius" class="moebius"><Moebius /></div>
       <div id="introText" class="content">
-        <div class="moebius"><Moebius /></div>
+        <div id="moebius-placeholder"></div>
+        <h3>Welcome to Future Voices / Zukunftsmusik!</h3>
         <p>
-          Welcome to Future Voices / Zukunftsmusik!
-          <br /><br />
+          <br />
           A one-year live-generated radio stream composed from hopes, fears and
           dreams of contributors from around the world.
         </p>
@@ -35,70 +36,43 @@
     </div>
     <div class="second-content">
       <div class="content">
-        <p>
-          What do YOU think about the future? What do YOU expect, fear, hope,
-          propose, plan for the future? You can make your voice heard: We are
-          collecting a multitude of voices that together compose this
-          one-year-long sound stream.
-        </p>
-        <p>
-          What do YOU think about the future? What do YOU expect, fear, hope,
-          propose, plan for the future? You can make your voice heard: We are
-          collecting a multitude of voices that together compose this
-          one-year-long sound stream.
-        </p>
-        <p>
-          What do YOU think about the future? What do YOU expect, fear, hope,
-          propose, plan for the future? You can make your voice heard: We are
-          collecting a multitude of voices that together compose this
-          one-year-long sound stream.
-        </p>
+        <div class="block">
+          <h3>Stats</h3>
+          <br />
+
+          <table class="tg">
+            <thead>
+              <tr>
+                <th class="tg-0lax">Recordings</th>
+                <th class="tg-0lax">soon</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="tg-0lax">Languages</td>
+                <td class="tg-0lax">soon</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">Current Language</td>
+                <td class="tg-0lax">soon</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">Current Composition<br /></td>
+                <td class="tg-0lax">soon</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="block">
+          <h3>Enter virtual world</h3>
+          <br />
+
+          <img
+            src="/gameimage.png"
+            alt="image to enter Future Voices 3d World"
+          />
+        </div>
       </div>
-      <!-- <div class="block">
-        <p>Stats</p>
-        <p>
-          What do YOU think about the future? What do YOU expect, fear, hope,
-          propose, plan for the future? You can make your voice heard: We are
-          collecting a multitude of voices that together compose this
-          one-year-long sound stream.
-        </p>
-        <p>
-          What do YOU think about the future? What do YOU expect, fear, hope,
-          propose, plan for the future? You can make your voice heard: We are
-          collecting a multitude of voices that together compose this
-          one-year-long sound stream.
-        </p>
-        <p>
-          What do YOU think about the future? What do YOU expect, fear, hope,
-          propose, plan for the future? You can make your voice heard: We are
-          collecting a multitude of voices that together compose this
-          one-year-long sound stream.
-        </p>
-        <br />
-        <br />
-        <table class="tg">
-          <thead>
-            <tr>
-              <th class="tg-0lax">Recordings</th>
-              <th class="tg-0lax">soon</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="tg-0lax">Languages</td>
-              <td class="tg-0lax">soon</td>
-            </tr>
-            <tr>
-              <td class="tg-0lax">Current Language</td>
-              <td class="tg-0lax">soon</td>
-            </tr>
-            <tr>
-              <td class="tg-0lax">Current Composition<br /></td>
-              <td class="tg-0lax">soon</td>
-            </tr>
-          </tbody>
-        </table>
-      </div> -->
     </div>
   </section>
 </template>
@@ -111,18 +85,7 @@ section {
   height: auto;
 }
 
-.second-content {
-  background-color: $lightweight;
-  z-index: 2;
-  box-shadow: 0px 0px 50px 100px $lightweight;
-
-  .content {
-    padding: 24px;
-  }
-}
-
 .bodyWrapper {
-  background-color: yellow;
   z-index: 999;
 }
 
@@ -158,6 +121,19 @@ section {
     z-index: 1;
   }
 }
+.moebius {
+  position: absolute;
+  top: 0;
+  // background-color: yellow;
+  width: 100%;
+  height: auto;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  margin-top: -18vh;
+  z-index: 101;
+}
+
 .contentWrapper {
   position: relative;
   width: 100%;
@@ -177,28 +153,17 @@ section {
     width: 100%;
     height: auto;
     z-index: 4;
-    margin-bottom: 40px;
+    margin-bottom: 100px;
 
     p,
-    a {
+    a,
+    h3 {
       color: $lightweight;
     }
   }
 
-  .moebius {
-    // background-color: yellow;
-    width: 100%;
-    height: auto;
-    top: 0;
-    left: 0;
-    z-index: 3;
-    margin-top: -18vh;
-    margin-bottom: -8vh;
-    z-index: 99;
-  }
-
   #introText {
-    z-index: 100;
+    z-index: 4;
 
     p,
     a {
@@ -230,14 +195,137 @@ section {
   }
 }
 
+.second-content {
+  position: relative;
+  background-color: $lightweight;
+  z-index: 2;
+  box-shadow: 0px 0px 50px 100px $lightweight;
+  margin-top: 100px;
+  padding-bottom: 100px;
+
+  .content {
+    padding-left: 24px;
+    padding-right: 24px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+    .block {
+      margin-left: 12px;
+      margin-right: 12px;
+      display: inline-block;
+      height: auto;
+      width: 20%;
+
+      table {
+        width: 100%;
+        th,
+        tr {
+          width: 50%;
+
+          td,
+          th {
+            padding: 5px;
+            font-weight: normal;
+          }
+        }
+      }
+
+      table,
+      th,
+      td {
+        border: 2px solid $black;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .block:nth-of-type(1) {
+      flex-grow: 1;
+    }
+    .block:nth-of-type(2) {
+      flex-grow: 2;
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .moebius {
+    margin-top: -5vw;
+  }
+}
+
 /* Extra Small Devices, Phones */
 @media only screen and (max-width: 480px) {
+  .moebius {
+    transform: translateX(-20px);
+  }
   .background-image {
     .inside-shadow {
       box-shadow: inset 0px 0px 0px 0px $lightweight,
         // first one is to hide the gap
           inset 0px 0px 0px 0px $lightweight,
         inset 0px 30px 30px $lightweight, inset 0px -30px 5px $lightweight;
+    }
+  }
+
+  // font sizes
+  section {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .contentWrapper {
+      .content {
+        .cta-links {
+          flex-direction: column;
+          text-align: center;
+          padding-top: 0;
+          p,
+          a {
+            margin-top: 12px;
+            margin-bottom: 12px;
+          }
+        }
+      }
+    }
+
+    p,
+    a {
+      font-size: 21px !important;
+    }
+  }
+
+  .second-content {
+    position: relative;
+    background-color: $lightweight;
+    z-index: 2;
+    box-shadow: 0px 0px 50px 100px $lightweight;
+    margin-top: 100px;
+    padding-bottom: 100px;
+
+    .content {
+      padding-left: 0px;
+      padding-right: 0px;
+      flex-direction: column-reverse;
+
+      .block {
+        margin-left: 0px;
+        margin-right: 0px;
+        display: inline-block;
+        height: auto;
+        width: 100%;
+        margin-bottom: 48px;
+      }
+
+      .block:nth-of-type(1) {
+        flex-grow: 0;
+      }
+      .block:nth-of-type(2) {
+        flex-grow: 0;
+      }
     }
   }
 }
@@ -261,6 +349,24 @@ export default {
       // height += 100;
       // document.getElementById('background').style.height = height + 'px';
       // console.log(height);
+
+      // resize moebius placeholder
+      // let height = document.getElementById('moebius').offsetHeight;
+      let height;
+      if (window.innerWidth >= '900') {
+        console.log(height);
+        height = 650;
+        console.log(height);
+      } else if (window.innerWidth < '900' && window.innerWidth > 480) {
+        height = 650; // to do
+      } else {
+        height = window.innerWidth * 0.8;
+      }
+
+      console.log(height);
+
+      document.getElementById('moebius-placeholder').style.height =
+        height + 'px';
     }
   },
   mounted() {
