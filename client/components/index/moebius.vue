@@ -34,7 +34,8 @@ export default {
       mData: {
         rendererSize: [0, 0],
         moebius: {
-          scale: 0.08
+          scale: 0.08,
+          autoRotateSpeed: 1
         }
       }
     };
@@ -67,6 +68,15 @@ export default {
 
       this.scene = new Scene();
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+      this.controls.autoRotate = true;
+      this.controls.autoRotateSpeed = this.mData.moebius.autoRotateSpeed;
+      this.controls.rotateSpeed = 0.4;
+      this.controls.enableDamping = true;
+      this.controls.dampingFactor = 0.1;
+      this.controls.enableZoom = false;
+      this.controls.enablePan = false;
+      // this.controls.maxPolarAngle = Math.PI / 2;
+      // this.controls.minPolarAngle = Math.PI / 2;
 
       // const geometry = new BoxGeometry();
       // const material = new MeshBasicMaterial({ color: 0x00ff00 });
@@ -118,6 +128,7 @@ export default {
     },
     render() {
       requestAnimationFrame(this.render);
+      this.controls.update();
       this.renderer.render(this.scene, this.camera);
     }
   },
