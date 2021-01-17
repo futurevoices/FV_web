@@ -7,11 +7,11 @@
 <style lang="scss" scoped>
 #canvasWrapper {
   display: inline-block;
-  max-width: 800px;
-  max-height: 800px;
+  max-width: 900px;
+  max-height: 900px;
   width: 100vw;
   height: 100vw;
-  border: 1px solid black;
+  // border: 1px solid black;
 }
 </style>
 

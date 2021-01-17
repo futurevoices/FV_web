@@ -3,9 +3,9 @@
   <header>
     <div>
       <b-navbar toggleable="lg">
-        
-
-        <b-navbar-brand><nuxt-link to="/">Future Voices</nuxt-link></b-navbar-brand>
+        <b-navbar-brand
+          ><nuxt-link to="/">Future Voices</nuxt-link></b-navbar-brand
+        >
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -52,16 +52,24 @@
   </header>
 </template>
 <style lang="scss">
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 10;
+}
+
 nav {
   height: 40px;
   background-color: transparent;
-  padding:0 !important;
+  padding: 0 !important;
   // padding: 10px 24px 0px 24px;
   padding-left: 24px !important;
   padding-right: 0px !important;
+  z-index: 10;
 
   border-bottom: $black 2px solid;
-
 
   #__BVID__88__BV_toggle_ {
     padding: 0;
@@ -72,7 +80,12 @@ nav {
     margin-top: -3px !important;
   }
 
-  h1, p , a, h2, h3, div {
+  h1,
+  p,
+  a,
+  h2,
+  h3,
+  div {
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -86,17 +99,17 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-   
+
     a {
-    margin-top: -3px !important;
+      margin-top: -3px !important;
     }
   }
 
   .dropdown-menu-right {
     background-color: $lightweight;
     li {
-    border: none !important;
-    background-color: $lightweight;
+      border: none !important;
+      background-color: $lightweight;
     }
   }
 
@@ -104,88 +117,82 @@ nav {
   //   margin: 0;
   //   padding: 0 !important;
   // }
- 
+
   button {
     margin: 0;
   }
-
 }
 
-  /*==========  Non-Mobile First Method  ==========*/
+/*==========  Non-Mobile First Method  ==========*/
 
-  /*Above */
-  @media only screen and (min-width : 1201px) {}
+/*Above */
+@media only screen and (min-width: 1201px) {
+}
 
-  /* Large Devices, Wide Screens */
-  @media only screen and (max-width : 1200px) {}
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+}
 
-  /* Medium Devices, Desktops */
-  @media only screen and (max-width : 992px) {}
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+}
 
-  /* Small Devices, Tablets */
-  @media only screen and (max-width : 768px) {}
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+}
 
-  /* Extra Small Devices, Phones */
-  @media only screen and (max-width : 480px) {
-    nav {
-      height: auto;
-      min-height: 40px;
-        padding-left: 10px !important;
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  nav {
+    height: auto;
+    min-height: 40px;
+    padding-left: 10px !important;
 
-        & .navbar-brand {
-          font-size: 24px !important;
-          margin-top: -3px !important;
-        }
+    & .navbar-brand {
+      font-size: 24px !important;
+      margin-top: -3px !important;
+    }
 
-               
-        button:focus,
-        button:active:focus,
-        button.active:focus,
-        button.focus,
-        button:active.focus,
-        button.active.focus {
-          outline: none !important;
-        }
+    button:focus,
+    button:active:focus,
+    button.active:focus,
+    button.focus,
+    button:active.focus,
+    button.active.focus {
+      outline: none !important;
+    }
 
-        .navbar-toggler {
-          border: none;
-          .navbar-toggler-icon {
-            background-image: url("~static/navbar-icon.svg") !important;
-              background-size: 20px 20px;
-            height: 20px;
-            width: 20px;
-  
-            margin-bottom: 2px;
-          }
-        }
+    .navbar-toggler {
+      border: none;
+      .navbar-toggler-icon {
+        background-image: url('~static/navbar-icon.svg') !important;
+        background-size: 20px 20px;
+        height: 20px;
+        width: 20px;
 
-        #nav-collapse {
-          
-          padding-right: 10px;
-          ul li {
-          border-left: 0;
-          justify-content: flex-end;
+        margin-bottom: 2px;
+      }
+    }
 
-          a {
+    #nav-collapse {
+      padding-right: 10px;
+      ul li {
+        border-left: 0;
+        justify-content: flex-end;
+
+        a {
+          font-size: 21px !important;
+
+          span {
             font-size: 21px !important;
-
-            span {
-               font-size: 21px !important;
-            }
           }
-
-          }
-        
         }
-
-
+      }
     }
   }
+}
 
-  /* Custom, iPhone Retina */
-  @media only screen and (max-width : 320px) {}
-
-
-
-
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 320px) {
+}
 </style>

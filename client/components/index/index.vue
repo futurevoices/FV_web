@@ -75,7 +75,7 @@
   max-width: 900px;
   margin: 0 auto;
   text-align: left;
-  background-color: yellow;
+  // background-color: yellow;
   margin-bottom: 40px;
 
   .content {
@@ -100,6 +100,18 @@
     top: 0;
     left: 0;
     z-index: 3;
+    margin-top: -18vh;
+    margin-bottom: -8vh;
+    z-index: 99;
+  }
+
+  #introText {
+    z-index: 100;
+
+    p,
+    a {
+      z-index: 1;
+    }
   }
 
   p,
@@ -122,6 +134,18 @@
     p:hover,
     a:hover {
       font-style: italic;
+    }
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  .background-image {
+    .inside-shadow {
+      box-shadow: inset 0px 0px 0px 0px $lightweight,
+        // first one is to hide the gap
+          inset 0px 0px 0px 0px $lightweight,
+        inset 0px 30px 30px $lightweight, inset 0px -30px 5px $lightweight;
     }
   }
 }
