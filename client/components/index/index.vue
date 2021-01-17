@@ -183,6 +183,7 @@ section {
     p:hover,
     a:hover {
       font-style: italic;
+      color: $lightweight !important;
     }
   }
 }
