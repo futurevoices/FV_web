@@ -77,8 +77,8 @@
       </div>
 
       <div class="tableWrapper">
-        <div class="customTable" v-dragscroll>
-          <div class="headerTable">
+        <div id="customTableHeader" class="customTable customTableHeader">
+          <div class="headerTable ">
             <div class="filter-literal custom-width-420-desktop">
               Literal text
             </div>
@@ -99,7 +99,13 @@
             </div>
             <div class="custom-width-180-desktop">Listen</div>
           </div>
-
+        </div>
+        <div
+          id="customTable"
+          class="customTable"
+          v-dragscroll
+          v-on:dragscrollmove="dragscrollmove($event.detail)"
+        >
           <div class="bodyTable">
             <div
               class="table-row"
@@ -236,11 +242,12 @@ section {
     }
 
     .tableWrapper {
-      // overflow-x: scroll;
-      background-color: $lightweight;
-
       .customTable {
+        width: 100vw;
+        overflow-x: hidden;
+
         .headerTable {
+          width: auto;
           position: sticky;
           top: 40px;
           margin-bottom: 24px;
@@ -252,10 +259,12 @@ section {
 
           div {
             display: inline-block;
+            background-color: $lightweight;
           }
         }
 
         .bodyTable {
+          padding-top: 40px;
           .table-row {
             display: flex;
             flex-direction: row;
@@ -313,6 +322,10 @@ section {
         }
       }
 
+      .customTableHeader {
+        overflow-x: hidden; /* Hide horizontal scrollbar */
+      }
+
       table {
         display: none;
         font-size: 12px;
@@ -341,10 +354,6 @@ section {
       }
     }
   }
-}
-
-.card-body {
-  overflow-x: scroll;
 }
 </style>
 
@@ -377,7 +386,10 @@ export default {
       isplaying: false,
       allAudio: null,
       index: 0,
-      player: ''
+      player: '',
+      tableMovement: {
+        x: 0
+      }
     };
   },
   methods: {
@@ -398,7 +410,8 @@ export default {
         let cleanedResponse = [];
 
         // filter out all unapproved recordings, except the last one
-        for (let i = 0; i < response.length; i++) {
+        for (let i = 0; i < 15; i++) {
+          // for (let i = 0; i < response.length; i++) {
           const element = response[i];
           if (i === 0) {
             cleanedResponse.push(element);
@@ -420,6 +433,7 @@ export default {
         await this.initPlayer();
         this.filterOnInit(this.initFilter);
         this.updateStats();
+        this.addElements();
       } catch (err) {
         this.current = null;
         console.log(err);
@@ -467,6 +481,16 @@ export default {
     },
     getRecordingCount: function() {
       return this.databaseInfo.amountRecordings;
+    },
+    dragscrollmove(data) {
+      let scroll = this.customTable.scrollLeft;
+      this.customTableHeader.scrollLeft = scroll;
+    },
+    addElements() {
+      this.customTable = document.getElementById('customTable');
+      this.customTableHeader = document.getElementById('customTableHeader');
+
+      console.log(document.getElementById('customTable'));
     }
   },
   created() {
@@ -475,10 +499,7 @@ export default {
     }
     this.getAllAudios();
   },
-  mounted() {
-    // this.$nextTick(() => {
-    // });
-  }
+  mounted() {}
 };
 </script>
 <style scoped></style>
