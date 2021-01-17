@@ -78,7 +78,7 @@
 
       <div class="tableWrapper">
         <div id="customTableHeader" class="customTable customTableHeader">
-          <div class="headerTable ">
+          <div class="headerTable">
             <div class="filter-literal custom-width-420-desktop">
               Literal text
             </div>
@@ -100,6 +100,7 @@
             <div class="custom-width-180-desktop">Listen</div>
           </div>
         </div>
+        <div class="table-spacer"></div>
         <div
           id="customTable"
           class="customTable"
@@ -122,7 +123,11 @@
                 <p>{{ audio.literal_text_english }}</p>
               </div>
               <div class="row-element filter-tags custom-width-180-desktop">
-                <p>{{ audio.tags }}</p>
+                <div v-for="(tag, index) in audio.tags" :key="index">
+                  <span
+                    ><p>{{ tag }}</p></span
+                  >
+                </div>
               </div>
               <div class="row-element filter-keywords custom-width-180-desktop">
                 <div v-for="(keyword, index) in audio.keywords" :key="index">
@@ -165,58 +170,6 @@
             </div>
           </div>
         </div>
-        <!-- <table class="table">
-          <thead>
-            <tr>
-         
-              <th class="filter-literal" scope="col">Literal text</th>
-              <th class="filter-literalEnglish" scope="col">
-                Literal text english
-              </th>
-              <th class="filter-tags" scope="col">Tags</th>
-              <th class="filter-keywords" scope="col">Keywords</th>
-              <th class="filter-language" scope="col">Language</th>
-              <th class="filter-dialect" scope="col">Dialect</th>
-              <th class="filter-native-language" scope="col">
-                Native Language
-              </th>
-              <th class="filter-country" scope="col">Country</th>
-              <th class="filter-town" scope="col">Location</th>
-              <th class="filter-coordinates" scope="col">Coordinates</th>
-              <th scope="col">Listen</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(audio, index) in allAudio" :key="index">
-
-              <td class="filter-literal">{{ audio.literal_text }}</td>
-              <td class="filter-literalEnglish">
-                {{ audio.literal_text_english }}
-              </td>
-              <td class="filter-tags">{{ audio.tags }}</td>
-              <td class="filter-keywords">
-                <div v-for="(keyword, index) in audio.keywords" :key="index">
-                  <span>{{ keyword }}</span>
-                </div>
-              </td>
-              <td class="filter-language">{{ audio.language }}</td>
-              <td class="filter-dialect">{{ audio.dialect }}</td>
-              <td class="filter-native-language">
-                {{ audio.speaker_native_language }}
-              </td>
-              <td class="filter-country">{{ audio.country }}</td>
-              <td class="filter-town">{{ audio.town }}</td>
-              <td class="filter-coordinates">
-                {{ audio.coordinates.lat }}, <br />{{ audio.coordinates.long }}
-              </td>
-              <td>
-                <button class="btn btn-primary" @click="play(audio)">
-                  Play
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table> -->
       </div>
     </div>
   </section>
@@ -236,50 +189,76 @@ section {
   .recordingsWrapper {
     margin-bottom: 80px;
 
+    button {
+      background-color: $green;
+      border-radius: 0;
+      border: 0;
+      color: $black;
+    }
+
     .filter-wrapper {
       margin-bottom: 24px;
       margin-top: 12px;
     }
 
     .tableWrapper {
+      padding-left: 6px;
+      padding-right: 6px;
+      #customTableHeader {
+        position: sticky;
+        top: 40px;
+      }
+
+      .table-spacer {
+        position: sticky;
+        top: 64px;
+        display: block;
+        width: 100%;
+        border-bottom: solid 1px $black;
+      }
+
       .customTable {
-        width: 100vw;
+        width: 100%;
         overflow-x: hidden;
+        cursor: pointer;
 
         .headerTable {
           width: auto;
-          position: sticky;
-          top: 40px;
-          margin-bottom: 24px;
+          margin-bottom: 12px;
           border-bottom: 2px solid $black;
           display: flex;
           flex-direction: row;
           justify-content: flex-start;
           background-color: $lightweight;
-
           div {
             display: inline-block;
-            background-color: $lightweight;
+            margin-left: 6px;
+            margin-right: 6px;
+
+            // background-color: $lightweight;
           }
         }
 
         .bodyTable {
-          padding-top: 40px;
+          padding-top: 24px;
           .table-row {
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
+            border-bottom: 1px solid $black;
             // display: flex;
             // justify-content: flex-start;
             // flex-direction: row;
 
             .row-element {
+              margin-left: 6px;
+              margin-right: 6px;
               display: inline-block;
-              background-color: yellowgreen;
             }
             p {
               font-size: 14px;
               line-height: 21px;
+              margin: 0;
             }
           }
         }
@@ -324,6 +303,10 @@ section {
 
       .customTableHeader {
         overflow-x: hidden; /* Hide horizontal scrollbar */
+
+        .headerTable {
+          border-bottom: 0;
+        }
       }
 
       table {
@@ -410,8 +393,7 @@ export default {
         let cleanedResponse = [];
 
         // filter out all unapproved recordings, except the last one
-        for (let i = 0; i < 15; i++) {
-          // for (let i = 0; i < response.length; i++) {
+        for (let i = 0; i < response.length; i++) {
           const element = response[i];
           if (i === 0) {
             cleanedResponse.push(element);
@@ -489,7 +471,6 @@ export default {
     addElements() {
       this.customTable = document.getElementById('customTable');
       this.customTableHeader = document.getElementById('customTableHeader');
-
       console.log(document.getElementById('customTable'));
     }
   },
