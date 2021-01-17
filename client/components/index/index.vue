@@ -33,17 +33,106 @@
         </p>
       </div>
     </div>
+    <div class="second-content">
+      <div class="content">
+        <p>
+          What do YOU think about the future? What do YOU expect, fear, hope,
+          propose, plan for the future? You can make your voice heard: We are
+          collecting a multitude of voices that together compose this
+          one-year-long sound stream.
+        </p>
+        <p>
+          What do YOU think about the future? What do YOU expect, fear, hope,
+          propose, plan for the future? You can make your voice heard: We are
+          collecting a multitude of voices that together compose this
+          one-year-long sound stream.
+        </p>
+        <p>
+          What do YOU think about the future? What do YOU expect, fear, hope,
+          propose, plan for the future? You can make your voice heard: We are
+          collecting a multitude of voices that together compose this
+          one-year-long sound stream.
+        </p>
+      </div>
+      <!-- <div class="block">
+        <p>Stats</p>
+        <p>
+          What do YOU think about the future? What do YOU expect, fear, hope,
+          propose, plan for the future? You can make your voice heard: We are
+          collecting a multitude of voices that together compose this
+          one-year-long sound stream.
+        </p>
+        <p>
+          What do YOU think about the future? What do YOU expect, fear, hope,
+          propose, plan for the future? You can make your voice heard: We are
+          collecting a multitude of voices that together compose this
+          one-year-long sound stream.
+        </p>
+        <p>
+          What do YOU think about the future? What do YOU expect, fear, hope,
+          propose, plan for the future? You can make your voice heard: We are
+          collecting a multitude of voices that together compose this
+          one-year-long sound stream.
+        </p>
+        <br />
+        <br />
+        <table class="tg">
+          <thead>
+            <tr>
+              <th class="tg-0lax">Recordings</th>
+              <th class="tg-0lax">soon</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tg-0lax">Languages</td>
+              <td class="tg-0lax">soon</td>
+            </tr>
+            <tr>
+              <td class="tg-0lax">Current Language</td>
+              <td class="tg-0lax">soon</td>
+            </tr>
+            <tr>
+              <td class="tg-0lax">Current Composition<br /></td>
+              <td class="tg-0lax">soon</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+    </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
+section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.second-content {
+  background-color: $lightweight;
+  z-index: 2;
+  box-shadow: 0px 0px 50px 100px $lightweight;
+
+  .content {
+    padding: 24px;
+  }
+}
+
+.bodyWrapper {
+  background-color: yellow;
+  z-index: 999;
+}
+
 .background-image {
   top: 40px;
   left: 0;
-  position: absolute;
+  position: fixed;
   display: block;
   width: 100%;
-  height: auto;
+  height: 100vh;
   z-index: 0;
 
   .inside-shadow {
@@ -77,9 +166,12 @@
   text-align: left;
   // background-color: yellow;
   margin-bottom: 40px;
+  height: auto;
+  display: block;
+  height: auto;
 
   .content {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -165,10 +257,10 @@ export default {
   methods: {
     resize() {
       // resize the background image
-      let height = document.getElementById('introText').offsetHeight;
-      height += 100;
-      document.getElementById('background').style.height = height + 'px';
-      console.log(height);
+      // let height = document.getElementById('introText').offsetHeight;
+      // height += 100;
+      // document.getElementById('background').style.height = height + 'px';
+      // console.log(height);
     }
   },
   mounted() {
