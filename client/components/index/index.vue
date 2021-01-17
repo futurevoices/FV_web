@@ -136,16 +136,7 @@ section {
 }
 
 .contentWrapper {
-  position: relative;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: left;
-  // background-color: yellow;
-  margin-bottom: 40px;
-  height: auto;
-  display: block;
-  height: auto;
+  // is in global
 
   .content {
     position: relative;

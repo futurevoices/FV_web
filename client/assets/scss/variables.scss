@@ -37,6 +37,39 @@ table {
 
 $footerRadioHeight: 70px;
 
+section {
+  position: relative;
+
+  .contentWrapper {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+    margin-bottom: 40px;
+    height: auto;
+    display: block;
+    height: auto;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  p,
+  a,
+  h1,
+  h2,
+  h3,
+  span,
+  li,
+  ul,
+  table {
+    color: $black;
+    font-size: 21px;
+    line-height: 28px;
+  }
+}
+
 // html,
 // body {
 //   background-color: black;

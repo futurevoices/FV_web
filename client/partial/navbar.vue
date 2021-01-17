@@ -21,7 +21,10 @@
               <nuxt-link to="/" class="nav-link">Stream</nuxt-link>
             </li> -->
             <li class="nav-item">
-              <nuxt-link to="/contribute" class="nav-link"
+              <nuxt-link
+                to="/contribute"
+                class="nav-link"
+                :class="$route.name === 'contribute' ? 'active' : ''"
                 >contribute</nuxt-link
               >
             </li>
@@ -31,10 +34,20 @@
               >
             </li> -->
             <li class="nav-item">
-              <nuxt-link to="/explore" class="nav-link">explore</nuxt-link>
+              <nuxt-link
+                to="/explore"
+                class="nav-link"
+                :class="$route.name === 'explore' ? 'active' : ''"
+                >explore</nuxt-link
+              >
             </li>
             <li class="nav-item">
-              <nuxt-link to="/about" class="nav-link">about</nuxt-link>
+              <nuxt-link
+                to="/about"
+                class="nav-link"
+                :class="$route.name === 'about' ? 'active' : ''"
+                >about</nuxt-link
+              >
             </li>
             <!-- <li class="nav-item">
               <nuxt-link to="/manager" class="nav-link">Manager</nuxt-link>

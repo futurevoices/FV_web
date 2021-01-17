@@ -8,11 +8,30 @@
         ) > -1
       "
     >
+      <div
+        v-if="
+          ['contribute', 'explore', 'index', 'about', 'imprint'].indexOf(
+            $route.name
+          ) > -1
+        "
+        class="header-spacer"
+      ></div>
       <steamFooter />
     </div>
     <nuxt />
   </div>
 </template>
+<style lang="scss">
+.header-spacer {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height: 40px;
+  top: 0;
+  margin-bottom: 24px;
+}
+</style>
+
 <script>
 import navbar from '@/partial/navbar';
 import steamFooter from '@/partial/footer';
