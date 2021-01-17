@@ -7,6 +7,26 @@ h3 {
   font-size: 28px;
 }
 
+section {
+  position: relative;
+
+  .contentWrapper {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+    margin-bottom: 40px;
+    height: auto;
+    display: block;
+    height: auto;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+}
+
 /*==========  Non-Mobile First Method  ==========*/
 
 /*Above */
@@ -29,6 +49,20 @@ h3 {
 @media only screen and (max-width: 480px) {
   .hide-mobile {
     display: none;
+  }
+
+  p,
+  a,
+  h1,
+  h2,
+  h3,
+  span,
+  li,
+  ul,
+  table {
+    color: $black;
+    font-size: 21px;
+    line-height: 28px;
   }
 }
 
