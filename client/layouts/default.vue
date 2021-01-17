@@ -3,16 +3,26 @@
     <navbar />
     <div
       v-if="
-        ['contribute', 'explore', 'index', 'about', 'imprint'].indexOf(
-          $route.name
-        ) > -1
+        [
+          'contribute',
+          'explore',
+          'index',
+          'about',
+          'imprint',
+          'codeofconduct'
+        ].indexOf($route.name) > -1
       "
     >
       <div
         v-if="
-          ['contribute', 'explore', 'index', 'about', 'imprint'].indexOf(
-            $route.name
-          ) > -1
+          [
+            'contribute',
+            'explore',
+            'index',
+            'about',
+            'imprint',
+            'codeofconduct'
+          ].indexOf($route.name) > -1
         "
         class="header-spacer"
       ></div>
