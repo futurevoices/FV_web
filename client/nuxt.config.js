@@ -77,6 +77,7 @@ export default {
           name: '[path][name].[ext]'
         }
       });
-    }
+    },
+    transpile: ['three']
   }
 };

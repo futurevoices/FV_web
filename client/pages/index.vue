@@ -1,18 +1,19 @@
 <template>
   <div>
+    <Moebius />
     <Index />
   </div>
 </template>
 <script>
 import Index from '@/components/index/index';
+import Moebius from '@/components/index/moebius';
 export default {
   components: {
-    Index
+    Index,
+    Moebius
   },
   data() {
-    return {
-      radioComponent: ''
-    };
+    return {};
   },
   computed: {},
   methods: {},

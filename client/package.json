@@ -20,6 +20,7 @@
     "nuxt": "^2.14.6",
     "recorder-js": "^1.0.7",
     "sweetalert": "^2.1.2",
+    "three": "^0.124.0",
     "vh-check": "^2.0.5"
   },
   "devDependencies": {

@@ -69,9 +69,7 @@ export default {
   },
   computed: {},
   methods: {},
-  mounted() {
-    console.log('stream has been mounted');
-  },
+  mounted() {},
   created() {}
 };
 </script>
