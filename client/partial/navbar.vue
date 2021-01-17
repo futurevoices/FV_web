@@ -3,7 +3,7 @@
   <header>
     <div>
       <b-navbar toggleable="lg">
-        <b-navbar-brand
+        <b-navbar-brand class="active"
           ><nuxt-link to="/">Future Voices</nuxt-link></b-navbar-brand
         >
 
@@ -21,7 +21,9 @@
               <nuxt-link to="/" class="nav-link">Stream</nuxt-link>
             </li> -->
             <li class="nav-item">
-              <nuxt-link to="/upload" class="nav-link">contribute</nuxt-link>
+              <nuxt-link to="/contribute" class="nav-link"
+                >contribute</nuxt-link
+              >
             </li>
             <!-- <li class="nav-item">
               <nuxt-link to="/fileupload" class="nav-link"
@@ -78,6 +80,13 @@ nav {
   & .navbar-brand {
     font-size: 24px !important;
     margin-top: -3px !important;
+  }
+
+  & .navbar-brand a:hover {
+    text-decoration: none !important;
+    font-weight: normal !important;
+    font-style: italic !important;
+    color: $black !important;
   }
 
   h1,

@@ -9,21 +9,21 @@
 
 <router>
 {
-    path: '/upload'
+    path: '/contribute'
 }
 </router>
 
 <script>
-import Uploader from "@/components/uploader/uploader";
+import Uploader from '@/components/uploader/uploader';
 // import StreamPlayer from "@/components/stream/streamPlayer";
 export default {
   components: {
     Uploader
   },
-  data () {
+  data() {
     return {
-      radioComponent: ""
-    }
+      radioComponent: ''
+    };
   }
 };
 </script>

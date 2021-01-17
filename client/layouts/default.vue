@@ -1,38 +1,42 @@
 <template>
   <div>
-
     <navbar />
-    <div v-if="['upload', 'explore', 'index', 'about', 'imprint'].indexOf($route.name) > -1">
-           <steamFooter />
+    <div
+      v-if="
+        ['contribute', 'explore', 'index', 'about', 'imprint'].indexOf(
+          $route.name
+        ) > -1
+      "
+    >
+      <steamFooter />
     </div>
     <nuxt />
-
-
   </div>
 </template>
 <script>
-import navbar from "@/partial/navbar";
-import steamFooter from "@/partial/footer";
+import navbar from '@/partial/navbar';
+import steamFooter from '@/partial/footer';
 
 // import vhCheck from 'vh-check'
 // const test = vhCheck()
 
 export default {
   components: {
-    navbar, steamFooter
+    navbar,
+    steamFooter
   },
-  data () {
+  data() {
     return {
-      radioComponent: "steamFooter"
-    }
+      radioComponent: 'steamFooter'
+    };
   }
 };
 </script>
 
 <style>
 html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;

@@ -3,7 +3,7 @@
     <div class="container mb-4">
       <div class="row mt-2 mb-1">
         <div class="col-md-12">
-          <h3 class="text-center">Upload</h3>
+          <h3 class="text-center">Contribute</h3>
         </div>
       </div>
       <div class="row uploader-card">
