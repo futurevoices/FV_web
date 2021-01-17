@@ -79,25 +79,25 @@
       <div class="tableWrapper">
         <div class="customTable" v-dragscroll>
           <div class="headerTable">
-            <div class="filter-literal custom-width-30-desktop">
+            <div class="filter-literal custom-width-420-desktop">
               Literal text
             </div>
-            <div class="filter-literalEnglish custom-width-30-desktop">
+            <div class="filter-literalEnglish custom-width-420-desktop">
               Literal text english
             </div>
-            <div class="filter-tags custom-width-20-desktop">Tags</div>
-            <div class="filter-keywords custom-width-20-desktop">Keywords</div>
-            <div class="filter-language custom-width-20-desktop">Language</div>
-            <div class="filter-dialect custom-width-20-desktop">Dialect</div>
-            <div class="filter-native-language custom-width-20-desktop">
+            <div class="filter-tags custom-width-180-desktop">Tags</div>
+            <div class="filter-keywords custom-width-180-desktop">Keywords</div>
+            <div class="filter-language custom-width-180-desktop">Language</div>
+            <div class="filter-dialect custom-width-180-desktop">Dialect</div>
+            <div class="filter-native-language custom-width-180-desktop">
               Native Language
             </div>
-            <div class="filter-country custom-width-20-desktop">Country</div>
-            <div class="filter-town custom-width-20-desktop">Location</div>
-            <div class="filter-coordinates custom-width-20-desktop">
+            <div class="filter-country custom-width-180-desktop">Country</div>
+            <div class="filter-town custom-width-180-desktop">Location</div>
+            <div class="filter-coordinates custom-width-180-desktop">
               Coordinates
             </div>
-            <div>Listen</div>
+            <div class="custom-width-180-desktop">Listen</div>
           </div>
 
           <div class="bodyTable">
@@ -107,43 +107,43 @@
               :key="index"
             >
               <!-- <th>{{ index + 1 }}</th> -->
-              <div class="row-element filter-literal custom-width-30-desktop">
+              <div class="row-element filter-literal custom-width-420-desktop">
                 <p>{{ audio.literal_text }}</p>
               </div>
               <div
-                class="row-element filter-literalEnglish custom-width-30-desktop"
+                class="row-element filter-literalEnglish custom-width-420-desktop"
               >
                 <p>{{ audio.literal_text_english }}</p>
               </div>
-              <div class="row-element filter-tags custom-width-20-desktop">
+              <div class="row-element filter-tags custom-width-180-desktop">
                 <p>{{ audio.tags }}</p>
               </div>
-              <div class="row-element filter-keywords custom-width-20-desktop">
+              <div class="row-element filter-keywords custom-width-180-desktop">
                 <div v-for="(keyword, index) in audio.keywords" :key="index">
                   <span
                     ><p>{{ keyword }}</p></span
                   >
                 </div>
               </div>
-              <div class="row-element filter-language custom-width-20-desktop">
+              <div class="row-element filter-language custom-width-180-desktop">
                 <p>{{ audio.language }}</p>
               </div>
-              <div class="row-element filter-dialect custom-width-20-desktop">
+              <div class="row-element filter-dialect custom-width-180-desktop">
                 <p>{{ audio.dialect }}</p>
               </div>
               <div
-                class="row-element filter-native-language custom-width-20-desktop"
+                class="row-element filter-native-language custom-width-180-desktop"
               >
                 <p>{{ audio.speaker_native_language }}</p>
               </div>
-              <div class="row-element filter-country custom-width-20-desktop">
+              <div class="row-element filter-country custom-width-180-desktop">
                 <p>{{ audio.country }}</p>
               </div>
-              <div class="row-element filter-town custom-width-20-desktop">
+              <div class="row-element filter-town custom-width-180-desktop">
                 <p>{{ audio.town }}</p>
               </div>
               <div
-                class="row-element filter-coordinates custom-width-´2-desktop0"
+                class="row-element filter-coordinates custom-width-180-desktop"
               >
                 <p>
                   {{ audio.coordinates.lat }}, <br />{{
@@ -151,7 +151,7 @@
                   }}
                 </p>
               </div>
-              <div class="row-element custom-width-10-desktop">
+              <div class="row-element custom-width-180-desktop">
                 <button class="btn btn-primary" @click="play(audio)">
                   Play
                 </button>
@@ -159,10 +159,10 @@
             </div>
           </div>
         </div>
-        <table class="table">
+        <!-- <table class="table">
           <thead>
             <tr>
-              <!-- <th scope="col">#</th> -->
+         
               <th class="filter-literal" scope="col">Literal text</th>
               <th class="filter-literalEnglish" scope="col">
                 Literal text english
@@ -182,7 +182,7 @@
           </thead>
           <tbody>
             <tr v-for="(audio, index) in allAudio" :key="index">
-              <!-- <th>{{ index + 1 }}</th> -->
+
               <td class="filter-literal">{{ audio.literal_text }}</td>
               <td class="filter-literalEnglish">
                 {{ audio.literal_text_english }}
@@ -210,7 +210,7 @@
               </td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
       </div>
     </div>
   </section>
@@ -231,63 +231,90 @@ section {
     margin-bottom: 80px;
 
     .filter-wrapper {
-      /* display: flex; */
-      /* justify-content: center;
-  align-items: center; */
       margin-bottom: 24px;
       margin-top: 12px;
     }
 
     .tableWrapper {
-      width: 100vw;
-      overflow-x: scroll;
+      // overflow-x: scroll;
       background-color: $lightweight;
 
-      .headerTable {
-        display: flex;
-        width: auto;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .bodyTable {
-        width: auto;
-        .table-row {
+      .customTable {
+        .headerTable {
+          position: sticky;
+          top: 40px;
+          margin-bottom: 24px;
+          border-bottom: 2px solid $black;
           display: flex;
-          justify-content: space-between;
-          align-items: center;
+          flex-direction: row;
+          justify-content: flex-start;
+          background-color: $lightweight;
 
-          .row-element {
-            background-color: yellowgreen;
+          div {
+            display: inline-block;
           }
+        }
 
-          .custom-width-10-desktop {
-            min-width: 10%;
-          }
-          .custom-width-20-desktop {
-            min-width: 20%;
-          }
-          .custom-width-30-desktop {
-            min-width: 30%;
-          }
-          .custom-width-40-desktop {
-            min-width: 40%;
-          }
-          .custom-width-60-desktop {
-            min-width: 60%;
-          }
-          .custom-width-80-desktop {
-            min-width: 80%;
-          }
+        .bodyTable {
+          .table-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            // display: flex;
+            // justify-content: flex-start;
+            // flex-direction: row;
 
-          p {
-            font-size: 14px;
-            line-height: 21px;
+            .row-element {
+              display: inline-block;
+              background-color: yellowgreen;
+            }
+            p {
+              font-size: 14px;
+              line-height: 21px;
+            }
           }
+        }
+
+        .custom-width-30-desktop {
+          width: 30px;
+          min-width: 30px;
+        }
+        .custom-width-60-desktop {
+          width: 60px;
+          min-width: 60px;
+        }
+        .custom-width-90-desktop {
+          width: 90px;
+          min-width: 90px;
+        }
+        .custom-width-120-desktop {
+          width: 120px;
+          min-width: 120px;
+        }
+        .custom-width-150-desktop {
+          width: 150px;
+          min-width: 150px;
+        }
+        .custom-width-180-desktop {
+          width: 180px;
+          min-width: 180px;
+        }
+        .custom-width-240-desktop {
+          width: 240px;
+          min-width: 240px;
+        }
+        .custom-width-300-desktop {
+          width: 300px;
+          min-width: 300px;
+        }
+        .custom-width-420-desktop {
+          width: 420px;
+          min-width: 420px;
         }
       }
 
       table {
+        display: none;
         font-size: 12px;
         line-height: 17px;
 
