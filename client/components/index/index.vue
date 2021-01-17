@@ -1,6 +1,11 @@
 <template>
   <section class="">
     <div class="contentWrapper">
+      <div class="background-image">
+        <div class="inside-shadow"></div>
+        <img src="background-image.png" alt="" />
+      </div>
+
       <Moebius />
       <p>
         Welcome to Future Voices / Zukunftsmusik!
@@ -36,6 +41,31 @@
   max-width: 900px;
   margin: 0 auto;
   text-align: left;
+
+  .background-image {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 500px;
+
+    .inside-shadow {
+      position: absolute;
+      top: 0;
+      width: inherit;
+      height: inherit;
+      box-shadow: inset 0px 0px 0px 5px $lightweight,
+        // first one is to hide the gap
+          inset 0px 0px 30px 40px $lightweight;
+      mix-blend-mode: normal;
+    }
+
+    img {
+      width: inherit;
+      height: inherit;
+      object-fit: cover;
+      opacity: 1;
+    }
+  }
 
   p,
   a {
