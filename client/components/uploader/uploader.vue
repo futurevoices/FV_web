@@ -712,7 +712,6 @@
   button,
   #gps-button-text {
     background-color: $green;
-    color: $black;
     border-radius: 0;
     border: 0;
     color: $black;
