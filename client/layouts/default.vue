@@ -63,7 +63,7 @@ export default {
   methods: {},
   mounted() {
     this.$nuxt.$on('start-stream', () => {
-      this.$refs.footerRef.toggleStream();
+      this.$refs.footerRef.toggleStream('onlystart');
     });
   }
 };

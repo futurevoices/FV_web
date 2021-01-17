@@ -175,14 +175,22 @@ export default {
       this.audio = document.getElementById('audioStream');
       this.playButton = document.getElementById('playButton');
     },
-    toggleStream() {
-      if (!this.audio.paused) {
-        this.audio.pause();
-        this.playButton.src = '/play.svg';
+    toggleStream(command) {
+      if (command === 'onlystart') {
+        if (this.audio.paused) {
+          this.audio.load();
+          this.audio.play();
+          this.playButton.src = '/pause.svg';
+        }
       } else {
-        this.audio.load();
-        this.audio.play();
-        this.playButton.src = '/pause.svg';
+        if (!this.audio.paused) {
+          this.audio.pause();
+          this.playButton.src = '/play.svg';
+        } else {
+          this.audio.load();
+          this.audio.play();
+          this.playButton.src = '/pause.svg';
+        }
       }
     }
   },
