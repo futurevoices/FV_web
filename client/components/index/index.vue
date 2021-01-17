@@ -11,7 +11,7 @@
         <p>Listen</p>
         <nuxt-link to="/upload">Contribute</nuxt-link>
         <a
-          href="mailto:?subject=Future%20Voices%20Radio&body=Hello%2CI'd%20like%20to%20invite%20you%20to%20participate%20with%20a%20recording%20about%20the%20future%20at%20https%3A%2F%2Ffuturevoices.radio%2F.Enjoy!"
+          href="mailto:?subject=Future%20Voices%20Radio&body=Hello%2CI'd%20like%20to%20invite%20you%20to%20participate%20with%20a%20recording%20about%20the%20future%20at%20https%3A%2F%2Ffuturevoices.radio%2F.%20Enjoy!"
           >Share</a
         >
       </div>
