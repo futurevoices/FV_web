@@ -77,6 +77,88 @@
       </div>
 
       <div class="tableWrapper">
+        <div class="customTable" v-dragscroll>
+          <div class="headerTable">
+            <div class="filter-literal custom-width-30-desktop">
+              Literal text
+            </div>
+            <div class="filter-literalEnglish custom-width-30-desktop">
+              Literal text english
+            </div>
+            <div class="filter-tags custom-width-20-desktop">Tags</div>
+            <div class="filter-keywords custom-width-20-desktop">Keywords</div>
+            <div class="filter-language custom-width-20-desktop">Language</div>
+            <div class="filter-dialect custom-width-20-desktop">Dialect</div>
+            <div class="filter-native-language custom-width-20-desktop">
+              Native Language
+            </div>
+            <div class="filter-country custom-width-20-desktop">Country</div>
+            <div class="filter-town custom-width-20-desktop">Location</div>
+            <div class="filter-coordinates custom-width-20-desktop">
+              Coordinates
+            </div>
+            <div>Listen</div>
+          </div>
+
+          <div class="bodyTable">
+            <div
+              class="table-row"
+              v-for="(audio, index) in allAudio"
+              :key="index"
+            >
+              <!-- <th>{{ index + 1 }}</th> -->
+              <div class="row-element filter-literal custom-width-30-desktop">
+                <p>{{ audio.literal_text }}</p>
+              </div>
+              <div
+                class="row-element filter-literalEnglish custom-width-30-desktop"
+              >
+                <p>{{ audio.literal_text_english }}</p>
+              </div>
+              <div class="row-element filter-tags custom-width-20-desktop">
+                <p>{{ audio.tags }}</p>
+              </div>
+              <div class="row-element filter-keywords custom-width-20-desktop">
+                <div v-for="(keyword, index) in audio.keywords" :key="index">
+                  <span
+                    ><p>{{ keyword }}</p></span
+                  >
+                </div>
+              </div>
+              <div class="row-element filter-language custom-width-20-desktop">
+                <p>{{ audio.language }}</p>
+              </div>
+              <div class="row-element filter-dialect custom-width-20-desktop">
+                <p>{{ audio.dialect }}</p>
+              </div>
+              <div
+                class="row-element filter-native-language custom-width-20-desktop"
+              >
+                <p>{{ audio.speaker_native_language }}</p>
+              </div>
+              <div class="row-element filter-country custom-width-20-desktop">
+                <p>{{ audio.country }}</p>
+              </div>
+              <div class="row-element filter-town custom-width-20-desktop">
+                <p>{{ audio.town }}</p>
+              </div>
+              <div
+                class="row-element filter-coordinates custom-width-´2-desktop0"
+              >
+                <p>
+                  {{ audio.coordinates.lat }}, <br />{{
+                    audio.coordinates.long
+                  }}
+                </p>
+              </div>
+              <div class="row-element custom-width-10-desktop">
+                <button class="btn btn-primary" @click="play(audio)">
+                  Play
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
         <table class="table">
           <thead>
             <tr>
@@ -161,6 +243,50 @@ section {
       overflow-x: scroll;
       background-color: $lightweight;
 
+      .headerTable {
+        display: flex;
+        width: auto;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .bodyTable {
+        width: auto;
+        .table-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .row-element {
+            background-color: yellowgreen;
+          }
+
+          .custom-width-10-desktop {
+            min-width: 10%;
+          }
+          .custom-width-20-desktop {
+            min-width: 20%;
+          }
+          .custom-width-30-desktop {
+            min-width: 30%;
+          }
+          .custom-width-40-desktop {
+            min-width: 40%;
+          }
+          .custom-width-60-desktop {
+            min-width: 60%;
+          }
+          .custom-width-80-desktop {
+            min-width: 80%;
+          }
+
+          p {
+            font-size: 14px;
+            line-height: 21px;
+          }
+        }
+      }
+
       table {
         font-size: 12px;
         line-height: 17px;
@@ -194,6 +320,7 @@ section {
   overflow-x: scroll;
 }
 </style>
+
 <script>
 export default {
   data() {
@@ -203,18 +330,18 @@ export default {
         language: ''
       },
       initFilter: [
-        // which ones to hide
-        'literal',
-        // "literalEnglish",
-        'tags',
-        // "keywords",
-        // "language",
-        'dialect',
-        'native-language',
-        'country',
-        // "town",
-        'coordinates'
-        // 'approval' // took it out
+        // // which ones to hide
+        // 'literal',
+        // // "literalEnglish",
+        // 'tags',
+        // // "keywords",
+        // // "language",
+        // 'dialect',
+        // 'native-language',
+        // 'country',
+        // // "town",
+        // 'coordinates'
+        // // 'approval' // took it out
       ],
       databaseInfo: {
         amountRecordings: 0
