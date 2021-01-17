@@ -8,11 +8,10 @@
 #canvasWrapper {
   display: inline-block;
   width: 50vw;
-  height: 40vh;
+  height: 50vw;
+  border: 1px solid black;
 }
 </style>
-
-<script type="module"></script>
 
 <script>
 import {
@@ -23,10 +22,9 @@ import {
   MeshBasicMaterial,
   Mesh
 } from 'three';
-// import { OrbitControls } from 'three';
-// const scene = new Scene();
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 
 // const controls = new OrbitControls();
 
@@ -34,7 +32,10 @@ export default {
   data() {
     return {
       mData: {
-        rendererSize: [0, 0]
+        rendererSize: [0, 0],
+        moebius: {
+          scale: 0.08
+        }
       }
     };
   },
@@ -45,7 +46,7 @@ export default {
     },
     init() {
       this.wrapper = document.getElementById('canvasWrapper');
-      this.renderer = new WebGLRenderer({ antialias: true });
+      this.renderer = new WebGLRenderer({ antialias: true, alpha: true });
       this.renderer.setSize(window.innerWidth, window.innerHeight);
       this.wrapper.appendChild(this.renderer.domElement);
 
@@ -55,25 +56,22 @@ export default {
       ];
 
       this.camera = new PerspectiveCamera(
-        75,
+        45,
         this.mData.rendererSize[0] / this.mData.rendererSize[1],
-        0.1,
+        1,
         1000
       );
 
       this.camera.position.set(0, 0, 100);
-      this.camera.position.z = 5;
       this.camera.lookAt(0, 0, 0);
 
       this.scene = new Scene();
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
-      const geometry = new BoxGeometry();
-      const material = new MeshBasicMaterial({ color: 0x00ff00 });
-      const cube = new Mesh(geometry, material);
-      this.scene.add(cube);
-
-      console.log(this.scene);
+      // const geometry = new BoxGeometry();
+      // const material = new MeshBasicMaterial({ color: 0x00ff00 });
+      // const cube = new Mesh(geometry, material);
+      // this.scene.add(cube);
 
       // // //controls.update() must be called after any manual changes to the camera's transform
       // // this.camera.position.set( 0, 20, 100 );
@@ -95,6 +93,29 @@ export default {
 
       // update camera ratio?
     },
+    loadMoebius() {
+      const that = this;
+      this.loader = new FBXLoader();
+      this.loader.load('moebius.fbx', function(object) {
+        // mixer = new THREE.AnimationMixer(object);
+        // const action = mixer.clipAction(object.animations[0]);
+        // action.play();
+        object.traverse(function(child) {
+          if (child.isMesh) {
+            child.castShadow = true;
+            child.receiveShadow = false;
+          }
+        });
+
+        object.scale.set(
+          that.mData.moebius.scale,
+          that.mData.moebius.scale,
+          that.mData.moebius.scale
+        );
+
+        that.scene.add(object);
+      });
+    },
     render() {
       requestAnimationFrame(this.render);
       this.renderer.render(this.scene, this.camera);
@@ -105,6 +126,7 @@ export default {
     this.init();
     this.resize();
     this.render();
+    this.loadMoebius();
   },
   created() {},
   destroyed() {
