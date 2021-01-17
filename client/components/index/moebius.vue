@@ -7,8 +7,10 @@
 <style lang="scss" scoped>
 #canvasWrapper {
   display: inline-block;
-  width: 50vw;
-  height: 50vw;
+  max-width: 800px;
+  max-height: 800px;
+  width: 100vw;
+  height: 100vw;
   border: 1px solid black;
 }
 </style>
@@ -108,7 +110,6 @@ export default {
       );
 
       this.renderer.setPixelRatio(window.devicePixelRatio);
-      // update camera ratio?
     },
     loadMoebius() {
       const that = this;

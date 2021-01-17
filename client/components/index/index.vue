@@ -1,6 +1,7 @@
 <template>
   <section class="">
     <div class="contentWrapper">
+      <Moebius />
       <p>
         Welcome to Future Voices / Zukunftsmusik!
         <br /><br />
@@ -31,7 +32,6 @@
 
 <style lang="scss" scoped>
 .contentWrapper {
-  padding-top: 20vh;
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
@@ -63,7 +63,12 @@
 </style>
 
 <script>
+import Moebius from '@/components/index/moebius';
+
 export default {
+  components: {
+    Moebius
+  },
   data() {
     return {};
   },
