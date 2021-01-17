@@ -20,11 +20,15 @@ import {
   PerspectiveCamera,
   BoxGeometry,
   MeshBasicMaterial,
-  Mesh
+  MeshMatcapMaterial,
+  Mesh,
+  Color,
+  TextureLoader
 } from 'three';
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
+// import { metalMatcap } from 'static/matcap.jpg';
 
 // const controls = new OrbitControls();
 
@@ -44,6 +48,10 @@ export default {
   methods: {
     addEventListeners() {
       window.addEventListener('resize', this.resize);
+    },
+    loadTextures() {
+      this.textureLoader = new TextureLoader();
+      this.metalMatcap = this.textureLoader.load('matcaps/3.jpg');
     },
     init() {
       this.wrapper = document.getElementById('canvasWrapper');
@@ -67,6 +75,13 @@ export default {
       this.camera.lookAt(0, 0, 0);
 
       this.scene = new Scene();
+
+      // const geometry = new BoxGeometry();
+      // const material = new MeshBasicMaterial({ color: 0x00ff00 });
+      // const cube = new Mesh(geometry, material);
+      // this.scene.add(cube);
+    },
+    addControls() {
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
       this.controls.autoRotate = true;
       this.controls.autoRotateSpeed = this.mData.moebius.autoRotateSpeed;
@@ -77,15 +92,6 @@ export default {
       this.controls.enablePan = false;
       // this.controls.maxPolarAngle = Math.PI / 2;
       // this.controls.minPolarAngle = Math.PI / 2;
-
-      // const geometry = new BoxGeometry();
-      // const material = new MeshBasicMaterial({ color: 0x00ff00 });
-      // const cube = new Mesh(geometry, material);
-      // this.scene.add(cube);
-
-      // // //controls.update() must be called after any manual changes to the camera's transform
-      // // this.camera.position.set( 0, 20, 100 );
-      // this.controls.update();
     },
     resize() {
       this.mData.rendererSize = [
@@ -101,6 +107,7 @@ export default {
         this.mData.rendererSize[1]
       );
 
+      this.renderer.setPixelRatio(window.devicePixelRatio);
       // update camera ratio?
     },
     loadMoebius() {
@@ -114,6 +121,12 @@ export default {
           if (child.isMesh) {
             child.castShadow = true;
             child.receiveShadow = false;
+
+            child.material = new MeshMatcapMaterial({
+              color: new Color().setHex('0xffffff').convertSRGBToLinear(),
+              matcap: that.metalMatcap
+              // normalMap: normalmap
+            });
           }
         });
 
@@ -134,7 +147,9 @@ export default {
   },
   mounted() {
     this.addEventListeners();
+    this.loadTextures();
     this.init();
+    this.addControls();
     this.resize();
     this.render();
     this.loadMoebius();
