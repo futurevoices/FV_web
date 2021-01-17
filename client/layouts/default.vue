@@ -26,7 +26,8 @@
         "
         class="header-spacer"
       ></div>
-      <steamFooter />
+
+      <steamFooter ref="footerRef"></steamFooter>
     </div>
     <nuxt />
   </div>
@@ -58,6 +59,12 @@ export default {
     return {
       radioComponent: 'steamFooter'
     };
+  },
+  methods: {},
+  mounted() {
+    this.$nuxt.$on('start-stream', () => {
+      this.$refs.footerRef.toggleStream();
+    });
   }
 };
 </script>
