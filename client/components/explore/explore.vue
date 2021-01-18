@@ -104,7 +104,7 @@
         <div
           id="customTable"
           class="customTable"
-          v-dragscroll
+          v-dragscroll.x
           v-on:dragscrollmove="dragscrollmove($event.detail)"
         >
           <div class="bodyTable">
@@ -241,6 +241,7 @@ section {
 
         .bodyTable {
           padding-top: 24px;
+          display: inline-block;
           .table-row {
             display: flex;
             flex-direction: row;

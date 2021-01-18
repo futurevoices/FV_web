@@ -66,7 +66,7 @@ export default {
 
   server: {
     port: 8000, // default: 3000
-    host: 'localhost' // default: localhost 0.0.0.0 for sharing
+    host: '0.0.0.0' // default: localhost 0.0.0.0 for sharing
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
