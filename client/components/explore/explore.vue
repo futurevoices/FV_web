@@ -9,67 +9,67 @@
     <div class="recordingsWrapper">
       <div class="filter-wrapper">
         <button
-          class="btn btn-outline-dark btn-sm active btn-filter-literal"
+          class="btn btn-sm active btn-filter-literal"
           @click="toggleData('literal', $event)"
         >
           Literal text
         </button>
         <button
-          class="btn btn-outline-dark btn-sm active btn-filter-literalEnglish"
+          class="btn btn-sm active btn-filter-literalEnglish"
           @click="toggleData('literalEnglish', $event)"
         >
           Literal text english
         </button>
         <button
-          class="btn btn-outline-dark btn-sm active btn-filter-tags"
+          class="btn btn-sm active btn-filter-tags"
           @click="toggleData('tags', $event)"
         >
           Tags
         </button>
         <button
-          class="btn btn-outline-dark btn-sm active btn-filter-keywords"
+          class="btn btn-sm active btn-filter-keywords"
           @click="toggleData('keywords', $event)"
         >
           Keywords
         </button>
         <button
-          class="btn btn-outline-dark btn-sm active btn-filter-language"
+          class="btn btn-sm active btn-filter-language"
           @click="toggleData('language', $event)"
         >
           Language
         </button>
         <button
-          class="btn btn-outline-dark btn-sm active btn-filter-dialect"
+          class="btn btn-sm active btn-filter-dialect"
           @click="toggleData('dialect', $event)"
         >
           Dialect
         </button>
         <button
-          class="btn btn-outline-dark btn-sm active btn-filter-native-language"
+          class="btn btn-sm active btn-filter-native-language"
           @click="toggleData('native-language', $event)"
         >
           Native Language
         </button>
         <button
-          class="btn btn-outline-dark btn-sm active btn-filter-country"
+          class="btn btn-sm active btn-filter-country"
           @click="toggleData('country', $event)"
         >
           Country
         </button>
         <button
-          class="btn btn-outline-dark btn-sm active btn-filter-town"
+          class="btn btn-sm active btn-filter-town"
           @click="toggleData('town', $event)"
         >
           Town
         </button>
         <button
-          class="btn btn-outline-dark btn-sm active btn-filter-coordinates"
+          class="btn btn-sm active btn-filter-coordinates"
           @click="toggleData('coordinates', $event)"
         >
           Coordinates
         </button>
         <!-- <button
-          class="btn btn-outline-dark btn-sm active btn-filter-approval"
+          class="btn btn-sm active btn-filter-approval"
           @click="toggleData('approval', $event)"
         >
           Approval
@@ -79,10 +79,10 @@
       <div class="tableWrapper">
         <div id="customTableHeader" class="customTable customTableHeader">
           <div class="headerTable">
-            <div class="filter-literal custom-width-420-desktop">
+            <div class="filter-literal custom-width-600-desktop">
               Literal text
             </div>
-            <div class="filter-literalEnglish custom-width-420-desktop">
+            <div class="filter-literalEnglish custom-width-600-desktop">
               Literal text english
             </div>
             <div class="filter-tags custom-width-180-desktop">Tags</div>
@@ -114,11 +114,11 @@
               :key="index"
             >
               <!-- <th>{{ index + 1 }}</th> -->
-              <div class="row-element filter-literal custom-width-420-desktop">
+              <div class="row-element filter-literal custom-width-600-desktop">
                 <p>{{ audio.literal_text }}</p>
               </div>
               <div
-                class="row-element filter-literalEnglish custom-width-420-desktop"
+                class="row-element filter-literalEnglish custom-width-600-desktop"
               >
                 <p>{{ audio.literal_text_english }}</p>
               </div>
@@ -163,7 +163,7 @@
                 </p>
               </div>
               <div class="row-element custom-width-180-desktop">
-                <button class="btn btn-primary" @click="play(audio)">
+                <button class="btn play-button" @click="play(audio)">
                   Play
                 </button>
               </div>
@@ -194,6 +194,25 @@ section {
       border-radius: 0;
       border: 0;
       color: $black;
+    }
+
+    .filter-wrapper {
+      padding-left: 12px;
+      padding-right: 12px;
+      button {
+        background-color: $green;
+        border-radius: 0;
+        border: 0;
+        color: $black;
+        border: solid 2px $green;
+        margin-bottom: 12px;
+      }
+      button.disabled {
+        background-color: $lightweight;
+        border-radius: 0;
+        border: solid 2px $black;
+        color: $black;
+      }
     }
 
     .filter-wrapper {
@@ -255,6 +274,10 @@ section {
               margin-left: 6px;
               margin-right: 6px;
               display: inline-block;
+
+              .play-button {
+                margin-bottom: 6px;
+              }
             }
             p {
               font-size: 14px;
@@ -300,6 +323,10 @@ section {
           width: 420px;
           min-width: 420px;
         }
+        .custom-width-600-desktop {
+          width: 600px;
+          min-width: 600px;
+        }
       }
 
       .customTableHeader {
@@ -328,13 +355,6 @@ section {
           font-size: inherit;
           line-height: inherit;
         }
-
-        button {
-          background-color: $green;
-          border-radius: 0;
-          border: 0;
-          color: $black;
-        }
       }
     }
   }
@@ -350,18 +370,18 @@ export default {
         language: ''
       },
       initFilter: [
-        // // which ones to hide
+        // which ones to hide
         // 'literal',
-        // // "literalEnglish",
-        // 'tags',
-        // // "keywords",
-        // // "language",
-        // 'dialect',
-        // 'native-language',
-        // 'country',
-        // // "town",
-        // 'coordinates'
-        // // 'approval' // took it out
+        // "literalEnglish",
+        'tags',
+        // "keywords",
+        // "language",
+        'dialect',
+        'native-language',
+        'country',
+        // "town",
+        'coordinates'
+        // 'approval' // took it out
       ],
       databaseInfo: {
         amountRecordings: 0
