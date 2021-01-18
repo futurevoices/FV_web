@@ -104,7 +104,7 @@
         <div
           id="customTable"
           class="customTable"
-          v-dragscroll.x
+          v-dragscroll
           v-on:dragscrollmove="dragscrollmove($event.detail)"
         >
           <div class="bodyTable">
@@ -235,7 +235,7 @@ section {
             margin-left: 6px;
             margin-right: 6px;
 
-            // background-color: $lightweight;
+            background-color: $lightweight;
           }
         }
 
