@@ -35,3 +35,7 @@ Get all audio: GET `localhost:8093/audio`
 Add new audio: POST `localhost:8093/audio`
 
 Delete audio: DELETE `localhost:8093/audio/5fcf5b54d2ee4c490f32bc4d`
+
+### Design
+
+[Figma Board](https://www.figma.com/file/1nBrIeekQxJ4NEYrCiObxx/Future-Voices?node-id=307%3A3)
