@@ -778,7 +778,7 @@ export default {
         .then(response => {
           console.log(response);
           swal('Success', 'updatedAudio', 'success').then(function() {
-            // this.$router.push("/manager/"); // not working?
+            // this.$router.push("/manager"); // not working?
             location.reload();
           });
         })

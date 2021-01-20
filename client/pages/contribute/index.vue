@@ -7,12 +7,6 @@
   </div>
 </template>
 
-<router>
-{
-    path: '/contribute'
-}
-</router>
-
 <script>
 import Uploader from '@/components/uploader/uploader';
 // import StreamPlayer from "@/components/stream/streamPlayer";

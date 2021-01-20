@@ -54,19 +54,19 @@ export default {
   // for local testing: http://localhost:1312/
 
   axios: {
-    baseURL: 'https://zukunftsmusik.radio'
+    baseURL: '/'
   },
 
   publicRuntimeConfig: {
-    baseURL: 'https://zukunftsmusik.radio'
+    baseURL: '/'
   },
   privateRuntimeConfig: {
     // apiSecret: process.env.API_SECRET,
-    baseURL: 'https://zukunftsmusik.radio'
+    baseURL: './'
   },
 
   server: {
-    port: 8000, // default: 3000
+    port: 8095, // default: 3000
     host: '0.0.0.0' // default: localhost 0.0.0.0 for sharing
   },
 

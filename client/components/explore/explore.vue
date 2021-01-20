@@ -1,7 +1,7 @@
 <template>
   <section v-if="allAudio">
     <div class="contentWrapper">
-      <img id="worldmap" src="map.svg" alt="world map" />
+      <img id="worldmap" src="/map.svg" alt="world map" />
       <br />
       <br />
       <h3>Explore {{ getRecordingCount() }} recordings</h3>

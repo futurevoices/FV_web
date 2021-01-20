@@ -1176,7 +1176,7 @@ export default {
             this.addLoading = false;
             this.audioDetails = {};
             swal('Success', 'New Audio Added', 'success').then(
-              this.$router.push('/explore/')
+              this.$router.push('/explore')
             );
           })
           .catch(err => {
