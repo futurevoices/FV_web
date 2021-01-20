@@ -8,4 +8,5 @@ router.get('/', audioController.getAllAudios);
 router.post('/updateSingleAudio', audioController.updateSingleAudio);
 router.post('/', upload.upload.single('audio'), audioController.addNewAudio);
 router.delete('/:audioId', audioController.deleteAudio);
+router.delete('/test/:audioId', audioController.deleteAudioTest);
 module.exports = router;

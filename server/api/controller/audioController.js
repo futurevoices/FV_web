@@ -77,7 +77,7 @@ exports.addNewAudio = async (req, res) => {
       // validation
       approved: false,
       approval_date: null,
-      approved_by: "needs approval",
+      approved_by: 'needs approval',
 
       // user timestamps
       user_timestamp: req.body.user_timestamp,
@@ -156,6 +156,17 @@ exports.deleteAudio = async (req, res) => {
     let result = await Audio.remove({ _id: id });
 
     res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+exports.deleteAudioTest = async (req, res) => {
+  try {
+    const id = req.params.audioId;
+    console.log('deleteAudioTest has been called');
+
+    res.status(200).json({ answer: 'deleteAudioTest has been called' });
   } catch (err) {
     res.status(500).json(err);
   }
