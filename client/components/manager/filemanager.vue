@@ -4,7 +4,9 @@
       <div class="row mt-2 mb-1">
         <div class="col-md-12">
           <h3 class="text-center">Contribute</h3>
-          <p style="color: red; text-align:center">Only disapprove hatespeach. Grammar errors or bad quality are fine.</p>
+          <p style="color: red; text-align:center">
+            Only disapprove hatespeach. Grammar errors or bad quality are fine.
+          </p>
         </div>
       </div>
       <div class="row">
@@ -591,35 +593,35 @@ h3 {
 </style>
 
 <script>
-import swal from "sweetalert";
-import ISO6391 from "iso-639-1";
-import countriesList from "countries-list";
+import swal from 'sweetalert';
+import ISO6391 from 'iso-639-1';
+import countriesList from 'countries-list';
 
 export default {
-  props: ["dataid"],
+  props: ['dataid'],
   data() {
     return {
       loadedData: null,
       audioDetails: {
-        literal_text: "",
-        literal_text_english: "",
+        literal_text: '',
+        literal_text_english: '',
         keywords: [],
         tags: [],
-        language_short: "",
-        dialect: "",
-        speaker_native_language: "",
-        country: "",
-        town: "",
-        long: "",
-        lat: "",
+        language_short: '',
+        dialect: '',
+        speaker_native_language: '',
+        country: '',
+        town: '',
+        long: '',
+        lat: '',
         // audio: ""
         approved: false,
         approval_date: null,
-        approved_by: ""
+        approved_by: ''
       },
       addLoading: false,
       audioData: null,
-      tagKeyword: "",
+      tagKeyword: '',
       tagsKeyword: [],
       autocompleteItemsKeyword: [
         // {
@@ -638,7 +640,7 @@ export default {
         //   text: "China"
         // }
       ],
-      tagTag: "",
+      tagTag: '',
       tagsTag: [],
       autocompleteItemsTag: []
     };
@@ -664,23 +666,23 @@ export default {
   methods: {
     async getAudio() {
       try {
-        let response = await this.$axios.$get("/audio/single/" + this.dataid);
+        let response = await this.$axios.$get('/audio/single/' + this.dataid);
         this.loadedData = response;
         console.log(response);
         if (response === []) {
           swal(
-            "Sorry",
-            "There was data recieved loading the audiofile. Check the ID",
-            "error"
+            'Sorry',
+            'There was data recieved loading the audiofile. Check the ID',
+            'error'
           );
         } else {
           this.filloutFields(response);
         }
       } catch (err) {
         swal(
-          "Sorry",
-          "There was an error loading the audiofile. Check the ID",
-          "error"
+          'Sorry',
+          'There was an error loading the audiofile. Check the ID',
+          'error'
         );
         console.log(err);
       }
@@ -714,7 +716,7 @@ export default {
       this.audioDetails.approved_by = data.approved_by;
 
       document.getElementById(
-        "preview-audio"
+        'preview-audio'
       ).src = `${this.$config.baseURL}${data.filePath}`;
     },
 
@@ -739,7 +741,7 @@ export default {
         lat: this.audioDetails.lat,
         user_timestamp: this.loadedData.user_timestamp,
         user_timestamp_string: this.loadedData.user_timestamp_string,
-        approved: this.audioDetails.approved == "true",
+        approved: this.audioDetails.approved == 'true',
         approved_by: this.audioDetails.approved_by,
         approval_date: new Date(
           new Date().getTime() - new Date().getTimezoneOffset() * 60000
@@ -764,25 +766,25 @@ export default {
         formDataObj.tags.push(tag.text);
       });
 
-      if (this.audioDetails.approved_by == "") {
-        swal("Error", "Please add the approvers name", "error");
+      if (this.audioDetails.approved_by == '') {
+        swal('Error', 'Please add the approvers name', 'error');
         return;
       }
 
       this.$axios
-        .$post("/audio/updateSingleAudio", formDataObj, {
-          headers: { "Content-Type": "application/json" }
+        .$post('/audio/private/updateSingleAudio', formDataObj, {
+          headers: { 'Content-Type': 'application/json' }
         })
         .then(response => {
           console.log(response);
-          swal("Success", "updatedAudio", "success").then(function() {
+          swal('Success', 'updatedAudio', 'success').then(function() {
             // this.$router.push("/manager/"); // not working?
             location.reload();
           });
         })
         .catch(err => {
           this.addLoading = false;
-          swal("Error", "Something Went wrong", "error");
+          swal('Error', 'Something Went wrong', 'error');
           console.log(err);
         });
 

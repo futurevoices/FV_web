@@ -49,19 +49,20 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
 
-  // for online and real database: https://zukunftsmusik.radio:8093/
+  // for online and real database: https://zukunftsmusik.radio/
+  // (used to be https://zukunftsmusik.radio:8093/ when node was only accesible via port and not rerouted via nginx)
   // for local testing: http://localhost:1312/
 
   axios: {
-    baseURL: 'https://zukunftsmusik.radio:8093/'
+    baseURL: 'https://zukunftsmusik.radio'
   },
 
   publicRuntimeConfig: {
-    baseURL: 'https://zukunftsmusik.radio:8093/'
+    baseURL: 'https://zukunftsmusik.radio'
   },
   privateRuntimeConfig: {
     // apiSecret: process.env.API_SECRET,
-    baseURL: 'https://zukunftsmusik.radio:8093/'
+    baseURL: 'https://zukunftsmusik.radio'
   },
 
   server: {

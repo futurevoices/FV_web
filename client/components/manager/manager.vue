@@ -5,7 +5,9 @@
         <div class="col-md-12">
           <h3 class="text-center">Manager</h3>
           <p style="color:red" class="text-center">Don't share this page!</p>
-          <p>Number of all recordings: <span>{{ getRecordingCount() }}</span></p>
+          <p>
+            Number of all recordings: <span>{{ getRecordingCount() }}</span>
+          </p>
         </div>
       </div>
 
@@ -79,14 +81,14 @@
               Approval
             </button>
           </div>
-           <div class="filter-wrapper">
-                         <button
+          <div class="filter-wrapper">
+            <button
               class="btn btn-outline-dark btn-sm btn-filter-approval"
               @click="filterAudios('unapproved', $event)"
             >
               Only show unapproved
             </button>
-           </div>
+          </div>
         </div>
       </div>
 
@@ -126,12 +128,15 @@
                   </td>
                   <td class="filter-tags">
                     <div v-for="(tag, index) in audio.tags" :key="index">
-                        <span>{{tag}}</span>
+                      <span>{{ tag }}</span>
                     </div>
                   </td>
-                  <td class="filter-keywords">                   
-                    <div v-for="(keyword, index) in audio.keywords" :key="index">
-                        <span>{{keyword}}</span>
+                  <td class="filter-keywords">
+                    <div
+                      v-for="(keyword, index) in audio.keywords"
+                      :key="index"
+                    >
+                      <span>{{ keyword }}</span>
                     </div>
                   </td>
                   <td class="filter-language">{{ audio.language }}</td>
@@ -141,7 +146,11 @@
                   </td>
                   <td class="filter-country">{{ audio.country }}</td>
                   <td class="filter-town">{{ audio.town }}</td>
-                  <td class="filter-coordinates">{{ audio.coordinates.lat}}, <br>{{ audio.coordinates.long}}</td>
+                  <td class="filter-coordinates">
+                    {{ audio.coordinates.lat }}, <br />{{
+                      audio.coordinates.long
+                    }}
+                  </td>
                   <td class="filter-approval">{{ audio.approved }}</td>
                   <td class="filter-approval">{{ audio.approved_by }}</td>
                   <td>
@@ -197,39 +206,39 @@ table {
 </style>
 
 <script>
-import swal from "sweetalert";
+import swal from 'sweetalert';
 export default {
   data() {
     return {
       current: {
-        title: "",
-        language: ""
+        title: '',
+        language: ''
       },
       initFilter: [
         // which ones to hide
-        "literal",
+        'literal',
         // "literalEnglish",
-        "tags",
+        'tags',
         // "keywords",
         // "language",
-        "dialect",
-        "native-language",
-        "country",
+        'dialect',
+        'native-language',
+        'country',
         // "town",
-        "coordinates",
+        'coordinates'
         // "approval",
       ],
       dataFilterActive: {
-        onlyUnapproved: false,
+        onlyUnapproved: false
       },
       databaseInfo: {
-        amountRecordings: 0,
+        amountRecordings: 0
       },
       song: true,
       isplaying: false,
       allAudio: null,
       index: 0,
-      player: ""
+      player: ''
     };
   },
   methods: {
@@ -244,7 +253,7 @@ export default {
     },
     async getAllAudios() {
       try {
-        let response = await this.$axios.$get("/audio/withid");
+        let response = await this.$axios.$get('/audio/private/withid');
         response.reverse();
         // console.log(response);
         if (response === []) {
@@ -273,25 +282,25 @@ export default {
     },
     toggleData(type, event) {
       let button = event.target;
-      let activateFilter = button.classList.contains("active") ? false : true;
+      let activateFilter = button.classList.contains('active') ? false : true;
 
-      button.classList.toggle("active");
-      button.classList.toggle("disabled");
+      button.classList.toggle('active');
+      button.classList.toggle('disabled');
 
-      let className = "filter-" + type;
+      let className = 'filter-' + type;
       let elements = document.getElementsByClassName(className);
 
       elements.forEach(element => {
         if (activateFilter) {
-          element.style.display = "table-cell";
+          element.style.display = 'table-cell';
         } else {
-          element.style.display = "none";
+          element.style.display = 'none';
         }
       });
     },
     filterOnInit(array) {
       array.forEach(element => {
-        let buttonClass = "btn-filter-" + element;
+        let buttonClass = 'btn-filter-' + element;
         let button = document.getElementsByClassName(buttonClass);
         let fakeEvent = {
           target: button[0]
@@ -302,42 +311,43 @@ export default {
     },
     deleteAudio(id) {
       swal({
-        title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this Audio!",
-        icon: "warning",
+        title: 'Are you sure?',
+        text: 'Once deleted, you will not be able to recover this Audio!',
+        icon: 'warning',
         buttons: true,
         dangerMode: true
       }).then(willDelete => {
         if (willDelete) {
           this.$axios
-            .$delete("/audio/" + id)
+            .$delete('/audio/private/' + id)
             .then(response => {
               this.getAllAudios();
-              swal("Poof! Your Audio file has been deleted!", {
-                icon: "success"
+              swal('Poof! Your Audio file has been deleted!', {
+                icon: 'success'
               });
             })
             .catch(err => {
-              swal("Error", "Somethimg went wrong", "error");
+              swal('Error', 'Somethimg went wrong', 'error');
             });
         } else {
-          swal("Your Audio file is safe!");
+          swal('Your Audio file is safe!');
         }
       });
     },
     editAudio(id) {
       console.log(id);
-      this.$router.push("/manager/" + id);
+      this.$router.push('/manager/' + id);
     },
-    updateStats(){
+    updateStats() {
       this.databaseInfo.amountRecordings = this.allAudio.length;
     },
-    getRecordingCount: function(){  
-        return this.databaseInfo.amountRecordings
+    getRecordingCount: function() {
+      return this.databaseInfo.amountRecordings;
     },
-    filterAudios(filter){
-      if (filter === "unapproved"){
-        this.dataFilterActive.onlyUnapproved = !this.dataFilterActive.onlyUnapproved
+    filterAudios(filter) {
+      if (filter === 'unapproved') {
+        this.dataFilterActive.onlyUnapproved = !this.dataFilterActive
+          .onlyUnapproved;
       }
 
       let audios = this.originalAllAudio;
@@ -347,15 +357,15 @@ export default {
         const a = audios[i];
 
         if (this.dataFilterActive.onlyUnapproved) {
-          if (a.approved){
+          if (a.approved) {
             continue;
           }
         }
-        filtered.push(a)
+        filtered.push(a);
       }
-      
+
       this.allAudio = filtered;
-      console.log(this.allAudio.length)
+      console.log(this.allAudio.length);
     }
   },
   mounted() {},
