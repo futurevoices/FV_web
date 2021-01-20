@@ -36,8 +36,10 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    '@nuxtjs/router-extras'
   ],
+
   bootstrapVue: {
     bootstrapCSS: false,
     bootstrapVueCSS: false
@@ -54,20 +56,20 @@ export default {
   // for local testing: http://localhost:1312/
 
   axios: {
-    baseURL: 'https://zukunftsmusik.radio/'
+    baseURL: '/'
   },
 
   publicRuntimeConfig: {
-    baseURL: 'https://zukunftsmusik.radio/'
+    baseURL: '/'
   },
   privateRuntimeConfig: {
     // apiSecret: process.env.API_SECRET,
-    baseURL: 'https://zukunftsmusik.radio/'
+    baseURL: '/'
   },
 
   server: {
-    port: 8000, // default: 3000
-    host: '0.0.0.0' // default: localhost 0.0.0.0 for sharing
+    port: 8096, // default: 3000
+    host: '127.0.0.1' // default: localhost 0.0.0.0 for sharing // 127.0.0.1 for online
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

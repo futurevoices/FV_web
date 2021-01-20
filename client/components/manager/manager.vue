@@ -336,7 +336,7 @@ export default {
     },
     editAudio(id) {
       console.log(id);
-      this.$router.push('/manager' + id);
+      this.$router.push('/manager/' + id);
     },
     updateStats() {
       this.databaseInfo.amountRecordings = this.allAudio.length;

@@ -3,12 +3,12 @@ module.exports = {
     {
       name: 'future voices frontend',
       exec_mode: 'cluster',
-      instances: 'max', // Or a number of instances
+      instances: '1', // Or a number of instances
       script: './node_modules/nuxt/bin/nuxt.js',
       args: 'start',
       env: {
-        HOST: 'localhost',
-        PORT: 8095
+        HOST: '127.0.0.1',
+        PORT: 8096
       }
     }
   ]
