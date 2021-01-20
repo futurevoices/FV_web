@@ -6,7 +6,8 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "prod": "nuxt build && pm2 restart ./ecosystem.config.js"
   },
   "dependencies": {
     "@johmun/vue-tags-input": "^2.1.0",
