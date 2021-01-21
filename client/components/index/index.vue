@@ -67,10 +67,16 @@
           <h3>Enter virtual world</h3>
           <br />
 
-          <img
-            src="/gameimage.png"
-            alt="image to enter Future Voices 3d World"
-          />
+          <a
+            href="https://www.ctm-festival.de/festival-2021/programme/practice/ctm-radio-lab-2021/future-voices"
+            target="_blank"
+          >
+            <img
+              class="link-image-game"
+              src="/gameimage.png"
+              alt="image to enter Future Voices 3d World"
+            />
+          </a>
         </div>
       </div>
     </div>
@@ -233,6 +239,14 @@ section {
       img {
         width: 100%;
         height: auto;
+      }
+
+      .link-image-game {
+        transition: all 0.4s ease-in-out;
+      }
+
+      .link-image-game:hover {
+        transform: scale(1.01);
       }
     }
 
