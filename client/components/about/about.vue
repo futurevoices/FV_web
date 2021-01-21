@@ -1,7 +1,8 @@
 <template>
   <section class="">
     <div class="contentWrapper">
-      <h3>About</h3>
+      <img src="/s4np.png" alt="cover image s4np" />
+      <br />
       <br />
       <p>
         &raquo;Future Voices/Zukunftsmusik&laquo; invites people from all over
@@ -54,6 +55,10 @@
 section {
   .contentWrapper {
     margin-bottom: 100px !important;
+
+    img {
+      width: 100%;
+    }
 
     a {
       text-decoration: underline;
