@@ -8,7 +8,17 @@
 2. Run `yarn generate`
 3. Copy the contents of the `build` folder to `gencomp.medienhaus.udk-berlin.de/home/vinzenz/zukunftsmusik.radio/public`
 
-## Server
+## Frontend Server
+
+### Deployment
+
+(Right now there is no auto deploy installed)
+
+1. Copy everything from the `master`branch into `gencomp.medienhaus.udk-berlin.de/home/vinzenz/zukunftsmusik.radio/public`
+2. SSH into the server and run `npm install --production` and then `npm run prod`
+3. The node server is rebuilt and restarted to serve the frontend.
+
+## API Server
 
 ### Deployment
 
@@ -25,21 +35,21 @@
 ### Private
 
 [https://zukunftsmusik.radio/manager/](https://zukunftsmusik.radio/manager/)
-
 [https://zukunftsmusik.radio/fileupload/](https://zukunftsmusik.radio/fileupload/)
 
 ### Api
 
 Get all audio: GET `localhost:8093/audio`
-
 Add new audio: POST `localhost:8093/audio`
-
 Delete audio: DELETE `localhost:8093/audio/5fcf5b54d2ee4c490f32bc4d`
 
-#### Testing Apis in Postman
+**Testing Apis in Postman**
+`DELETE https://zukunftsmusik.radio:8093/private/audio/test/123123` -> just returns an obj
 
-`DELETE https://zukunftsmusik.radio:8093/audio/test/123123` -> just returns an obj
+### Security
 
-### Design
+To secure the api's all private ones run under `.../private/...`. They're protected with auth from the nginx auth. Same goes for the backend at `./manager`.
+
+## Design
 
 [Figma Board](https://www.figma.com/file/1nBrIeekQxJ4NEYrCiObxx/Future-Voices?node-id=307%3A3)
