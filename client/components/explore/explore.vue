@@ -79,6 +79,7 @@
       <div class="tableWrapper">
         <div id="customTableHeader" class="customTable customTableHeader">
           <div class="headerTable">
+            <div class="custom-width-70-desktop">Listen</div>
             <div class="filter-literal custom-width-600-desktop">
               Literal text
             </div>
@@ -97,7 +98,6 @@
             <div class="filter-coordinates custom-width-180-desktop">
               Coordinates
             </div>
-            <div class="custom-width-180-desktop">Listen</div>
           </div>
         </div>
         <div class="table-spacer"></div>
@@ -113,6 +113,11 @@
               v-for="(audio, index) in allAudio"
               :key="index"
             >
+              <div class="row-element custom-width-70-desktop">
+                <button class="btn play-button" @click="play(audio)">
+                  Play
+                </button>
+              </div>
               <!-- <th>{{ index + 1 }}</th> -->
               <div class="row-element filter-literal custom-width-600-desktop">
                 <p>{{ audio.literal_text }}</p>
@@ -162,11 +167,6 @@
                   }}
                 </p>
               </div>
-              <div class="row-element custom-width-180-desktop">
-                <button class="btn play-button" @click="play(audio)">
-                  Play
-                </button>
-              </div>
             </div>
           </div>
         </div>
@@ -190,6 +190,7 @@ section {
     margin-bottom: 80px;
 
     button {
+      margin-top: 5px;
       background-color: $green;
       border-radius: 0;
       border: 0;
@@ -294,6 +295,10 @@ section {
         .custom-width-60-desktop {
           width: 60px;
           min-width: 60px;
+        }
+        .custom-width-70-desktop {
+          width: 70px;
+          min-width: 70px;
         }
         .custom-width-90-desktop {
           width: 90px;
@@ -408,7 +413,16 @@ export default {
     },
     async getAllAudios() {
       try {
-        let response = await this.$axios.$get('/audio');
+        let response = await this.$axios.$get(
+          '/audio'
+          // {},
+          // {
+          //   auth: {
+          //     username: '.',
+          //     password: '.'
+          //   }
+          // }
+        );
         response.reverse();
 
         let cleanedResponse = [];

@@ -50,6 +50,12 @@ Delete audio: DELETE `localhost:8093/audio/5fcf5b54d2ee4c490f32bc4d`
 
 To secure the api's all private ones run under `.../private/...`. They're protected with auth from the nginx auth. Same goes for the backend at `./manager`.
 
+### Local Development
+
+To use the online apis locally, change the nuxt axios base url to `https://zukunftsmusik.radio/`. Don't forget to change it back!
+
+To use the secret online apis locally, pass the auth params with the request. Don't forget to change it back and necer commit!
+
 ## Design
 
 [Figma Board](https://www.figma.com/file/1nBrIeekQxJ4NEYrCiObxx/Future-Voices?node-id=307%3A3)
