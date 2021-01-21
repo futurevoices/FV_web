@@ -2,11 +2,18 @@
   <section v-if="allAudio">
     <div class="contentWrapper">
       <img id="worldmap" src="/map.svg" alt="world map" />
-      <br />
-      <br />
-      <h3>Explore {{ getRecordingCount() }} recordings</h3>
     </div>
+
     <div class="recordingsWrapper">
+      <div class="instructions ">
+        <h3>Explore {{ getRecordingCount() }} recordings</h3>
+        <p class="small-text ">
+          <i>
+            Use buttons for filtering + Click & drag for horizontal scrolling</i
+          >
+        </p>
+      </div>
+
       <div class="filter-wrapper">
         <button
           class="btn btn-sm active btn-filter-literal"
@@ -74,12 +81,16 @@
         >
           Approval
         </button> -->
+        <br />
+        <br />
       </div>
 
       <div class="tableWrapper">
         <div id="customTableHeader" class="customTable customTableHeader">
           <div class="headerTable">
-            <div class="custom-width-70-desktop">Listen</div>
+            <div class=" custom-width-70-desktop table-first-element-spacing">
+              Listen
+            </div>
             <div class="filter-literal custom-width-600-desktop">
               Literal text
             </div>
@@ -113,7 +124,9 @@
               v-for="(audio, index) in allAudio"
               :key="index"
             >
-              <div class="row-element custom-width-70-desktop">
+              <div
+                class="  row-element custom-width-70-desktop table-first-element-spacing"
+              >
                 <button class="btn play-button" @click="play(audio)">
                   Play
                 </button>
@@ -179,15 +192,24 @@
 section {
   .contentWrapper {
     h3 {
-      text-align: center;
+      text-align: left;
     }
     img {
       width: 100%;
     }
+    margin-bottom: 60px !important;
   }
 
   .recordingsWrapper {
     margin-bottom: 80px;
+
+    .small-text {
+      font-size: 16px;
+    }
+
+    .text-center {
+      text-align: left;
+    }
 
     button {
       margin-top: 5px;
@@ -197,10 +219,23 @@ section {
       color: $black;
     }
 
-    .filter-wrapper {
+    .instructions {
       padding-left: 12px;
       padding-right: 12px;
+    }
+
+    .filter-wrapper {
+      padding-left: 6px;
+      padding-right: 6px;
+      margin-bottom: 24px;
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      // justify-content: center;
       button {
+        margin-right: 6px;
+        margin-left: 6px;
         background-color: $green;
         border-radius: 0;
         border: 0;
@@ -216,14 +251,9 @@ section {
       }
     }
 
-    .filter-wrapper {
-      margin-bottom: 24px;
-      margin-top: 12px;
-    }
-
     .tableWrapper {
-      padding-left: 6px;
-      padding-right: 6px;
+      // padding-left: 6px;
+      // padding-right: 6px;
       #customTableHeader {
         position: sticky;
         top: 40px;
@@ -240,7 +270,7 @@ section {
       .customTable {
         width: 100%;
         overflow-x: hidden;
-        cursor: pointer;
+        cursor: move;
 
         .headerTable {
           width: auto;
@@ -262,11 +292,13 @@ section {
         .bodyTable {
           padding-top: 24px;
           display: inline-block;
+          min-width: 100%;
           .table-row {
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
             border-bottom: 1px solid $black;
+            min-width: 100%;
             // display: flex;
             // justify-content: flex-start;
             // flex-direction: row;
@@ -280,6 +312,7 @@ section {
                 margin-bottom: 6px;
               }
             }
+
             p {
               font-size: 14px;
               line-height: 21px;
@@ -331,6 +364,10 @@ section {
         .custom-width-600-desktop {
           width: 600px;
           min-width: 600px;
+        }
+
+        .table-first-element-spacing {
+          margin-left: 12px !important;
         }
       }
 
