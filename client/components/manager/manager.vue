@@ -253,7 +253,15 @@ export default {
     },
     async getAllAudios() {
       try {
-        let response = await this.$axios.$get('/audio/private/withid');
+        let response = await this.$axios.$get(
+          '/audio/private/withid' // {},
+          // {
+          //   auth: {
+          //     username: '.',
+          //     password: '.'
+          //   }
+          // }
+        );
         response.reverse();
         // console.log(response);
         if (response === []) {

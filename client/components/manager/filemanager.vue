@@ -666,7 +666,15 @@ export default {
   methods: {
     async getAudio() {
       try {
-        let response = await this.$axios.$get('/audio/single/' + this.dataid);
+        let response = await this.$axios.$get(
+          '/audio/single/' + this.dataid // {},
+          // {
+          //   auth: {
+          //     username: '.',
+          //     password: '.'
+          //   }
+          // }
+        );
         this.loadedData = response;
         console.log(response);
         if (response === []) {
