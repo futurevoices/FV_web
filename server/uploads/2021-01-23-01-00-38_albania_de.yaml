@@ -1,0 +1,24 @@
+literal_text: This is a little test 2
+literal_text_english: ''
+keywords: []
+tags: []
+language_short: DE
+language: German
+dialect: ''
+speaker_native_language: DE
+country_code: AL
+country: Albania
+coordinates:
+  lat: null
+  long: null
+lat: null
+user_timestamp: '2021-01-23T01:00:38.543Z'
+user_timestamp_string: '2021-01-23T00:00:38.000Z'
+approved: true
+approved_by: vw
+approval_date: '2021-01-23T02:21:04.509Z'
+filePath: uploads/2021-01-23-01-00-38_albania_de.wav
+filename: 2021-01-23-01-00-38_albania_de.wav
+yamlFilename: 2021-01-23-01-00-38_albania_de.yaml
+yamlFilenamePath: uploads/2021-01-23-01-00-38_albania_de.yaml
+version: 0.1
