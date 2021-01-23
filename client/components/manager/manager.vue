@@ -256,7 +256,7 @@
               <div class="row-element filter-approval custom-width-90-desktop">
                 <p
                   :class="[
-                    audio.approved == false ? '' : '',
+                    audio.approved == false ? 'color-red' : '',
                     audio.approved == true ? 'color-green' : ''
                   ]"
                 >
