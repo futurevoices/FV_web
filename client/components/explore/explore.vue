@@ -27,12 +27,12 @@
         >
           Literal text english
         </button>
-        <button
+        <!-- <button
           class="btn btn-sm active btn-filter-tags"
           @click="toggleData('tags', $event)"
         >
           Tags
-        </button>
+        </button> -->
         <button
           class="btn btn-sm active btn-filter-keywords"
           @click="toggleData('keywords', $event)"
@@ -97,7 +97,7 @@
             <div class="filter-literalEnglish custom-width-600-desktop">
               Literal text english
             </div>
-            <div class="filter-tags custom-width-180-desktop">Tags</div>
+            <!-- <div class="filter-tags custom-width-180-desktop">Tags</div> -->
             <div class="filter-keywords custom-width-180-desktop">Keywords</div>
             <div class="filter-language custom-width-180-desktop">Language</div>
             <div class="filter-dialect custom-width-180-desktop">Dialect</div>
@@ -140,13 +140,13 @@
               >
                 <p>{{ audio.literal_text_english }}</p>
               </div>
-              <div class="row-element filter-tags custom-width-180-desktop">
+              <!-- <div class="row-element filter-tags custom-width-180-desktop">
                 <div v-for="(tag, index) in audio.tags" :key="index">
                   <span
                     ><p>{{ tag }}</p></span
                   >
                 </div>
-              </div>
+              </div> -->
               <div class="row-element filter-keywords custom-width-180-desktop">
                 <div v-for="(keyword, index) in audio.keywords" :key="index">
                   <span
@@ -415,7 +415,7 @@ export default {
         // which ones to hide
         // 'literal',
         // "literalEnglish",
-        'tags',
+        // 'tags',
         // "keywords",
         // "language",
         'dialect',

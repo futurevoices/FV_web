@@ -3,7 +3,10 @@
     <div class="container mb-4">
       <div class="row mt-2 mb-1">
         <div class="col-md-12">
-          <h3 class="text-center">Contribute</h3>
+          <br />
+          <br />
+          <br />
+          <h3 style="color:red" class="text-center">File Edit</h3>
           <p style="color: red; text-align:center">
             Only disapprove hatespeach. Grammar errors or bad quality are fine.
           </p>

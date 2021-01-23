@@ -9,17 +9,6 @@
         </p>
       </div> -->
 
-      <!-- <div class="">
-        <div class="filter-wrapper">
-          <button
-            class="btn btn-outline-dark btn-sm btn-filter-approval"
-            @click="filterAudios('unapproved', $event)"
-          >
-            Only show unapproved
-          </button>
-        </div>
-      </div> -->
-
       <!-- <div class="row">
         <div class="col-md-12">
           <div class="card showdow">
@@ -110,9 +99,13 @@
         </div>
       </div> -->
     </div>
+    <div class="spacer"></div>
+
     <div class="recordingsWrapper">
       <div class="instructions ">
-        <h3>Explore {{ getRecordingCount() }} recordings</h3>
+        <h1 style="color: red">Manager</h1>
+        <h1 style="color: red">Do not share!</h1>
+        <h3>Total {{ getRecordingCount() }} recordings</h3>
         <p class="small-text ">
           <i>
             Use buttons for filtering + Click & drag for horizontal scrolling</i
@@ -190,12 +183,26 @@
         <br />
         <br />
       </div>
+      <div class="filter-wrapper">
+        <button
+          class="btn btn-outline-dark btn-sm btn-filter-approval"
+          @click="filterAudios('unapproved', $event)"
+        >
+          Only show unapproved
+        </button>
+      </div>
 
       <div class="tableWrapper">
         <div id="customTableHeader" class="customTable customTableHeader">
           <div class="headerTable">
-            <div class=" custom-width-70-desktop table-first-element-spacing">
+            <div class=" custom-width-90-desktop table-first-element-spacing">
               Listen
+            </div>
+            <div class="filter-approval custom-width-90-desktop">
+              Approved
+            </div>
+            <div class="filter-approval custom-width-150-desktop">
+              Last approved by
             </div>
             <div class="filter-literal custom-width-600-desktop">
               Literal text
@@ -231,13 +238,40 @@
               :key="index"
             >
               <div
-                class="  row-element custom-width-70-desktop table-first-element-spacing"
+                class="row-element custom-width-90-desktop table-first-element-spacing"
               >
                 <button class="btn play-button" @click="play(audio)">
                   Play
                 </button>
+                <button class="btn edit-button" @click="editAudio(audio._id)">
+                  Edit
+                </button>
+                <button
+                  class="btn delete-button"
+                  @click="deleteAudio(audio._id)"
+                >
+                  Delete
+                </button>
               </div>
-              <!-- <th>{{ index + 1 }}</th> -->
+              <div class="row-element filter-approval custom-width-90-desktop">
+                <p
+                  :class="[
+                    audio.approved == false ? '' : '',
+                    audio.approved == true ? 'color-green' : ''
+                  ]"
+                >
+                  {{ audio.approved }}
+                </p>
+              </div>
+              <div class="row-element filter-approval custom-width-150-desktop">
+                <p
+                  :class="[
+                    audio.approved_by === 'needs approval' ? 'color-red' : ''
+                  ]"
+                >
+                  {{ audio.approved_by }}
+                </p>
+              </div>
               <div class="row-element filter-literal custom-width-600-desktop">
                 <p>{{ audio.literal_text }}</p>
               </div>
@@ -295,6 +329,17 @@
 </template>
 
 <style scoped lang="scss">
+.color-red {
+  color: red;
+}
+
+.color-green {
+  color: green;
+}
+
+.spacer {
+  height: 50px;
+}
 table {
   font-size: 12px;
 }
@@ -339,11 +384,11 @@ table {
     button {
       margin-right: 6px;
       margin-left: 6px;
-      background-color: $green;
+      background-color: black;
       border-radius: 0;
       border: 0;
-      color: $black;
-      border: solid 2px $green;
+      color: white;
+      border: solid 2px black;
       margin-bottom: 12px;
     }
     button.disabled {
@@ -413,6 +458,18 @@ table {
 
             .play-button {
               margin-bottom: 6px;
+            }
+
+            .edit-button {
+              margin-bottom: 6px;
+              background-color: orange;
+            }
+
+            .delete-button {
+              font-size: 10px;
+              margin-bottom: 6px;
+              background-color: red;
+              // transform: scale(0.7);
             }
           }
 
