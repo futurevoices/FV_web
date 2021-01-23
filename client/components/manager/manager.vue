@@ -115,7 +115,9 @@
                     <th class="filter-town" scope="col">Town</th>
                     <th class="filter-coordinates" scope="col">Coordinates</th>
                     <th class="filter-approval" scope="col">Approved</th>
-                    <th class="filter-approval" scope="col">Approved by</th>
+                    <th class="filter-approval" scope="col">
+                      Last approved by
+                    </th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -344,7 +346,10 @@ export default {
     },
     editAudio(id) {
       console.log(id);
-      this.$router.push('/manager/' + id);
+      // this.$router.push('/manager/' + id);
+      let routeData = this.$router.resolve({ name: '/manager/' + id });
+      console.log(routeData);
+      window.open(routeData.route.name, '_blank');
     },
     updateStats() {
       this.databaseInfo.amountRecordings = this.allAudio.length;

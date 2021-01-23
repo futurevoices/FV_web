@@ -542,10 +542,11 @@
                 <h3>Approval</h3>
                 <div class="form-group">
                   <select
-                    id="language-selector"
+                    id="approval-selector"
                     v-model="audioDetails.approved"
                     class="form-control"
                   >
+                    <option disabled value="">Please select one</option>
                     <option value="false">False</option>
                     <option value="true">True</option>
                   </select>
@@ -667,7 +668,8 @@ export default {
     async getAudio() {
       try {
         let response = await this.$axios.$get(
-          '/audio/single/' + this.dataid // {},
+          '/audio/single/' + this.dataid
+          // {},
           // {
           //   auth: {
           //     username: '.',
@@ -721,7 +723,12 @@ export default {
       this.audioDetails.long = data.coordinates.long;
 
       this.audioDetails.approved = data.approved;
+
       this.audioDetails.approved_by = data.approved_by;
+
+      if (this.audioDetails.approved_by === 'needs approval') {
+        this.audioDetails.approved_by = '';
+      }
 
       document.getElementById(
         'preview-audio'
@@ -729,6 +736,10 @@ export default {
     },
 
     updateAudio() {
+      // transform dropdown to boolean // was bugging before.
+      this.audioDetails.approved =
+        document.getElementById('approval-selector').value == 'true';
+
       let formDataObj = {
         literal_text: this.audioDetails.literal_text,
         literal_text_english: this.audioDetails.literal_text_english,
@@ -749,7 +760,7 @@ export default {
         lat: this.audioDetails.lat,
         user_timestamp: this.loadedData.user_timestamp,
         user_timestamp_string: this.loadedData.user_timestamp_string,
-        approved: this.audioDetails.approved == 'true',
+        approved: this.audioDetails.approved,
         approved_by: this.audioDetails.approved_by,
         approval_date: new Date(
           new Date().getTime() - new Date().getTimezoneOffset() * 60000
@@ -778,7 +789,6 @@ export default {
         swal('Error', 'Please add the approvers name', 'error');
         return;
       }
-
       this.$axios
         .$post('/audio/private/updateSingleAudio', formDataObj, {
           headers: { 'Content-Type': 'application/json' }
@@ -821,9 +831,9 @@ export default {
       // yamlFilenamePath: (...)
     }
   },
-  mounted() {},
-  created() {
+  mounted() {
     this.getAudio();
-  }
+  },
+  created() {}
 };
 </script>
