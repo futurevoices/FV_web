@@ -1,83 +1,15 @@
 <template>
   <section v-if="allAudio">
     <div class="container">
-      <div class="">
+      <!-- <div class="">
         <h3 class="text-center">Manager</h3>
         <p style="color:red" class="text-center">Don't share this page!</p>
         <p>
           Number of all recordings: <span>{{ getRecordingCount() }}</span>
         </p>
-      </div>
+      </div> -->
 
-      <div class="">
-        <!-- <div class="filter-wrapper">
-            <button
-              class="btn btn-outline-dark btn-sm active btn-filter-literal"
-              @click="toggleData('literal', $event)"
-            >
-              Literal text
-            </button>
-            <button
-              class="btn btn-outline-dark btn-sm active btn-filter-literalEnglish"
-              @click="toggleData('literalEnglish', $event)"
-            >
-              Literal text english
-            </button>
-            <button
-              class="btn btn-outline-dark btn-sm active btn-filter-tags"
-              @click="toggleData('tags', $event)"
-            >
-              Tags
-            </button>
-            <button
-              class="btn btn-outline-dark btn-sm active btn-filter-keywords"
-              @click="toggleData('keywords', $event)"
-            >
-              Keywords
-            </button>
-            <button
-              class="btn btn-outline-dark btn-sm active btn-filter-language"
-              @click="toggleData('language', $event)"
-            >
-              Language
-            </button>
-            <button
-              class="btn btn-outline-dark btn-sm active btn-filter-dialect"
-              @click="toggleData('dialect', $event)"
-            >
-              Dialect
-            </button>
-            <button
-              class="btn btn-outline-dark btn-sm active btn-filter-native-language"
-              @click="toggleData('native-language', $event)"
-            >
-              Native Language
-            </button>
-            <button
-              class="btn btn-outline-dark btn-sm active btn-filter-country"
-              @click="toggleData('country', $event)"
-            >
-              Country
-            </button>
-            <button
-              class="btn btn-outline-dark btn-sm active btn-filter-town"
-              @click="toggleData('town', $event)"
-            >
-              Town
-            </button>
-            <button
-              class="btn btn-outline-dark btn-sm active btn-filter-coordinates"
-              @click="toggleData('coordinates', $event)"
-            >
-              Coordinates
-            </button>
-            <button
-              class="btn btn-outline-dark btn-sm active btn-filter-approval"
-              @click="toggleData('approval', $event)"
-            >
-              Approval
-            </button>
-          </div> -->
+      <!-- <div class="">
         <div class="filter-wrapper">
           <button
             class="btn btn-outline-dark btn-sm btn-filter-approval"
@@ -86,7 +18,7 @@
             Only show unapproved
           </button>
         </div>
-      </div>
+      </div> -->
 
       <!-- <div class="row">
         <div class="col-md-12">
@@ -371,186 +303,203 @@ table {
   overflow-x: scroll;
 }
 
-.filter-wrapper {
-  /* display: flex; */
-  /* justify-content: center;
-  align-items: center; */
-  margin-bottom: 24px;
-  margin-top: 12px;
-}
+.recordingsWrapper {
+  margin-bottom: 80px;
 
-.filter-wrapper {
-  padding-left: 6px;
-  padding-right: 6px;
-  margin-bottom: 24px;
-  margin-top: 12px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  // justify-content: center;
+  .small-text {
+    font-size: 16px;
+  }
+
+  .text-center {
+    text-align: left;
+  }
+
   button {
-    margin-right: 6px;
-    margin-left: 6px;
+    margin-top: 5px;
     background-color: $green;
     border-radius: 0;
     border: 0;
     color: $black;
-    border: solid 2px $green;
-    margin-bottom: 12px;
-  }
-  button.disabled {
-    background-color: $lightweight;
-    border-radius: 0;
-    border: solid 2px $black;
-    color: $black;
-  }
-}
-
-.tableWrapper {
-  // padding-left: 6px;
-  // padding-right: 6px;
-  #customTableHeader {
-    position: sticky;
-    top: 40px;
   }
 
-  .table-spacer {
-    position: sticky;
-    top: 64px;
-    display: block;
-    width: 100%;
-    border-bottom: solid 1px $black;
+  .instructions {
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
-  .customTable {
-    width: 100%;
-    overflow-x: hidden;
-    cursor: move;
-
-    .headerTable {
-      width: auto;
+  .filter-wrapper {
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-bottom: 24px;
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    // justify-content: center;
+    button {
+      margin-right: 6px;
+      margin-left: 6px;
+      background-color: $green;
+      border-radius: 0;
+      border: 0;
+      color: $black;
+      border: solid 2px $green;
       margin-bottom: 12px;
-      border-bottom: 2px solid $black;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
+    }
+    button.disabled {
       background-color: $lightweight;
-      div {
-        display: inline-block;
-        margin-left: 6px;
-        margin-right: 6px;
+      border-radius: 0;
+      border: solid 2px $black;
+      color: $black;
+    }
+  }
 
-        background-color: $lightweight;
-      }
+  .tableWrapper {
+    // padding-left: 6px;
+    // padding-right: 6px;
+    #customTableHeader {
+      position: sticky;
+      top: 40px;
     }
 
-    .bodyTable {
-      padding-top: 24px;
-      display: inline-block;
-      min-width: 100%;
-      .table-row {
+    .table-spacer {
+      position: sticky;
+      top: 64px;
+      display: block;
+      width: 100%;
+      border-bottom: solid 1px $black;
+    }
+
+    .customTable {
+      width: 100%;
+      overflow-x: hidden;
+      cursor: move;
+
+      .headerTable {
+        width: auto;
+        margin-bottom: 12px;
+        border-bottom: 2px solid $black;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
-        border-bottom: 1px solid $black;
-        min-width: 100%;
-        // display: flex;
-        // justify-content: flex-start;
-        // flex-direction: row;
-
-        .row-element {
+        background-color: $lightweight;
+        div {
+          display: inline-block;
           margin-left: 6px;
           margin-right: 6px;
-          display: inline-block;
 
-          .play-button {
-            margin-bottom: 6px;
+          background-color: $lightweight;
+        }
+      }
+
+      .bodyTable {
+        padding-top: 24px;
+        display: inline-block;
+        min-width: 100%;
+        .table-row {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          border-bottom: 1px solid $black;
+          min-width: 100%;
+          // display: flex;
+          // justify-content: flex-start;
+          // flex-direction: row;
+
+          .row-element {
+            margin-left: 6px;
+            margin-right: 6px;
+            display: inline-block;
+
+            .play-button {
+              margin-bottom: 6px;
+            }
+          }
+
+          p {
+            font-size: 14px;
+            line-height: 21px;
+            margin: 0;
           }
         }
+      }
 
-        p {
-          font-size: 14px;
-          line-height: 21px;
-          margin: 0;
-        }
+      .custom-width-30-desktop {
+        width: 30px;
+        min-width: 30px;
+      }
+      .custom-width-60-desktop {
+        width: 60px;
+        min-width: 60px;
+      }
+      .custom-width-70-desktop {
+        width: 70px;
+        min-width: 70px;
+      }
+      .custom-width-90-desktop {
+        width: 90px;
+        min-width: 90px;
+      }
+      .custom-width-120-desktop {
+        width: 120px;
+        min-width: 120px;
+      }
+      .custom-width-150-desktop {
+        width: 150px;
+        min-width: 150px;
+      }
+      .custom-width-180-desktop {
+        width: 180px;
+        min-width: 180px;
+      }
+      .custom-width-240-desktop {
+        width: 240px;
+        min-width: 240px;
+      }
+      .custom-width-300-desktop {
+        width: 300px;
+        min-width: 300px;
+      }
+      .custom-width-420-desktop {
+        width: 420px;
+        min-width: 420px;
+      }
+      .custom-width-600-desktop {
+        width: 600px;
+        min-width: 600px;
+      }
+
+      .table-first-element-spacing {
+        margin-left: 12px !important;
       }
     }
 
-    .custom-width-30-desktop {
-      width: 30px;
-      min-width: 30px;
-    }
-    .custom-width-60-desktop {
-      width: 60px;
-      min-width: 60px;
-    }
-    .custom-width-70-desktop {
-      width: 70px;
-      min-width: 70px;
-    }
-    .custom-width-90-desktop {
-      width: 90px;
-      min-width: 90px;
-    }
-    .custom-width-120-desktop {
-      width: 120px;
-      min-width: 120px;
-    }
-    .custom-width-150-desktop {
-      width: 150px;
-      min-width: 150px;
-    }
-    .custom-width-180-desktop {
-      width: 180px;
-      min-width: 180px;
-    }
-    .custom-width-240-desktop {
-      width: 240px;
-      min-width: 240px;
-    }
-    .custom-width-300-desktop {
-      width: 300px;
-      min-width: 300px;
-    }
-    .custom-width-420-desktop {
-      width: 420px;
-      min-width: 420px;
-    }
-    .custom-width-600-desktop {
-      width: 600px;
-      min-width: 600px;
+    .customTableHeader {
+      overflow-x: hidden; /* Hide horizontal scrollbar */
+
+      .headerTable {
+        border-bottom: 0;
+      }
     }
 
-    .table-first-element-spacing {
-      margin-left: 12px !important;
-    }
-  }
+    table {
+      display: none;
+      font-size: 12px;
+      line-height: 17px;
 
-  .customTableHeader {
-    overflow-x: hidden; /* Hide horizontal scrollbar */
+      tr,
+      td,
+      th {
+        padding-right: 24px;
+        padding-left: 24px;
+        border: 0;
+        border-top: solid 1px $black;
+      }
 
-    .headerTable {
-      border-bottom: 0;
-    }
-  }
-
-  table {
-    display: none;
-    font-size: 12px;
-    line-height: 17px;
-
-    tr,
-    td,
-    th {
-      padding-right: 24px;
-      padding-left: 24px;
-      border: 0;
-      border-top: solid 1px $black;
-    }
-
-    span {
-      font-size: inherit;
-      line-height: inherit;
+      span {
+        font-size: inherit;
+        line-height: inherit;
+      }
     }
   }
 }
