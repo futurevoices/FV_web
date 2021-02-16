@@ -19,6 +19,7 @@
     "countries-list": "^2.5.6",
     "iso-639-1": "^2.1.4",
     "nuxt": "^2.14.6",
+    "nuxt-matomo": "^1.2.4",
     "recorder-js": "^1.0.7",
     "sweetalert": "^2.1.2",
     "three": "^0.124.0",

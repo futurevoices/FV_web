@@ -1412,7 +1412,6 @@
     "merge-source-map" "^1.1.0"
     "postcss" "^7.0.14"
     "postcss-selector-parser" "^6.0.2"
-    "prettier" "^1.18.2"
     "source-map" "~0.6.1"
     "vue-template-es2015-compiler" "^1.9.0"
   optionalDependencies:
@@ -2473,7 +2472,6 @@
   dependencies:
     "anymatch" "~3.1.1"
     "braces" "~3.0.2"
-    "fsevents" "~2.1.2"
     "glob-parent" "~5.1.0"
     "is-binary-path" "~2.1.0"
     "is-glob" "~4.0.1"
@@ -5818,6 +5816,11 @@
   "resolved" "https://registry.npmjs.org/number-is-nan/-/number-is-nan-1.0.1.tgz"
   "version" "1.0.1"
 
+"nuxt-matomo@^1.2.4":
+  "integrity" "sha512-09cIWnj6v58CMbEDS+mVTnJ97BaO/fJaQDPk31sa27jejcD80bIvNowkAJMj4OcVWMeeIVTljClMHE6249cFtw=="
+  "resolved" "https://registry.npmjs.org/nuxt-matomo/-/nuxt-matomo-1.2.4.tgz"
+  "version" "1.2.4"
+
 "nuxt@^2.14.6":
   "integrity" "sha512-VbcXpSlP3R1wxC5DPQcC8b7MNCK9Vy6ZC5dEzYENZ4Is8TJ3aYsQuxzz/owdrVR7AU/lZkgGk+LUEmk5AutVNg=="
   "resolved" "https://registry.npmjs.org/nuxt/-/nuxt-2.14.10.tgz"
@@ -8884,7 +8887,6 @@
     "chokidar" "^3.4.1"
     "graceful-fs" "^4.1.2"
     "neo-async" "^2.5.0"
-    "watchpack-chokidar2" "^2.0.1"
   optionalDependencies:
     "watchpack-chokidar2" "^2.0.1"
 
