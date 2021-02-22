@@ -233,7 +233,7 @@ section {
       table,
       th,
       td {
-        border: 2px solid $black;
+        border: 1px solid $black;
       }
 
       img {

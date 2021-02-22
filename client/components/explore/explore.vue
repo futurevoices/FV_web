@@ -240,13 +240,13 @@ section {
         border-radius: 0;
         border: 0;
         color: $black;
-        border: solid 2px $green;
+        border: solid 1px $green;
         margin-bottom: 12px;
       }
       button.disabled {
         background-color: $lightweight;
         border-radius: 0;
-        border: solid 2px $black;
+        border: solid 1px $black;
         color: $black;
       }
     }

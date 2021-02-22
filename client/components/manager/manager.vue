@@ -388,13 +388,13 @@ table {
       border-radius: 0;
       border: 0;
       color: white;
-      border: solid 2px black;
+      border: solid 1px black;
       margin-bottom: 12px;
     }
     button.disabled {
       background-color: $lightweight;
       border-radius: 0;
-      border: solid 2px $black;
+      border: solid 1px $black;
       color: $black;
     }
   }
