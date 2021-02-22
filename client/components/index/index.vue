@@ -225,6 +225,8 @@ section {
           td,
           th {
             padding: 5px;
+            padding-left: 9px;
+            padding-right: 9px;
             font-weight: normal;
           }
         }
