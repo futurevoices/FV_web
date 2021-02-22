@@ -91,10 +91,14 @@
             <div class=" custom-width-70-desktop table-first-element-spacing">
               Listen
             </div>
-            <div class="filter-literal custom-width-600-desktop">
+            <div
+              class="filter-literal custom-width-600-desktop custom-width-100vwMax-mobile"
+            >
               Literal text
             </div>
-            <div class="filter-literalEnglish custom-width-600-desktop">
+            <div
+              class="filter-literalEnglish custom-width-600-desktop custom-width-100vwMax-mobile"
+            >
               Literal text english
             </div>
             <!-- <div class="filter-tags custom-width-180-desktop">Tags</div> -->
@@ -132,11 +136,13 @@
                 </button>
               </div>
               <!-- <th>{{ index + 1 }}</th> -->
-              <div class="row-element filter-literal custom-width-600-desktop">
+              <div
+                class="row-element filter-literal custom-width-600-deskto custom-width-100vwMax-mobile"
+              >
                 <p>{{ audio.literal_text }}</p>
               </div>
               <div
-                class="row-element filter-literalEnglish custom-width-600-desktop"
+                class="row-element filter-literalEnglish custom-width-600-desktop custom-width-100vwMax-mobile"
               >
                 <p>{{ audio.literal_text_english }}</p>
               </div>
@@ -406,6 +412,34 @@ section {
       }
     }
   }
+}
+/*Above */
+@media only screen and (min-width: 1201px) {
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  .custom-width-100vwMax-mobile {
+    width: 100vw !important;
+    min-width: 100vw !important;
+    max-width: 100vw !important;
+  }
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 320px) {
 }
 </style>
 
