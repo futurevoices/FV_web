@@ -293,7 +293,13 @@ section {
           padding-top: 24px;
           display: inline-block;
           min-width: 100%;
+
+          .table-row:hover {
+            background-color: $lightweightdarker;
+          }
+
           .table-row {
+            transition: background-color 0.2s linear;
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
