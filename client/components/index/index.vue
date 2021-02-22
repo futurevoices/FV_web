@@ -272,6 +272,12 @@ section {
   .moebius {
     transform: translateX(-20px);
   }
+
+  #background {
+    width: calc(100vw + 60px);
+    left: -30px;
+  }
+
   .background-image {
     .inside-shadow {
       box-shadow: inset 0px 0px 0px 0px $lightweight,
