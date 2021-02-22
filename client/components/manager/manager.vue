@@ -166,7 +166,7 @@
           class="btn btn-sm active btn-filter-town"
           @click="toggleData('town', $event)"
         >
-          Town
+          Location
         </button>
         <button
           class="btn btn-sm active btn-filter-coordinates"
