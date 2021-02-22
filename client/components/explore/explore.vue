@@ -27,12 +27,12 @@
         >
           Literal text english
         </button>
-        <button
+        <!-- <button
           class="btn btn-sm active btn-filter-tags"
           @click="toggleData('tags', $event)"
         >
           Tags
-        </button>
+        </button> -->
         <button
           class="btn btn-sm active btn-filter-keywords"
           @click="toggleData('keywords', $event)"
@@ -91,13 +91,17 @@
             <div class=" custom-width-70-desktop table-first-element-spacing">
               Listen
             </div>
-            <div class="filter-literal custom-width-600-desktop">
+            <div
+              class="filter-literal custom-width-600-desktop custom-width-100vwMax-mobile"
+            >
               Literal text
             </div>
-            <div class="filter-literalEnglish custom-width-600-desktop">
+            <div
+              class="filter-literalEnglish custom-width-600-desktop custom-width-100vwMax-mobile"
+            >
               Literal text english
             </div>
-            <div class="filter-tags custom-width-180-desktop">Tags</div>
+            <!-- <div class="filter-tags custom-width-180-desktop">Tags</div> -->
             <div class="filter-keywords custom-width-180-desktop">Keywords</div>
             <div class="filter-language custom-width-180-desktop">Language</div>
             <div class="filter-dialect custom-width-180-desktop">Dialect</div>
@@ -132,21 +136,23 @@
                 </button>
               </div>
               <!-- <th>{{ index + 1 }}</th> -->
-              <div class="row-element filter-literal custom-width-600-desktop">
+              <div
+                class="row-element filter-literal custom-width-600-desktop custom-width-100vwMax-mobile"
+              >
                 <p>{{ audio.literal_text }}</p>
               </div>
               <div
-                class="row-element filter-literalEnglish custom-width-600-desktop"
+                class="row-element filter-literalEnglish custom-width-600-desktop custom-width-100vwMax-mobile"
               >
                 <p>{{ audio.literal_text_english }}</p>
               </div>
-              <div class="row-element filter-tags custom-width-180-desktop">
+              <!-- <div class="row-element filter-tags custom-width-180-desktop">
                 <div v-for="(tag, index) in audio.tags" :key="index">
                   <span
                     ><p>{{ tag }}</p></span
                   >
                 </div>
-              </div>
+              </div> -->
               <div class="row-element filter-keywords custom-width-180-desktop">
                 <div v-for="(keyword, index) in audio.keywords" :key="index">
                   <span
@@ -240,13 +246,13 @@ section {
         border-radius: 0;
         border: 0;
         color: $black;
-        border: solid 2px $green;
+        border: solid 1px $green;
         margin-bottom: 12px;
       }
       button.disabled {
         background-color: $lightweight;
         border-radius: 0;
-        border: solid 2px $black;
+        border: solid 1px $black;
         color: $black;
       }
     }
@@ -274,7 +280,7 @@ section {
 
         .headerTable {
           width: auto;
-          margin-bottom: 12px;
+          margin-bottom: 0 + px;
           border-bottom: 2px solid $black;
           display: flex;
           flex-direction: row;
@@ -293,7 +299,13 @@ section {
           padding-top: 24px;
           display: inline-block;
           min-width: 100%;
+
+          .table-row:hover {
+            background-color: $lightweightdarker;
+          }
+
           .table-row {
+            transition: background-color 0.2s linear;
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
@@ -401,6 +413,34 @@ section {
     }
   }
 }
+/*Above */
+@media only screen and (min-width: 1201px) {
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  .custom-width-100vwMax-mobile {
+    width: 100vw !important;
+    min-width: 100vw !important;
+    max-width: 100vw !important;
+  }
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 320px) {
+}
 </style>
 
 <script>
@@ -412,10 +452,10 @@ export default {
         language: ''
       },
       initFilter: [
-        // which ones to hide
+        // uncommented ones are the ones that are hidden
         // 'literal',
-        // "literalEnglish",
-        'tags',
+        // 'literalEnglish',
+        // 'tags',
         // "keywords",
         // "language",
         'dialect',
@@ -444,6 +484,7 @@ export default {
         this.current = await this.allAudio[this.index];
         //console.log(this.current);
         this.player.src = `${this.$config.baseURL}${this.current.filePath}`;
+        //alert(`${this.$config.baseURL}${this.current.filePath}`);
       } else {
         this.song = true;
       }
@@ -550,9 +591,10 @@ export default {
     if (process.client) {
       this.player = new Audio();
     }
-    this.getAllAudios();
   },
-  mounted() {}
+  mounted() {
+    this.getAllAudios();
+  }
 };
 </script>
 <style scoped></style>

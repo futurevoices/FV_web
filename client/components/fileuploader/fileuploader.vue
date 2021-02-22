@@ -35,19 +35,19 @@
 
                 <div class="form-group">
                   <label for="title">Literal Text</label>
-                  <input
+                  <textarea
                     type="text"
                     v-model="audioDetails.literal_text"
-                    class="form-control"
+                    class="form-control growingTextbox"
                   />
                 </div>
 
                 <div class="form-group">
                   <label for="title">Literal Text English (voluntary)</label>
-                  <input
+                  <textarea
                     type="text"
                     v-model="audioDetails.literal_text_english"
-                    class="form-control"
+                    class="form-control growingTextbox"
                   />
                 </div>
 
@@ -58,7 +58,7 @@
                       v-model="tagKeyword"
                       :tags="tagsKeyword"
                       :autocomplete-items="filteredItemsKeyword"
-                      @tags-changed="(newTags) => (tagsKeyword = newTags)"
+                      @tags-changed="newTags => (tagsKeyword = newTags)"
                     />
                   </client-only>
                 </div>
@@ -70,7 +70,7 @@
                       v-model="tagTag"
                       :tags="tagsTag"
                       :autocomplete-items="filteredItemsTag"
-                      @tags-changed="(newTags) => (tagsTag = newTags)"
+                      @tags-changed="newTags => (tagsTag = newTags)"
                     />
                   </client-only>
                 </div>
@@ -684,7 +684,7 @@
 .vue-tags-input .ti-tag:after {
   transition: transform 0.2s;
   position: absolute;
-  content: "";
+  content: '';
   height: 2px;
   width: 108%;
   left: -4%;
@@ -699,33 +699,33 @@
 </style>
 
 <script>
-import swal from "sweetalert";
-import ISO6391 from "iso-639-1";
-import countriesList from "countries-list";
+import swal from 'sweetalert';
+import ISO6391 from 'iso-639-1';
+import countriesList from 'countries-list';
 
 export default {
   data() {
     return {
       audioDetails: {
-        literal_text: "",
-        literal_text_english: "",
+        literal_text: '',
+        literal_text_english: '',
         keywords: [],
         tags: [],
-        language_short: "",
-        dialect: "",
-        speaker_native_language: "",
-        country: "",
-        town: "",
-        long: "",
-        lat: "",
-        audio: "",
+        language_short: '',
+        dialect: '',
+        speaker_native_language: '',
+        country: '',
+        town: '',
+        long: '',
+        lat: '',
+        audio: ''
       },
       allAudio: [],
       audioLoading: false,
       isValid: false,
       addState: false,
       addLoading: false,
-      tagKeyword: "",
+      tagKeyword: '',
       tagsKeyword: [],
       autocompleteItemsKeyword: [
         // {
@@ -744,28 +744,28 @@ export default {
         //   text: "China"
         // }
       ],
-      tagTag: "",
+      tagTag: '',
       tagsTag: [],
-      autocompleteItemsTag: [],
+      autocompleteItemsTag: []
     };
   },
   computed: {
-    isDisabled: function () {
+    isDisabled: function() {
       if (
-        this.audioDetails.language_short === "" ||
-        this.audioDetails.audio === "" ||
-        this.audioDetails.country === ""
+        this.audioDetails.language_short === '' ||
+        this.audioDetails.audio === '' ||
+        this.audioDetails.country === ''
       ) {
         return !this.isValid;
       }
     },
     filteredItemsKeyword() {
-      return this.autocompleteItemsKeyword.filter((i) => {
+      return this.autocompleteItemsKeyword.filter(i => {
         return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
       });
     },
     filteredItemsTag() {
-      return this.autocompleteItemsTag.filter((i) => {
+      return this.autocompleteItemsTag.filter(i => {
         return i.text.toLowerCase().indexOf(this.tag.toLowerCase()) !== -1;
       });
     },
@@ -774,7 +774,7 @@ export default {
     },
     getTagTags() {
       return this.tagsTag;
-    },
+    }
   },
   methods: {
     initForm() {
@@ -792,58 +792,58 @@ export default {
         types.test(this.audioDetails.audio.name)
       ) {
         let formData = new FormData();
-        formData.append("literal_text", this.audioDetails.literal_text);
+        formData.append('literal_text', this.audioDetails.literal_text);
         formData.append(
-          "literal_text_english",
+          'literal_text_english',
           this.audioDetails.literal_text_english
         );
 
         // keywords tags
         let ktags = [];
-        this.tagsKeyword.forEach((tag) => {
+        this.tagsKeyword.forEach(tag => {
           ktags.push(tag.text);
         });
-        formData.append("keywords", JSON.stringify(ktags));
+        formData.append('keywords', JSON.stringify(ktags));
 
         // tag tags
         let ttags = [];
-        this.tagsTag.forEach((tag) => {
+        this.tagsTag.forEach(tag => {
           ttags.push(tag.text);
         });
-        formData.append("tags", JSON.stringify(ttags));
+        formData.append('tags', JSON.stringify(ttags));
 
-        formData.append("language_short", this.audioDetails.language_short);
+        formData.append('language_short', this.audioDetails.language_short);
         formData.append(
-          "language",
+          'language',
           ISO6391.getName(this.audioDetails.language_short.toLowerCase())
         );
 
-        formData.append("dialect", this.audioDetails.dialect);
+        formData.append('dialect', this.audioDetails.dialect);
         formData.append(
-          "speaker_native_language",
+          'speaker_native_language',
           this.audioDetails.speaker_native_language
         );
-        formData.append("country_code", this.audioDetails.country);
+        formData.append('country_code', this.audioDetails.country);
         formData.append(
-          "country",
+          'country',
           countriesList.countries[this.audioDetails.country].name
         );
 
-        formData.append("town", this.audioDetails.town);
-        formData.append("long", this.audioDetails.long);
-        formData.append("lat", this.audioDetails.lat);
-        formData.append("audio", this.audioDetails.audio);
+        formData.append('town', this.audioDetails.town);
+        formData.append('long', this.audioDetails.long);
+        formData.append('lat', this.audioDetails.lat);
+        formData.append('audio', this.audioDetails.audio);
 
         // timestamps
         const timestampstring = new Date().toString();
 
         formData.append(
-          "user_timestamp",
+          'user_timestamp',
           new Date(
             new Date().getTime() - new Date().getTimezoneOffset() * 60000
           ).toISOString()
         );
-        formData.append("user_timestamp_string", timestampstring);
+        formData.append('user_timestamp_string', timestampstring);
 
         // Display the key/value pairs
         // for (var pair of formData.entries()) {
@@ -852,47 +852,66 @@ export default {
 
         this.addLoading = true;
         this.$axios
-          .$post("/audio", formData)
-          .then((response) => {
+          .$post('/audio', formData)
+          .then(response => {
             console.log(response);
             this.addLoading = false;
             this.audioDetails = {};
-            swal("Success", "New Audio Added", "success");
+            swal('Success', 'New Audio Added', 'success');
           })
-          .catch((err) => {
+          .catch(err => {
             this.addLoading = false;
-            swal("Error", "Something Went wrong", "error");
+            swal('Error', 'Something Went wrong', 'error');
             console.log(err);
           });
       } else {
-        swal("Error", "Invalid file type", "error");
+        swal('Error', 'Invalid file type', 'error');
         return !this.isValid;
       }
     },
     getGps() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.setPosition);
-        document.getElementById("gps-button-text").innerHTML = "...";
+        document.getElementById('gps-button-text').innerHTML = '...';
       } else {
-        swal("Sorry", "Your device doesn‘t support geolocation.", "error");
+        swal('Sorry', 'Your device doesn‘t support geolocation.', 'error');
       }
     },
     setPosition(position) {
       let long = position.coords.longitude;
       let lat = position.coords.latitude;
-      document.getElementById("inputLat").value =
+      document.getElementById('inputLat').value =
         Math.floor(lat * 100 + 0.5) / 100;
-      document.getElementById("inputLong").value =
+      document.getElementById('inputLong').value =
         Math.floor(long * 100 + 0.5) / 100;
       console.log(position);
-      document.getElementById("gps-button-text").innerHTML =
-        "Use Gps (rounded to 2 decimals for privacy)";
+      document.getElementById('gps-button-text').innerHTML =
+        'Use Gps (rounded to 2 decimals for privacy)';
       // somehow the data doesn't get passed, so adding it manually
-      this.audioDetails.lat = document.getElementById("inputLat").value;
-      this.audioDetails.long = document.getElementById("inputLong").value;
+      this.audioDetails.lat = document.getElementById('inputLat').value;
+      this.audioDetails.long = document.getElementById('inputLong').value;
     },
+    growingTextbox() {
+      this.textBoxes = document.getElementsByClassName('growingTextbox');
+      this.textBoxes.forEach(txtbox => {
+        txtbox.addEventListener(
+          'keyup',
+          function() {
+            this.style.overflow = 'hidden';
+            this.style.height = 0;
+            this.style.height = this.scrollHeight + 'px';
+          },
+          false
+        );
+        txtbox.style.overflow = 'hidden';
+        txtbox.style.height = 0;
+        txtbox.style.height = txtbox.scrollHeight + 'px';
+      });
+    }
   },
-  mounted() {},
-  created() {},
+  mounted() {
+    this.growingTextbox();
+  },
+  created() {}
 };
 </script>

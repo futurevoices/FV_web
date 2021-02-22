@@ -56,14 +56,14 @@ footer {
       width: auto;
 
       .border-right {
-        border-right: 2.2px solid $black !important;
+        border-right: 1px solid $black !important;
         height: inherit;
         display: inline-block;
         padding-right: 18px;
       }
 
       .border-left {
-        border-left: 2.2px solid $black !important;
+        border-left: 1px solid $black !important;
         height: inherit;
         display: inline-block;
         padding-left: 18px;

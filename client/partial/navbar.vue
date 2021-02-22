@@ -84,7 +84,7 @@ nav {
   padding-left: 24px !important;
   padding-right: 0px !important;
   z-index: 100;
-  border-bottom: $black 2px solid;
+  border-bottom: $black 1px solid;
 
   #__BVID__88__BV_toggle_ {
     padding: 0;
@@ -115,7 +115,7 @@ nav {
   ul li {
     padding-left: 20px;
     padding-right: 20px;
-    border-left: 2.2px solid $black;
+    border-left: 1px solid $black;
     height: 40px;
 
     display: flex;

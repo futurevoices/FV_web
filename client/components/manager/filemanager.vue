@@ -3,7 +3,10 @@
     <div class="container mb-4">
       <div class="row mt-2 mb-1">
         <div class="col-md-12">
-          <h3 class="text-center">Contribute</h3>
+          <br />
+          <br />
+          <br />
+          <h3 style="color:red" class="text-center">File Edit</h3>
           <p style="color: red; text-align:center">
             Only disapprove hatespeach. Grammar errors or bad quality are fine.
           </p>
@@ -20,19 +23,19 @@
 
                 <div class="form-group">
                   <label for="title">Literal Text</label>
-                  <input
+                  <textarea
                     type="text"
                     v-model="audioDetails.literal_text"
-                    class="form-control"
+                    class="form-control growingTextbox"
                   />
                 </div>
 
                 <div class="form-group">
                   <label for="title">Literal Text English (voluntary)</label>
-                  <input
+                  <textarea
                     type="text"
                     v-model="audioDetails.literal_text_english"
-                    class="form-control"
+                    class="form-control growingTextbox"
                   />
                 </div>
 
@@ -542,10 +545,11 @@
                 <h3>Approval</h3>
                 <div class="form-group">
                   <select
-                    id="language-selector"
+                    id="approval-selector"
                     v-model="audioDetails.approved"
                     class="form-control"
                   >
+                    <option disabled value="">Please select one</option>
                     <option value="false">False</option>
                     <option value="true">True</option>
                   </select>
@@ -666,7 +670,16 @@ export default {
   methods: {
     async getAudio() {
       try {
-        let response = await this.$axios.$get('/audio/single/' + this.dataid);
+        let response = await this.$axios.$get(
+          '/audio/single/' + this.dataid
+          // {},
+          // {
+          //   auth: {
+          //     username: '.',
+          //     password: '.'
+          //   }
+          // }
+        );
         this.loadedData = response;
         console.log(response);
         if (response === []) {
@@ -713,7 +726,12 @@ export default {
       this.audioDetails.long = data.coordinates.long;
 
       this.audioDetails.approved = data.approved;
+
       this.audioDetails.approved_by = data.approved_by;
+
+      if (this.audioDetails.approved_by === 'needs approval') {
+        this.audioDetails.approved_by = '';
+      }
 
       document.getElementById(
         'preview-audio'
@@ -721,6 +739,10 @@ export default {
     },
 
     updateAudio() {
+      // transform dropdown to boolean // was bugging before.
+      this.audioDetails.approved =
+        document.getElementById('approval-selector').value == 'true';
+
       let formDataObj = {
         literal_text: this.audioDetails.literal_text,
         literal_text_english: this.audioDetails.literal_text_english,
@@ -741,7 +763,7 @@ export default {
         lat: this.audioDetails.lat,
         user_timestamp: this.loadedData.user_timestamp,
         user_timestamp_string: this.loadedData.user_timestamp_string,
-        approved: this.audioDetails.approved == 'true',
+        approved: this.audioDetails.approved,
         approved_by: this.audioDetails.approved_by,
         approval_date: new Date(
           new Date().getTime() - new Date().getTimezoneOffset() * 60000
@@ -770,7 +792,6 @@ export default {
         swal('Error', 'Please add the approvers name', 'error');
         return;
       }
-
       this.$axios
         .$post('/audio/private/updateSingleAudio', formDataObj, {
           headers: { 'Content-Type': 'application/json' }
@@ -811,11 +832,40 @@ export default {
       // version: (...)
       // yamlFilename: (...)
       // yamlFilenamePath: (...)
+    },
+    growingTextbox() {
+      this.textBoxes = document.getElementsByClassName('growingTextbox');
+      this.textBoxes.forEach(txtbox => {
+        txtbox.addEventListener(
+          'keyup',
+          function() {
+            this.style.overflow = 'hidden';
+            this.style.height = 0;
+            this.style.height = this.scrollHeight + 'px';
+          },
+          false
+        );
+        txtbox.style.overflow = 'hidden';
+        txtbox.style.height = 0;
+        txtbox.style.height = txtbox.scrollHeight + 'px';
+      });
+    },
+    runResizingOnEveryTextbox() {
+      this.textBoxes = document.getElementsByClassName('growingTextbox');
+      this.textBoxes.forEach(txtbox => {
+        txtbox.style.overflow = 'hidden';
+        txtbox.style.height = 0;
+        txtbox.style.height = txtbox.scrollHeight + 'px';
+      });
     }
   },
-  mounted() {},
-  created() {
+  mounted() {
     this.getAudio();
-  }
+    this.growingTextbox();
+    setTimeout(() => {
+      this.runResizingOnEveryTextbox();
+    }, 1000);
+  },
+  created() {}
 };
 </script>

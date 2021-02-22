@@ -37,7 +37,19 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
-    '@nuxtjs/router-extras'
+    '@nuxtjs/router-extras',
+    [
+      'nuxt-matomo',
+      {
+        matomoUrl: 'https://stats.vinzenzaubry.com/',
+        siteId: 5,
+        cookies: false,
+        trackerUrl: 'https://stats.vinzenzaubry.com/vinni.php?',
+        scriptUrl: 'https://stats.vinzenzaubry.com/vinni.js'
+        // debug: true,
+        // verbose: true,
+      }
+    ]
   ],
 
   bootstrapVue: {
