@@ -400,6 +400,8 @@ table {
   }
 
   .tableWrapper {
+    // font-family: Arial, Helvetica, sans-serif;
+
     // padding-left: 6px;
     // padding-right: 6px;
     #customTableHeader {
@@ -578,10 +580,10 @@ export default {
         language: ''
       },
       initFilter: [
-        // which ones to hide
-        'literal',
+        // uncommented ones are the ones that are hidden
+        // 'literal',
         // "literalEnglish",
-        'tags',
+        // 'tags',
         // "keywords",
         // "language",
         'dialect',
