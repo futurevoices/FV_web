@@ -2,7 +2,14 @@
   <section class="">
     <div id="background" class="background-image">
       <div class="inside-shadow"></div>
-      <img src="background-image.png" alt="" />
+      <!-- <img src="background-image.png" alt="" /> -->
+      <video
+        loop
+        plays-inline
+        muted
+        autoplay
+        src="background-video2k4.mp4"
+      ></video>
     </div>
     <div class="contentWrapper">
       <div id="moebius" class="moebius"><Moebius /></div>
@@ -116,7 +123,8 @@ section {
     z-index: 2;
   }
 
-  img {
+  img,
+  video {
     position: absolute;
     top: 0;
     left: 0;
@@ -238,7 +246,8 @@ section {
         border: 1px solid $black;
       }
 
-      img {
+      img,
+      video {
         width: 100%;
         height: auto;
       }
