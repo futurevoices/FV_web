@@ -23,19 +23,19 @@
 
                 <div class="form-group">
                   <label for="title">Literal Text</label>
-                  <input
+                  <textarea
                     type="text"
                     v-model="audioDetails.literal_text"
-                    class="form-control"
+                    class="form-control growingTextbox"
                   />
                 </div>
 
                 <div class="form-group">
                   <label for="title">Literal Text English (voluntary)</label>
-                  <input
+                  <textarea
                     type="text"
                     v-model="audioDetails.literal_text_english"
-                    class="form-control"
+                    class="form-control growingTextbox"
                   />
                 </div>
 
@@ -832,10 +832,39 @@ export default {
       // version: (...)
       // yamlFilename: (...)
       // yamlFilenamePath: (...)
+    },
+    growingTextbox() {
+      this.textBoxes = document.getElementsByClassName('growingTextbox');
+      this.textBoxes.forEach(txtbox => {
+        txtbox.addEventListener(
+          'keyup',
+          function() {
+            this.style.overflow = 'hidden';
+            this.style.height = 0;
+            this.style.height = this.scrollHeight + 'px';
+          },
+          false
+        );
+        txtbox.style.overflow = 'hidden';
+        txtbox.style.height = 0;
+        txtbox.style.height = txtbox.scrollHeight + 'px';
+      });
+    },
+    runResizingOnEveryTextbox() {
+      this.textBoxes = document.getElementsByClassName('growingTextbox');
+      this.textBoxes.forEach(txtbox => {
+        txtbox.style.overflow = 'hidden';
+        txtbox.style.height = 0;
+        txtbox.style.height = txtbox.scrollHeight + 'px';
+      });
     }
   },
   mounted() {
     this.getAudio();
+    this.growingTextbox();
+    setTimeout(() => {
+      this.runResizingOnEveryTextbox();
+    }, 1000);
   },
   created() {}
 };

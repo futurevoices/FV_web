@@ -757,11 +757,13 @@ export default {
       console.log(this.allAudio.length);
     }
   },
-  mounted() {},
+
   created() {
     if (process.client) {
       this.player = new Audio();
     }
+  },
+  mounted() {
     this.getAllAudios();
   }
 };

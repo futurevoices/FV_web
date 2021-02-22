@@ -137,7 +137,7 @@
               </div>
               <!-- <th>{{ index + 1 }}</th> -->
               <div
-                class="row-element filter-literal custom-width-600-deskto custom-width-100vwMax-mobile"
+                class="row-element filter-literal custom-width-600-desktop custom-width-100vwMax-mobile"
               >
                 <p>{{ audio.literal_text }}</p>
               </div>
@@ -280,7 +280,7 @@ section {
 
         .headerTable {
           width: auto;
-          margin-bottom: 12px;
+          margin-bottom: 0 + px;
           border-bottom: 2px solid $black;
           display: flex;
           flex-direction: row;
@@ -452,9 +452,9 @@ export default {
         language: ''
       },
       initFilter: [
-        // which ones to hide
+        // uncommented ones are the ones that are hidden
         // 'literal',
-        // "literalEnglish",
+        // 'literalEnglish',
         // 'tags',
         // "keywords",
         // "language",
@@ -484,6 +484,7 @@ export default {
         this.current = await this.allAudio[this.index];
         //console.log(this.current);
         this.player.src = `${this.$config.baseURL}${this.current.filePath}`;
+        //alert(`${this.$config.baseURL}${this.current.filePath}`);
       } else {
         this.song = true;
       }
@@ -590,9 +591,10 @@ export default {
     if (process.client) {
       this.player = new Audio();
     }
-    this.getAllAudios();
   },
-  mounted() {}
+  mounted() {
+    this.getAllAudios();
+  }
 };
 </script>
 <style scoped></style>
