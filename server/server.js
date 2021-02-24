@@ -12,21 +12,21 @@ const app = express();
 const fs = require('fs');
 const http = require('http');
 
-console.log(PORTHTTPS);
-let https;
-let options;
+// console.log(PORTHTTPS);
+// let https;
+// let options;
 
-if (PORTHTTPS !== 1313) {
-  console.log('runs');
-  https = require('https');
-  options = {
-    key: fs.readFileSync(
-      '/etc/letsencrypt/live/zukunftsmusik.radio/privkey.pem'
-    ),
-    cert: fs.readFileSync('/etc/letsencrypt/live/zukunftsmusik.radio/cert.pem'),
-    ca: fs.readFileSync('/etc/letsencrypt/live/zukunftsmusik.radio/chain.pem'),
-  };
-}
+// if (PORTHTTPS !== 1313) {
+//   console.log('runs');
+//   https = require('https');
+//   options = {
+//     key: fs.readFileSync(
+//       '/etc/letsencrypt/live/zukunftsmusik.radio/privkey.pem'
+//     ),
+//     cert: fs.readFileSync('/etc/letsencrypt/live/zukunftsmusik.radio/cert.pem'),
+//     ca: fs.readFileSync('/etc/letsencrypt/live/zukunftsmusik.radio/chain.pem'),
+//   };
+// }
 
 //configure database and mongoose
 mongoose.set('useCreateIndex', true);
@@ -67,22 +67,22 @@ app.use('/audio', audioRoutes);
 
 const httpServer = http.createServer(app);
 
-let httpsServer;
+// let httpsServer;
 
-if (PORTHTTPS !== 1313) {
-  httpsServer = https.createServer(options, app);
-}
-// server.listen(PORT, IP, function () {
-//   console.log(
-//     `http started at ${IP} on port: ${PORT}.`
-//   );
-// });
+// if (PORTHTTPS !== 1313) {
+//   httpsServer = https.createServer(options, app);
+// }
+// // server.listen(PORT, IP, function () {
+// //   console.log(
+// //     `http started at ${IP} on port: ${PORT}.`
+// //   );
+// // });
 
 httpServer.listen(PORT, IP, function () {
   console.log(`Server started at ${IP} on port: ${PORT}`);
 });
-if (PORTHTTPS !== 1313) {
-  httpsServer.listen(PORTHTTPS, IP, function () {
-    console.log(`Https started at ${IP} on port: ${PORTHTTPS}`);
-  });
-}
+// if (PORTHTTPS !== 1313) {
+//   httpsServer.listen(PORTHTTPS, IP, function () {
+//     console.log(`Https started at ${IP} on port: ${PORTHTTPS}`);
+//   });
+// }
