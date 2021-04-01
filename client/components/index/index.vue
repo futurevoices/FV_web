@@ -75,7 +75,7 @@
           <br />
 
           <a
-            href="https://www.ctm-festival.de/festival-2021/programme/practice/ctm-radio-lab-2021/future-voices"
+            href="https://www.ctm-festival.de/festival-2021/programme/exhibition/ctm-cyberia/future-voices-zukunftsmusik-by-society-for-nontrivial-pursuits-s4ntp"
             target="_blank"
           >
             <img

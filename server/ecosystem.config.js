@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'zukunftsmusik.radio node & db',
+      name: 'future voices backend + db',
       script: 'server.js',
 
       // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
