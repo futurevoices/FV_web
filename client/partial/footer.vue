@@ -2,7 +2,7 @@
   <footer>
     <audio
       id="audioStream"
-      src="https://gencomp.medienhaus.udk-berlin.de:8443/future.mp3"
+      src="https://dradio-edge-3099-dus-ts-cdn.cast.addradio.de/dradio/event/live/mp3/128/stream.mp3"
     ></audio>
     <div class="footerWrapper">
       <div class="wrap">
@@ -14,7 +14,21 @@
             alt="play/pause button"
             @click="toggleStream()"
           />
-          <p>Live<span class="hide-mobile"> streaming</span></p>
+          <p>Live<span class="hide-mobile"></span></p>
+        </div>
+      </div>
+      <div class="wrap wrap-center">
+        <div class="stream-picker">
+          <div @click="updateStream('stream1')">
+            <p v-bind:class="{ active: stream1 }">
+              <span v-bind:class="{ active: stream1 }">•&#8196;</span>stream 1
+            </p>
+          </div>
+          <div @click="updateStream('stream2')">
+            <p v-bind:class="{ active: stream2 }">
+              <span v-bind:class="{ active: stream2 }">•&#8196;</span>stream 2
+            </p>
+          </div>
         </div>
       </div>
       <div class="wrap">
@@ -49,6 +63,10 @@ footer {
     display: flex;
     justify-content: space-between;
 
+    .wrap-center {
+      flex: 1;
+    }
+
     .wrap {
       // background-color: green;
       // border: 2px solid blue;
@@ -67,6 +85,63 @@ footer {
         height: inherit;
         display: inline-block;
         padding-left: 18px;
+      }
+
+      .stream-picker {
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        height: 42px;
+        width: 100px;
+
+        justify-content: center;
+        align-items: center;
+        border-right: 1px solid black;
+
+        div {
+          height: 50%;
+          width: 100%;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          cursor: pointer;
+
+          &:first-child {
+            border-bottom: 1px solid black;
+          }
+
+          p,
+          span {
+            width: auto;
+            height: auto;
+            font-size: 13px;
+            display: inline-block;
+            line-height: 12px;
+            position: relative;
+            margin: 0;
+            margin-bottom: 2px;
+          }
+
+          p {
+            margin-right: 5px;
+          }
+
+          span {
+            visibility: hidden;
+          }
+
+          span.active {
+            visibility: visible;
+          }
+        }
+
+        div:first-child > p,
+        div:first-child > span {
+          margin-bottom: 1px;
+        }
       }
 
       .element {
@@ -101,6 +176,8 @@ footer {
 /* Extra Small Devices, Phones */
 @media only screen and (max-width: 480px) {
   footer {
+    padding-left: 12px;
+    padding-right: 12px;
     .footerWrapper {
       .wrap {
         .border-right {
@@ -111,6 +188,51 @@ footer {
         .border-left {
           border-left: 0px !important;
           padding-left: 0px;
+        }
+
+        .stream-picker {
+          position: relative;
+
+          display: flex;
+          flex-direction: column;
+          height: 42px;
+          width: auto;
+
+          justify-content: center;
+          align-items: center;
+          border-right: 0px solid black;
+
+          flex: 1;
+
+          div {
+            &:first-child {
+              align-items: flex-end;
+              border-bottom: 0px solid black;
+            }
+
+            p,
+            span {
+              line-height: 8px;
+              margin: 0;
+              margin-bottom: 4px;
+              opacity: 0.4;
+            }
+
+            p.active {
+              // font-style: italic;
+              opacity: 1;
+            }
+
+            span {
+              visibility: hidden !important;
+              width: 0;
+            }
+          }
+
+          div:first-child > p,
+          div:first-child > span {
+            margin-bottom: 0px;
+          }
         }
       }
     }
@@ -127,11 +249,48 @@ export default {
       // berlin -> utc: time should be 1 hour behind my berlin time
       startingTime: new Date(Date.UTC(2021, 0, 17, 18, 0, 0)),
       isRunning: false,
-      interval: undefined // store the interval here
+      interval: undefined, // store the interval here
+      stream1: true,
+      stream1src:
+        'https://dradio-edge-3099-dus-ts-cdn.cast.addradio.de/dradio/event/live/mp3/128/stream.mp3',
+      stream2: false,
+      stream2src: 'https://gencomp.medienhaus.udk-berlin.de:8443/future.mp3'
     };
   },
   computed: {},
   methods: {
+    updateStream(stream) {
+      let streamUrl = '';
+      if (stream == 'stream1') {
+        streamUrl = this.stream1src;
+      } else {
+        streamUrl = this.stream2src;
+      }
+
+      // check if new stream
+      if (streamUrl == this.audio.src) {
+        return;
+      }
+
+      // update stream interface
+      if (stream == 'stream1') {
+        this.stream1 = true;
+        this.stream2 = false;
+      } else {
+        this.stream1 = false;
+        this.stream2 = true;
+      }
+
+      // update stream url
+      this.audio.src = streamUrl;
+
+      // play stream
+      this.audio.load();
+      this.audio.play();
+      this.playButton.src = '/pause.svg';
+
+      console.log(streamUrl);
+    },
     toggleTimer() {
       if (this.isRunning) {
         clearInterval(this.interval);
