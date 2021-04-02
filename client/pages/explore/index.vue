@@ -4,10 +4,11 @@
   </div>
 </template>
 <script>
-import explore from "@/components/explore/explore";
+import explore from '@/components/explore/explore';
 export default {
   components: {
     explore
-  }
+  },
+  transition: 'standard'
 };
 </script>

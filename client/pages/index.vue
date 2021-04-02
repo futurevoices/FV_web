@@ -12,6 +12,8 @@ export default {
   data() {
     return {};
   },
+  transition: 'standard',
+
   computed: {},
   methods: {},
   mounted() {},

@@ -14,6 +14,7 @@ export default {
   components: {
     Uploader
   },
+  transition: 'standard',
   data() {
     return {
       radioComponent: ''
