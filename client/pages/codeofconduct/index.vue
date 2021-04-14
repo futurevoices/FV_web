@@ -8,6 +8,7 @@ import codeofconduct from '@/components/codeofconduct/codeofconduct';
 export default {
   components: {
     codeofconduct
-  }
+  },
+  transition: 'standard'
 };
 </script>

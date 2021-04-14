@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import filemanager from "@/components/manager/filemanager";
+import filemanager from '@/components/manager/filemanager';
 export default {
   data() {
     return {};
