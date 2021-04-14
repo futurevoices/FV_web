@@ -11,7 +11,7 @@
       <form>
         <div class="form-group audio-buttons">
           <label for="audio"
-            >Audio Recording <span style="color:red">*</span>
+            >Audio Recording<span style="color:red">*</span>
           </label>
 
           <button
@@ -57,6 +57,14 @@
                   </div>
                 </div> -->
 
+        <p class="intro-text file-upload">
+          If you prefer to send us a file that you pre-recorded or composed,
+          send us a
+          <a
+            href="mailto:contact@futurevoices.radio?subject=Pre-recorded%20File"
+            >mail</a
+          >.
+        </p>
         <div class="form-group">
           <label for="title">Contribution text in original language</label>
           <textarea
@@ -285,7 +293,7 @@
         </div>
 
         <div class="form-group">
-          <label for="language">Country <span style="color:red">*</span></label>
+          <label for="language">Country<span style="color:red">*</span></label>
           <select v-model="audioDetails.country" class="form-control">
             <option value="" disabled selected>Country</option>
             <!-- https://www.freeformatter.com/iso-country-list-html-select.html#alpha2 -->
@@ -707,6 +715,17 @@
   .intro-text {
     font-size: 16px;
     line-height: 21px;
+
+    a {
+      font-size: 16px;
+      line-height: 21px;
+    }
+  }
+
+  .file-upload {
+    // font-size: 12px;
+    opacity: 0.5;
+    font-style: italic;
   }
 
   button,
