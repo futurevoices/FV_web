@@ -43,6 +43,14 @@
             </li>
             <li class="nav-item">
               <nuxt-link
+                to="/news"
+                class="nav-link"
+                :class="$route.name === 'news' ? 'active' : ''"
+                >news</nuxt-link
+              >
+            </li>
+            <li class="nav-item">
+              <nuxt-link
                 to="/about"
                 class="nav-link"
                 :class="$route.name === 'about' ? 'active' : ''"

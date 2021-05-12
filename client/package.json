@@ -22,7 +22,9 @@
     "nuxt-matomo": "^1.2.4",
     "recorder-js": "^1.0.7",
     "sweetalert": "^2.1.2",
+    "swiper": "^6.6.1",
     "three": "^0.127.0",
+    "vanilla-lazyload": "^17.3.1",
     "vh-check": "^2.0.5",
     "vue-dragscroll": "^2.1.0"
   },

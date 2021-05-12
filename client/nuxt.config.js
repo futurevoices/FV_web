@@ -15,6 +15,8 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    { src: '@/plugins/components.js' },
+    { src: '@/plugins/plugins.js' },
     { src: '~/plugins/vue-tags-input', ssr: false },
     { src: '~/plugins/vue-dragscroll', ssr: false }
   ],

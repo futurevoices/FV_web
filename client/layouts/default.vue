@@ -9,7 +9,8 @@
           'index',
           'about',
           'imprint',
-          'codeofconduct'
+          'codeofconduct',
+          'news'
         ].indexOf($route.name) > -1
       "
     >
@@ -21,7 +22,8 @@
             'index',
             'about',
             'imprint',
-            'codeofconduct'
+            'codeofconduct',
+            'news'
           ].indexOf($route.name) > -1
         "
         class="header-spacer"
