@@ -41,6 +41,169 @@
   </footer>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      time: '0:0:00:00',
+      // year, month, day, hour, minute, second
+      // month: 0-11
+      // berlin -> utc: time should be 1 hour behind my berlin time
+      startingTime: new Date(Date.UTC(2021, 0, 17, 18, 0, 0)),
+      isRunning: false,
+      interval: undefined, // store the interval here
+      stream1: true,
+      stream1src:
+        'https://dradio-edge-3099-dus-ts-cdn.cast.addradio.de/dradio/event/live/mp3/128/stream.mp3',
+      stream2: false,
+      stream2src: 'https://gencomp.medienhaus.udk-berlin.de:8443/future.mp3'
+    };
+  },
+  computed: {},
+  methods: {
+    updateStream(stream) {
+      let streamUrl = '';
+      if (stream == 'stream1') {
+        streamUrl = this.stream1src;
+      } else {
+        streamUrl = this.stream2src;
+      }
+
+      // check if new stream
+      if (streamUrl == this.audio.src) {
+        return;
+      }
+
+      // update stream interface
+      if (stream == 'stream1') {
+        this.stream1 = true;
+        this.stream2 = false;
+      } else {
+        this.stream1 = false;
+        this.stream2 = true;
+      }
+
+      // update stream url
+      this.audio.src = streamUrl;
+
+      // play stream
+      this.audio.load();
+      this.audio.play();
+      this.playButton.src = '/pause.svg';
+
+      console.log(streamUrl);
+    },
+    setStream(stream) {
+      let streamUrl = '';
+      if (stream == 'stream1') {
+        streamUrl = this.stream1src;
+      } else {
+        streamUrl = this.stream2src;
+      }
+
+      // check if new stream
+      if (streamUrl == this.audio.src) {
+        return;
+      }
+
+      // update stream interface
+      if (stream == 'stream1') {
+        this.stream1 = true;
+        this.stream2 = false;
+      } else {
+        this.stream1 = false;
+        this.stream2 = true;
+      }
+
+      // update stream url
+      this.audio.src = streamUrl;
+
+      // play stream
+      this.audio.load();
+    },
+    toggleTimer() {
+      if (this.isRunning) {
+        clearInterval(this.interval);
+      } else {
+        this.interval = setInterval(this.updateTime, 1000);
+      }
+      this.isRunning = !this.isRunning; // better to read
+    },
+
+    updateTime() {
+      // get total seconds between the times
+      let delta = Math.abs(this.startingTime - new Date().getTime()) / 1000;
+
+      // calculate (and subtract) whole days
+      let days = Math.floor(delta / 86400);
+      delta -= days * 86400;
+
+      // calculate (and subtract) whole hours
+      let hours = Math.floor(delta / 3600) % 24;
+      delta -= hours * 3600;
+
+      // calculate (and subtract) whole minutes
+      let minutes = Math.floor(delta / 60) % 60;
+      minutes = ('0' + minutes).slice(-2);
+      delta -= minutes * 60;
+
+      // what's left is seconds
+      let seconds = Math.floor(delta % 60); // in theory the modulus is not required
+      seconds = ('0' + seconds).slice(-2);
+
+      if (window.innerWidth <= 480) {
+        this.time = `${days}:${hours}:${minutes}:${seconds}`;
+      } else {
+        this.time = `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+      }
+    },
+    resize() {
+      this.updateTime();
+    },
+    addEventListeners() {
+      window.addEventListener('resize', this.resize);
+    },
+    toggleStream(command) {
+      if (command === 'onlystart') {
+        if (this.audio.paused) {
+          this.audio.load();
+          this.audio.play();
+          this.playButton.src = '/pause.svg';
+        }
+      } else {
+        if (!this.audio.paused) {
+          this.audio.pause();
+          this.playButton.src = '/play.svg';
+        } else {
+          this.audio.load();
+          this.audio.play();
+          this.playButton.src = '/pause.svg';
+        }
+      }
+    }
+  },
+  mounted() {
+    this.toggleTimer();
+    this.updateTime();
+    this.audio = document.getElementById('audioStream');
+    this.playButton = document.getElementById('playButton');
+    this.setStream('stream2');
+
+    this.addEventListeners();
+  },
+  created() {},
+  destroyed() {
+    window.removeEventListener('resize', this.resize);
+  },
+  activated() {
+    // console.log('Stream Player has been activated');
+  },
+  deactivated() {
+    // console.log('Stream Player has been deactivated');
+  }
+};
+</script>
+
 <style lang="scss">
 footer {
   z-index: 9999;
@@ -239,135 +402,3 @@ footer {
   }
 }
 </style>
-<script>
-export default {
-  data() {
-    return {
-      time: '0:0:00:00',
-      // year, month, day, hour, minute, second
-      // month: 0-11
-      // berlin -> utc: time should be 1 hour behind my berlin time
-      startingTime: new Date(Date.UTC(2021, 0, 17, 18, 0, 0)),
-      isRunning: false,
-      interval: undefined, // store the interval here
-      stream1: true,
-      stream1src:
-        'https://dradio-edge-3099-dus-ts-cdn.cast.addradio.de/dradio/event/live/mp3/128/stream.mp3',
-      stream2: false,
-      stream2src: 'https://gencomp.medienhaus.udk-berlin.de:8443/future.mp3'
-    };
-  },
-  computed: {},
-  methods: {
-    updateStream(stream) {
-      let streamUrl = '';
-      if (stream == 'stream1') {
-        streamUrl = this.stream1src;
-      } else {
-        streamUrl = this.stream2src;
-      }
-
-      // check if new stream
-      if (streamUrl == this.audio.src) {
-        return;
-      }
-
-      // update stream interface
-      if (stream == 'stream1') {
-        this.stream1 = true;
-        this.stream2 = false;
-      } else {
-        this.stream1 = false;
-        this.stream2 = true;
-      }
-
-      // update stream url
-      this.audio.src = streamUrl;
-
-      // play stream
-      this.audio.load();
-      this.audio.play();
-      this.playButton.src = '/pause.svg';
-
-      console.log(streamUrl);
-    },
-    toggleTimer() {
-      if (this.isRunning) {
-        clearInterval(this.interval);
-      } else {
-        this.interval = setInterval(this.updateTime, 1000);
-      }
-      this.isRunning = !this.isRunning; // better to read
-    },
-    updateTime() {
-      // get total seconds between the times
-      let delta = Math.abs(this.startingTime - new Date().getTime()) / 1000;
-
-      // calculate (and subtract) whole days
-      let days = Math.floor(delta / 86400);
-      delta -= days * 86400;
-
-      // calculate (and subtract) whole hours
-      let hours = Math.floor(delta / 3600) % 24;
-      delta -= hours * 3600;
-
-      // calculate (and subtract) whole minutes
-      let minutes = Math.floor(delta / 60) % 60;
-      minutes = ('0' + minutes).slice(-2);
-      delta -= minutes * 60;
-
-      // what's left is seconds
-      let seconds = Math.floor(delta % 60); // in theory the modulus is not required
-      seconds = ('0' + seconds).slice(-2);
-
-      if (window.innerWidth <= 480) {
-        this.time = `${days}:${hours}:${minutes}:${seconds}`;
-      } else {
-        this.time = `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
-      }
-    },
-    resize() {
-      this.updateTime();
-    },
-    addEventListeners() {
-      window.addEventListener('resize', this.resize);
-      this.audio = document.getElementById('audioStream');
-      this.playButton = document.getElementById('playButton');
-    },
-    toggleStream(command) {
-      if (command === 'onlystart') {
-        if (this.audio.paused) {
-          this.audio.load();
-          this.audio.play();
-          this.playButton.src = '/pause.svg';
-        }
-      } else {
-        if (!this.audio.paused) {
-          this.audio.pause();
-          this.playButton.src = '/play.svg';
-        } else {
-          this.audio.load();
-          this.audio.play();
-          this.playButton.src = '/pause.svg';
-        }
-      }
-    }
-  },
-  mounted() {
-    this.toggleTimer();
-    this.updateTime();
-
-    this.addEventListeners();
-  },
-  created() {},
-  destroyed() {
-    window.removeEventListener('resize', this.resize);
-  },
-  activated() {
-    // console.log('Stream Player has been activated');
-  },
-  deactivated() {
-    // console.log('Stream Player has been deactivated');
-  }
-};
-</script>
