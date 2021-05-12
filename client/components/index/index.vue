@@ -90,6 +90,54 @@
   </section>
 </template>
 
+<script>
+import Moebius from '@/components/index/moebius';
+
+export default {
+  components: {
+    Moebius
+  },
+  data() {
+    return {};
+  },
+  computed: {},
+  methods: {
+    resize() {
+      // resize the background image
+      // let height = document.getElementById('introText').offsetHeight;
+      // height += 100;
+      // document.getElementById('background').style.height = height + 'px';
+      // console.log(height);
+
+      // resize moebius placeholder
+      // let height = document.getElementById('moebius').offsetHeight;
+      let height;
+      if (window.innerWidth >= '900') {
+        height = 650;
+      } else if (window.innerWidth < '900' && window.innerWidth > 480) {
+        height = 650; // to do
+      } else {
+        height = window.innerWidth * 0.8;
+      }
+
+      document.getElementById('moebius-placeholder').style.height =
+        height + 'px';
+    },
+    activateStream() {
+      this.$nuxt.$emit('start-stream');
+    }
+  },
+  mounted() {
+    this.resize();
+    window.addEventListener('resize', this.resize);
+  },
+  created() {},
+  destroyed() {
+    window.removeEventListener('resize', this.resize);
+  }
+};
+</script>
+
 <style lang="scss" scoped>
 section {
   position: relative;
@@ -354,51 +402,3 @@ section {
   }
 }
 </style>
-
-<script>
-import Moebius from '@/components/index/moebius';
-
-export default {
-  components: {
-    Moebius
-  },
-  data() {
-    return {};
-  },
-  computed: {},
-  methods: {
-    resize() {
-      // resize the background image
-      // let height = document.getElementById('introText').offsetHeight;
-      // height += 100;
-      // document.getElementById('background').style.height = height + 'px';
-      // console.log(height);
-
-      // resize moebius placeholder
-      // let height = document.getElementById('moebius').offsetHeight;
-      let height;
-      if (window.innerWidth >= '900') {
-        height = 650;
-      } else if (window.innerWidth < '900' && window.innerWidth > 480) {
-        height = 650; // to do
-      } else {
-        height = window.innerWidth * 0.8;
-      }
-
-      document.getElementById('moebius-placeholder').style.height =
-        height + 'px';
-    },
-    activateStream() {
-      this.$nuxt.$emit('start-stream');
-    }
-  },
-  mounted() {
-    this.resize();
-    window.addEventListener('resize', this.resize);
-  },
-  created() {},
-  destroyed() {
-    window.removeEventListener('resize', this.resize);
-  }
-};
-</script>
