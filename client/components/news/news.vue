@@ -65,8 +65,16 @@ export default {
 
   ::v-deep .layout {
     h2 {
-      font-size: 28px;
+      // font-size: 28px;
       margin-bottom: 16px;
+    }
+
+    p,
+    a,
+    li,
+    ul {
+      font-size: 16px;
+      line-height: 135%;
     }
 
     a {
