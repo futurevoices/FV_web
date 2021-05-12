@@ -11,6 +11,8 @@
   src: url(~assets/fonts/soehne-mono-web-buch-kursiv.woff2) format('woff2');
 }
 
+$transitionDefault: 400ms ease;
+
 //colors
 $lightweight: #f1f1f1;
 $lightweightdarker: #e4e4e4;
@@ -53,3 +55,54 @@ $footerRadioHeight: 70px;
 // ul {
 //   color: white;
 // }
+
+.aspect-ratio-wrap {
+  height: 0px;
+  width: 100%;
+  overflow: visible;
+  position: relative;
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.block--gallery {
+  .slick-carousel {
+    img {
+      pointer-events: none;
+    }
+  }
+}
+
+.block {
+  margin-bottom: 1rem;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity $transitionDefault;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
+img {
+  transition: opacity $transitionDefault;
+  vertical-align: middle;
+  max-width: 100%;
+}
+img.lazy {
+  opacity: 0;
+  &.loaded {
+    opacity: 1;
+  }
+}
+
+.no-margin {
+  margin: 0 !important;
+}

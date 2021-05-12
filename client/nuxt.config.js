@@ -69,6 +69,8 @@ export default {
   // (used to be https://zukunftsmusik.radio:8093/ when node was only accesible via port and not rerouted via nginx)
   // for local testing: http://localhost:1312/
 
+  // can't change
+
   axios: {
     baseURL: '/'
   },

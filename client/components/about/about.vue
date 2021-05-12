@@ -51,7 +51,7 @@
   </section>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 section {
   .contentWrapper {
     margin-bottom: 100px !important;

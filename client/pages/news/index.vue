@@ -1,14 +1,31 @@
 <template>
   <div>
-    <news />
+    <News :data="data" />
   </div>
 </template>
 <script>
-import news from '@/components/news/news';
+import axios from 'axios';
+import News from '@/components/news/news';
 export default {
   components: {
-    news
+    News
   },
-  transition: 'standard'
+  transition: 'standard',
+  data() {
+    return {
+      data: {}
+    };
+  },
+
+  async fetch() {
+    this.data = await this.$axios
+      .$get(`https://fv.cms.ungroup.group/news.json`)
+      .then(res => {
+        return res;
+      })
+      .catch(() => {
+        return this.$router.push('/');
+      });
+  }
 };
 </script>
