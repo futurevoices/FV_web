@@ -14,7 +14,7 @@
 
 (Right now there is no auto deploy installed)
 
-1. Copy everything from the `main`branch into `gencomp.medienhaus.udk-berlin.de/home/vinzenz/zukunftsmusik.radio/public`
+1. Copy everything from the `main` branch into `gencomp.medienhaus.udk-berlin.de/home/vinzenz/zukunftsmusik.radio/public`
 2. SSH into the server and run `npm install --production` and then `npm run prod`
 3. The node server is rebuilt and restarted to serve the frontend.
 
