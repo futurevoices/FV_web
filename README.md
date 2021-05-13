@@ -2,9 +2,9 @@
 
 ## Frontend
 
-### Deployment
+### Deployment (Deprecated)
 
-1. Check api paths in `nuxt.config.js` are `/`
+1. Check api paths in `nuxt.config.js` are `https://zukunftsmusik.radio:8093/`
 2. Run `yarn generate`
 3. Copy the contents of the `build` folder to `gencomp.medienhaus.udk-berlin.de/home/vinzenz/zukunftsmusik.radio/public`
 
