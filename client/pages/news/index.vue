@@ -16,7 +16,6 @@ export default {
       data: {}
     };
   },
-
   async fetch() {
     this.data = await this.$axios
       .$get(`https://fv.cms.ungroup.group/news.json`)

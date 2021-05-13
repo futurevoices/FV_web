@@ -17,8 +17,7 @@
         <div id="moebius-placeholder"></div>
         <div class="news-summary">
           <p>
-            NEWS: ON STREAM 2 - current and future voices report and comment on
-            the situation in Colombia.
+            {{ data.data.summarynews }}
           </p>
         </div>
         <h1>Welcome to Future Voices / Zukunftsmusik!</h1>
@@ -102,6 +101,12 @@ import Moebius from '@/components/index/moebius';
 export default {
   components: {
     Moebius
+  },
+  props: {
+    data: {
+      type: Object,
+      default: null
+    }
   },
   data() {
     return {};
