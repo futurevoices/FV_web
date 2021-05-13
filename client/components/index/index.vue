@@ -15,7 +15,13 @@
       <div id="moebius" class="moebius"><Moebius /></div>
       <div id="introText" class="content">
         <div id="moebius-placeholder"></div>
-        <h3>Welcome to Future Voices / Zukunftsmusik!</h3>
+        <div class="news-summary">
+          <p>
+            NEWS: ON STREAM 2 - current and future voices report and comment on
+            the situation in Colombia.
+          </p>
+        </div>
+        <h1>Welcome to Future Voices / Zukunftsmusik!</h1>
         <p>
           <br />
           A one-year live-generated radio stream composed from hopes, fears and
@@ -90,6 +96,54 @@
   </section>
 </template>
 
+<script>
+import Moebius from '@/components/index/moebius';
+
+export default {
+  components: {
+    Moebius
+  },
+  data() {
+    return {};
+  },
+  computed: {},
+  methods: {
+    resize() {
+      // resize the background image
+      // let height = document.getElementById('introText').offsetHeight;
+      // height += 100;
+      // document.getElementById('background').style.height = height + 'px';
+      // console.log(height);
+
+      // resize moebius placeholder
+      // let height = document.getElementById('moebius').offsetHeight;
+      let height;
+      if (window.innerWidth >= '900') {
+        height = 650;
+      } else if (window.innerWidth < '900' && window.innerWidth > 480) {
+        height = 650; // to do
+      } else {
+        height = window.innerWidth * 0.8;
+      }
+
+      document.getElementById('moebius-placeholder').style.height =
+        height + 'px';
+    },
+    activateStream() {
+      this.$nuxt.$emit('start-stream');
+    }
+  },
+  mounted() {
+    this.resize();
+    window.addEventListener('resize', this.resize);
+  },
+  created() {},
+  destroyed() {
+    window.removeEventListener('resize', this.resize);
+  }
+};
+</script>
+
 <style lang="scss" scoped>
 section {
   position: relative;
@@ -163,8 +217,20 @@ section {
 
     p,
     a,
-    h3 {
+    h3,
+    h1 {
       color: $lightweight;
+    }
+
+    .news-summary {
+      background-color: $green;
+      padding: 6px 10px 8px 10px;
+      margin-bottom: 32px;
+
+      p {
+        color: $black;
+        margin: 0;
+      }
     }
   }
 
@@ -178,9 +244,10 @@ section {
   }
 
   p,
-  a {
+  a,
+  h1 {
     font-size: 24px;
-    line-height: 125%;
+    line-height: 135%;
   }
   .cta-links {
     display: flex;
@@ -317,7 +384,8 @@ section {
     }
 
     p,
-    a {
+    a,
+    h1 {
       font-size: 21px !important;
     }
   }
@@ -354,51 +422,3 @@ section {
   }
 }
 </style>
-
-<script>
-import Moebius from '@/components/index/moebius';
-
-export default {
-  components: {
-    Moebius
-  },
-  data() {
-    return {};
-  },
-  computed: {},
-  methods: {
-    resize() {
-      // resize the background image
-      // let height = document.getElementById('introText').offsetHeight;
-      // height += 100;
-      // document.getElementById('background').style.height = height + 'px';
-      // console.log(height);
-
-      // resize moebius placeholder
-      // let height = document.getElementById('moebius').offsetHeight;
-      let height;
-      if (window.innerWidth >= '900') {
-        height = 650;
-      } else if (window.innerWidth < '900' && window.innerWidth > 480) {
-        height = 650; // to do
-      } else {
-        height = window.innerWidth * 0.8;
-      }
-
-      document.getElementById('moebius-placeholder').style.height =
-        height + 'px';
-    },
-    activateStream() {
-      this.$nuxt.$emit('start-stream');
-    }
-  },
-  mounted() {
-    this.resize();
-    window.addEventListener('resize', this.resize);
-  },
-  created() {},
-  destroyed() {
-    window.removeEventListener('resize', this.resize);
-  }
-};
-</script>
