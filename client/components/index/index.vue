@@ -15,10 +15,12 @@
       <div id="moebius" class="moebius"><Moebius /></div>
       <div id="introText" class="content">
         <div id="moebius-placeholder"></div>
-        <div class="news-summary">
-          <p>
-            {{ data.data.summarynews }}
-          </p>
+        <div v-if="data.data">
+          <div class="news-summary" v-if="data.data.summarynews !== ''">
+            <p>
+              {{ data.data.summarynews }}
+            </p>
+          </div>
         </div>
         <h1>Welcome to Future Voices / Zukunftsmusik!</h1>
         <p>
