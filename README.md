@@ -1,8 +1,8 @@
 # futurevoices.radio
 
-## Frontend
+## Frontend Static (Deprecated)
 
-### Deployment (Deprecated)
+### Deployment
 
 1. Check api paths in `nuxt.config.js` are `https://zukunftsmusik.radio:8093/`
 2. Run `yarn generate`
