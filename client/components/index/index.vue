@@ -17,6 +17,7 @@
         <div id="moebius-placeholder"></div>
         <div v-if="data.data">
           <div class="news-summary" v-if="data.data.summarynews !== ''">
+            <div class="news-summary-background"></div>
             <p>
               {{ data.data.summarynews }}
             </p>
@@ -230,13 +231,31 @@ section {
     }
 
     .news-summary {
-      background-color: $green;
+      background-color: transparent;
       padding: 6px 10px 8px 10px;
       margin-bottom: 32px;
+      position: relative;
+
+      // filter: blur(12px);
+
+      .news-summary-background {
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        background-color: $green;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        filter: blur(12px);
+        border-radius: 6px;
+      }
 
       p {
+        padding: 10px;
         color: $black;
         margin: 0;
+        z-index: 2;
       }
     }
   }
