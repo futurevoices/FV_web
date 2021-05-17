@@ -18,8 +18,8 @@
         <div v-if="data.data">
           <div class="news-summary" v-if="data.data.summarynews !== ''">
             <div class="news-summary-background"></div>
-            <p>
-              {{ data.data.summarynews }}
+            <p v-html="data.data.summarynews">
+              <!-- {{ data.data.summarynews }} -->
             </p>
           </div>
         </div>
@@ -235,6 +235,11 @@ section {
       padding: 6px 10px 8px 10px;
       margin-bottom: 32px;
       position: relative;
+
+      ::v-deep a {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
 
       // filter: blur(12px);
 
