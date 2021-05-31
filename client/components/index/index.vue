@@ -52,7 +52,7 @@
     <div class="second-content">
       <div class="content">
         <div class="block">
-          <h3>Stats</h3>
+          <h3>Stats:</h3>
           <br />
 
           <table class="tg">
@@ -79,13 +79,12 @@
           </table>
         </div>
         <div class="block">
-          <h3>Enter virtual world</h3>
+          <h3>
+            Enter virtual world:
+          </h3>
           <br />
 
-          <a
-            href="https://www.ctm-festival.de/festival-2021/programme/exhibition/ctm-cyberia/future-voices-zukunftsmusik-by-society-for-nontrivial-pursuits-s4ntp"
-            target="_blank"
-          >
+          <a href="http://cyberia.futurevoices.radio/" target="_blank">
             <img
               class="link-image-game"
               src="/gameimage.png"
@@ -351,11 +350,11 @@ section {
       }
 
       .link-image-game {
-        transition: all 0.4s ease-in-out;
+        transition: all 0.3s ease-in-out;
       }
 
       .link-image-game:hover {
-        transform: scale(1.01);
+        transform: scale(1.02);
       }
     }
 

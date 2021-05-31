@@ -18,6 +18,7 @@
     "core-js": "^3.6.5",
     "countries-list": "^2.5.6",
     "iso-639-1": "^2.1.4",
+    "jquery": "^3.6.0",
     "nuxt": "^2.14.6",
     "nuxt-matomo": "^1.2.4",
     "recorder-js": "^1.0.7",
