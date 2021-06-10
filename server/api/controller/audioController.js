@@ -44,10 +44,7 @@ exports.getSingleAudio = async (req, res) => {
 exports.addNewAudio = async (req, res) => {
   let generatedFilenameByMulter = res.req.file.filename;
   let destination = res.req.file.destination.substring(2);
-  let filenameNoExt = generatedFilenameByMulter
-    .split('.')
-    .slice(0, -1)
-    .join('.');
+  let filenameNoExt = generatedFilenameByMulter.split('.').slice(0, -1).join('.');
 
   let currentDate = new Date();
 
@@ -87,6 +84,8 @@ exports.addNewAudio = async (req, res) => {
       filePath: `${destination}/${generatedFilenameByMulter}`,
       yamlFilename: `${filenameNoExt}.yaml`,
       yamlFilenamePath: `${destination}/${filenameNoExt}.yaml`,
+      jsonFilename: `${filenameNoExt}.json`,
+      jsonFilenamePath: `${destination}/${filenameNoExt}.json`,
       // audio: req.audio, // don't need it???
     };
 
@@ -96,8 +95,11 @@ exports.addNewAudio = async (req, res) => {
 
     // create the yaml file
     let yamlStr = yaml.safeDump(data);
-
     await fsPromises.writeFile(`${destination}/${data.yamlFilename}`, yamlStr);
+
+    // create json file
+    let jsonStr = JSON.stringify(data);
+    await fsPromises.writeFile(`${destination}/${data.jsonFilename}`, jsonStr);
 
     res.status(200).json({ data: newAudio });
   } catch (err) {
@@ -122,6 +124,13 @@ exports.updateSingleAudio = async (req, res) => {
     let yamlStr = yaml.safeDump(data);
     await fsPromises.writeFile(`${destination}/${data.yamlFilename}`, yamlStr);
 
+    // also update json
+    // only if there is a filestring
+    if (data.jsonFilename) {
+      let jsonStr = JSON.stringify(data);
+      await fsPromises.writeFile(`${destination}/${data.jsonFilename}`, jsonStr);
+    }
+
     res.status(200).json({ data: update });
   } catch (err) {
     res.status(500).json({ error: err });
@@ -143,14 +152,19 @@ exports.deleteAudio = async (req, res) => {
     console.log(filePath);
     // uploads/2021-01-05-00-44-34_germany_de.wav
     const originalWav = filePath;
-    const targetWav =
-      'uploads/_deleted/' + originalWav.replace(/uploads\//g, '');
+    const targetWav = 'uploads/_deleted/' + originalWav.replace(/uploads\//g, '');
     await mv(originalWav, targetWav);
 
     const originalYaml = yamlFilePath;
-    const targetYaml =
-      'uploads/_deleted/' + originalYaml.replace(/uploads\//g, '');
+    const targetYaml = 'uploads/_deleted/' + originalYaml.replace(/uploads\//g, '');
     await mv(originalYaml, targetYaml);
+
+    if (audioData.jsonFilenamePath) {
+      const jsonFilePath = audioData.jsonFilenamePath;
+      const originaljson = jsonFilePath;
+      const targetjson = 'uploads/_deleted/' + originaljson.replace(/uploads\//g, '');
+      await mv(originaljson, targetjson);
+    }
 
     // remove from mongo
     let result = await Audio.remove({ _id: id });
