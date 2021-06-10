@@ -93,10 +93,6 @@ exports.addNewAudio = async (req, res) => {
       // audio: req.audio, // don't need it???
     };
 
-    // create mongodb entry
-    const audio = new Audio(data);
-    let newAudio = await audio.save();
-
     // create the yaml file
     console.log(data);
     console.log(yaml.safeDump(data));
@@ -106,6 +102,11 @@ exports.addNewAudio = async (req, res) => {
     // create json file
     let jsonStr = JSON.stringify(data);
     await fsPromises.writeFile(`${destination}/${data.jsonFilename}`, jsonStr);
+
+    // create mongodb entry
+    // only write to db when everything else is created
+    const audio = new Audio(data);
+    let newAudio = await audio.save();
 
     res.status(200).json({ data: newAudio });
   } catch (err) {
