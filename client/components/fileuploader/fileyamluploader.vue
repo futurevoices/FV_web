@@ -245,7 +245,29 @@ export default {
           formData.append(key, this.loadedJSON[key]);
         }
 
+        // add audio
         formData.append('audio', this.audioDetails.audio);
+
+        // overwrite tags as they are an array and throw an error otherwise
+        formData.delete('keywords');
+        formData.delete('tags');
+        let ktags = [];
+        this.loadedJSON.keywords.forEach(tag => {
+          ktags.push(tag);
+        });
+        formData.append('keywords', JSON.stringify(ktags));
+
+        let ttags = [];
+        this.loadedJSON.tags.forEach(tag => {
+          ttags.push(tag);
+        });
+        formData.append('tags', JSON.stringify(ttags));
+
+        //clean coordinates
+        formData.delete('lat');
+        formData.delete('long');
+        formData.append('long', this.loadedJSON.coordinates.long);
+        formData.append('lat', this.loadedJSON.coordinates.lat);
 
         this.addLoading = true;
         this.$axios

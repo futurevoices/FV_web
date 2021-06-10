@@ -44,6 +44,7 @@ exports.getSingleAudio = async (req, res) => {
 exports.addNewAudio = async (req, res) => {
   let generatedFilenameByMulter = res.req.file.filename;
   let destination = res.req.file.destination.substring(2);
+
   let filenameNoExt = generatedFilenameByMulter
     .split('.')
     .slice(0, -1)
@@ -97,7 +98,9 @@ exports.addNewAudio = async (req, res) => {
     let newAudio = await audio.save();
 
     // create the yaml file
-    let yamlStr = yaml.safeDump(data);
+    console.log(data);
+    console.log(yaml.safeDump(data));
+    let yamlStr = yaml.safeDump(data, { skipInvalid: true });
     await fsPromises.writeFile(`${destination}/${data.yamlFilename}`, yamlStr);
 
     // create json file
