@@ -182,64 +182,70 @@ export default {
         types.test(this.audioDetails.audio.type) ||
         types.test(this.audioDetails.audio.name)
       ) {
-        let formData = new FormData();
-        formData.append('literal_text', this.audioDetails.literal_text);
-        formData.append(
-          'literal_text_english',
-          this.audioDetails.literal_text_english
-        );
+        // let formData = new FormData();
+        // formData.append('literal_text', this.audioDetails.literal_text);
+        // formData.append(
+        //   'literal_text_english',
+        //   this.audioDetails.literal_text_english
+        // );
 
-        // keywords tags
-        let ktags = [];
-        this.tagsKeyword.forEach(tag => {
-          ktags.push(tag.text);
-        });
-        formData.append('keywords', JSON.stringify(ktags));
+        // // keywords tags
+        // let ktags = [];
+        // this.tagsKeyword.forEach(tag => {
+        //   ktags.push(tag.text);
+        // });
+        // formData.append('keywords', JSON.stringify(ktags));
 
-        // tag tags
-        let ttags = [];
-        this.tagsTag.forEach(tag => {
-          ttags.push(tag.text);
-        });
-        formData.append('tags', JSON.stringify(ttags));
+        // // tag tags
+        // let ttags = [];
+        // this.tagsTag.forEach(tag => {
+        //   ttags.push(tag.text);
+        // });
+        // formData.append('tags', JSON.stringify(ttags));
 
-        formData.append('language_short', this.audioDetails.language_short);
-        formData.append(
-          'language',
-          ISO6391.getName(this.audioDetails.language_short.toLowerCase())
-        );
+        // formData.append('language_short', this.audioDetails.language_short);
+        // formData.append(
+        //   'language',
+        //   ISO6391.getName(this.audioDetails.language_short.toLowerCase())
+        // );
 
-        formData.append('dialect', this.audioDetails.dialect);
-        formData.append(
-          'speaker_native_language',
-          this.audioDetails.speaker_native_language
-        );
-        formData.append('country_code', this.audioDetails.country);
-        formData.append(
-          'country',
-          countriesList.countries[this.audioDetails.country].name
-        );
+        // formData.append('dialect', this.audioDetails.dialect);
+        // formData.append(
+        //   'speaker_native_language',
+        //   this.audioDetails.speaker_native_language
+        // );
+        // formData.append('country_code', this.audioDetails.country);
+        // formData.append(
+        //   'country',
+        //   countriesList.countries[this.audioDetails.country].name
+        // );
 
-        formData.append('town', this.audioDetails.town);
-        formData.append('long', this.audioDetails.long);
-        formData.append('lat', this.audioDetails.lat);
-        formData.append('audio', this.audioDetails.audio);
+        // formData.append('town', this.audioDetails.town);
+        // formData.append('long', this.audioDetails.long);
+        // formData.append('lat', this.audioDetails.lat);
+        // formData.append('audio', this.audioDetails.audio);
 
-        // timestamps
-        const timestampstring = new Date().toString();
+        // // timestamps
+        // const timestampstring = new Date().toString();
 
-        formData.append(
-          'user_timestamp',
-          new Date(
-            new Date().getTime() - new Date().getTimezoneOffset() * 60000
-          ).toISOString()
-        );
-        formData.append('user_timestamp_string', timestampstring);
+        // formData.append(
+        //   'user_timestamp',
+        //   new Date(
+        //     new Date().getTime() - new Date().getTimezoneOffset() * 60000
+        //   ).toISOString()
+        // );
+        // formData.append('user_timestamp_string', timestampstring);
 
         // Display the key/value pairs
         // for (var pair of formData.entries()) {
         //   console.log(pair[0] + ", " + pair[1]);
         // }
+
+        var formData = new FormData();
+
+        for (var key in this.loadedJSON) {
+          formData.append(key, this.loadedJSON[key]);
+        }
 
         this.addLoading = true;
         this.$axios
