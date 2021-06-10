@@ -773,6 +773,8 @@ export default {
         filename: this.loadedData.filename,
         yamlFilename: this.loadedData.yamlFilename,
         yamlFilenamePath: this.loadedData.yamlFilenamePath,
+        jsonFilename: this.loadedData.jsonFilename,
+        jsonFilenamePath: this.loadedData.jsonFilenamePath,
         version: this.loadedData.version,
         user_timestamp: this.loadedData.user_timestamp,
 

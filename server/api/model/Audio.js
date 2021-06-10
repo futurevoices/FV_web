@@ -13,6 +13,14 @@ let audioSchema = mongoose.Schema({
     type: 'String',
     default: null,
   },
+  jsonFilename: {
+    type: 'String',
+    default: null,
+  },
+  jsonFilenamePath: {
+    type: 'String',
+    default: null,
+  },
   filePath: {
     type: 'String',
     default: null,
@@ -31,9 +39,7 @@ let audioSchema = mongoose.Schema({
   },
   user_timestamp: {
     type: 'Date',
-    default: new Date(
-      new Date().getTime() - new Date().getTimezoneOffset() * 60000
-    ).toISOString(),
+    default: new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString(),
   },
   user_timestamp_string: {
     type: 'Date',
