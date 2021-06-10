@@ -19,6 +19,7 @@
     "countries-list": "^2.5.6",
     "iso-639-1": "^2.1.4",
     "jquery": "^3.6.0",
+    "js-yaml": "^4.1.0",
     "nuxt": "^2.14.6",
     "nuxt-matomo": "^1.2.4",
     "recorder-js": "^1.0.7",
@@ -27,7 +28,8 @@
     "three": "^0.127.0",
     "vanilla-lazyload": "^17.3.1",
     "vh-check": "^2.0.5",
-    "vue-dragscroll": "^2.1.0"
+    "vue-dragscroll": "^2.1.0",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "@nuxtjs/router-extras": "^1.1.1",
