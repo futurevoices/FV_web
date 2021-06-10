@@ -44,7 +44,10 @@ exports.getSingleAudio = async (req, res) => {
 exports.addNewAudio = async (req, res) => {
   let generatedFilenameByMulter = res.req.file.filename;
   let destination = res.req.file.destination.substring(2);
-  let filenameNoExt = generatedFilenameByMulter.split('.').slice(0, -1).join('.');
+  let filenameNoExt = generatedFilenameByMulter
+    .split('.')
+    .slice(0, -1)
+    .join('.');
 
   let currentDate = new Date();
 
@@ -108,6 +111,7 @@ exports.addNewAudio = async (req, res) => {
 };
 
 exports.updateSingleAudio = async (req, res) => {
+  // careful: this data is calculated from the frontend and not the backend.
   let data = req.body;
   const id = req.body._id;
   console.log(data);
@@ -128,7 +132,11 @@ exports.updateSingleAudio = async (req, res) => {
     // only if there is a filestring
     if (data.jsonFilename) {
       let jsonStr = JSON.stringify(data);
-      await fsPromises.writeFile(`${destination}/${data.jsonFilename}`, jsonStr);
+      console.log(jsonStr);
+      await fsPromises.writeFile(
+        `${destination}/${data.jsonFilename}`,
+        jsonStr
+      );
     }
 
     res.status(200).json({ data: update });
@@ -152,17 +160,20 @@ exports.deleteAudio = async (req, res) => {
     console.log(filePath);
     // uploads/2021-01-05-00-44-34_germany_de.wav
     const originalWav = filePath;
-    const targetWav = 'uploads/_deleted/' + originalWav.replace(/uploads\//g, '');
+    const targetWav =
+      'uploads/_deleted/' + originalWav.replace(/uploads\//g, '');
     await mv(originalWav, targetWav);
 
     const originalYaml = yamlFilePath;
-    const targetYaml = 'uploads/_deleted/' + originalYaml.replace(/uploads\//g, '');
+    const targetYaml =
+      'uploads/_deleted/' + originalYaml.replace(/uploads\//g, '');
     await mv(originalYaml, targetYaml);
 
     if (audioData.jsonFilenamePath) {
       const jsonFilePath = audioData.jsonFilenamePath;
       const originaljson = jsonFilePath;
-      const targetjson = 'uploads/_deleted/' + originaljson.replace(/uploads\//g, '');
+      const targetjson =
+        'uploads/_deleted/' + originaljson.replace(/uploads\//g, '');
       await mv(originaljson, targetjson);
     }
 
