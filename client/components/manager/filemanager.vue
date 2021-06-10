@@ -760,11 +760,11 @@ export default {
           lat: this.audioDetails.lat,
           long: this.audioDetails.long
         },
-        lat: this.audioDetails.lat,
         user_timestamp: this.loadedData.user_timestamp,
         user_timestamp_string: this.loadedData.user_timestamp_string,
         approved: this.audioDetails.approved,
         approved_by: this.audioDetails.approved_by,
+        town: this.audioDetails.town,
         approval_date: new Date(
           new Date().getTime() - new Date().getTimezoneOffset() * 60000
         ).toISOString(),

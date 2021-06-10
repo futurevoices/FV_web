@@ -93,9 +93,15 @@ exports.addNewAudio = async (req, res) => {
       // audio: req.audio, // don't need it???
     };
 
+    if (req.body.long == 'null') {
+      data.coordinates.long = null;
+    }
+    if (req.body.lat == 'null') {
+      data.coordinates.lat = null;
+    }
+
     // create the yaml file
     console.log(data);
-    console.log(yaml.safeDump(data));
     let yamlStr = yaml.safeDump(data, { skipInvalid: true });
     await fsPromises.writeFile(`${destination}/${data.yamlFilename}`, yamlStr);
 
@@ -110,6 +116,7 @@ exports.addNewAudio = async (req, res) => {
 
     res.status(200).json({ data: newAudio });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ error: err });
   }
 };
