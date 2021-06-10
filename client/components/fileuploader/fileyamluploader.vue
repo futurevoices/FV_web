@@ -148,8 +148,6 @@ export default {
       this.addState = !this.addState;
     },
     handleFileUpload() {
-      console.log('yeah');
-      console.log(this.$refs.file.files);
       this.audioDetails.audio = this.$refs.file.files[0];
       console.log(this.audioDetails.audio);
       console.log(this.audioDetails.audio.type);
@@ -246,6 +244,8 @@ export default {
         for (var key in this.loadedJSON) {
           formData.append(key, this.loadedJSON[key]);
         }
+
+        formData.append('audio', this.audioDetails.audio);
 
         this.addLoading = true;
         this.$axios
