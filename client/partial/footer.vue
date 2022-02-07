@@ -2,7 +2,7 @@
   <footer>
     <audio
       id="audioStream"
-      src="https://dradio-edge-3099-dus-ts-cdn.cast.addradio.de/dradio/event/live/mp3/128/stream.mp3"
+      src="https://gencomp.medienhaus.udk-berlin.de:8443/future.mp3"
     ></audio>
     <div class="footerWrapper">
       <div class="wrap">
@@ -53,8 +53,7 @@ export default {
       isRunning: false,
       interval: undefined, // store the interval here
       stream1: true,
-      stream1src:
-        'https://dradio-edge-3099-dus-ts-cdn.cast.addradio.de/dradio/event/live/mp3/128/stream.mp3',
+      stream1src: 'https://gencomp.medienhaus.udk-berlin.de:8443/future.mp3',
       stream2: false,
       stream2src: 'https://gencomp.medienhaus.udk-berlin.de:8443/future.mp3'
     };
@@ -261,6 +260,7 @@ footer {
         justify-content: center;
         align-items: center;
         border-right: 1px solid black;
+        display: none;
 
         div {
           height: 50%;
@@ -366,6 +366,7 @@ footer {
           border-right: 0px solid black;
 
           flex: 1;
+          display: none;
 
           div {
             &:first-child {
