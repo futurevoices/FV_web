@@ -506,12 +506,13 @@ export default {
         let cleanedResponse = [];
 
         // filter out all unapproved recordings, except the last one
+        // update 20.02.23 - filter out all unapproved recordings
         for (let i = 0; i < response.length; i++) {
           const element = response[i];
-          if (i === 0) {
-            cleanedResponse.push(element);
-            continue;
-          }
+          // if (i === 0) {
+          //   cleanedResponse.push(element);
+          //   continue;
+          // }
           if (element.approved) {
             cleanedResponse.push(element);
           }
