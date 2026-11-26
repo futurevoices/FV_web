@@ -1,11 +1,23 @@
+const SITE_URL = 'https://futurevoices.s4ntp.org/';
+const DESCRIPTION =
+  'A live-generated radio stream composed from hopes, fears and dreams of contributors from around the world.';
+
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'FutureVoices',
+    title: 'Future Voices',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: DESCRIPTION },
+      { hid: 'og:title', property: 'og:title', content: 'Future Voices' },
+      { hid: 'og:site_name', property: 'og:site_name', content: 'Future Voices' },
+      { hid: 'og:description', property: 'og:description', content: DESCRIPTION },
+      { hid: 'og:url', property: 'og:url', content: SITE_URL },
+      { hid: 'og:image', property: 'og:image', content: SITE_URL + 'og-image.jpg' },
+      { hid: 'og:image:width', property: 'og:image:width', content: '1200' },
+      { hid: 'og:image:height', property: 'og:image:height', content: '630' },
+      { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
