@@ -25,7 +25,8 @@ import {
   MeshMatcapMaterial,
   Mesh,
   Color,
-  TextureLoader
+  TextureLoader,
+  Vector3
 } from 'three';
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
@@ -73,7 +74,8 @@ export default {
         1000
       );
 
-      this.camera.position.set(0, 0, 100);
+      // slightly from above, so the flat ring reads as a ring while it turns
+      this.camera.position.set(0, 35, 95);
       this.camera.lookAt(0, 0, 0);
 
       this.scene = new Scene();
@@ -135,6 +137,14 @@ export default {
           that.mData.moebius.scale,
           that.mData.moebius.scale,
           that.mData.moebius.scale
+        );
+
+        // The model's ring plane is tilted in moebius.fbx (normal measured with
+        // a PCA of its vertices). Turn that normal to +Y so the ring lies flat
+        // and the auto-rotation turns it like a carousel.
+        object.quaternion.setFromUnitVectors(
+          new Vector3(-0.52, 0.65, -0.555).normalize(),
+          new Vector3(0, 1, 0)
         );
 
         that.scene.add(object);
