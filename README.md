@@ -23,6 +23,10 @@ to this server, so a new subdomain needs no DNS change.
   (iptables). Before that, the private API was reachable without auth on
   `:8094/audio/private/...`. nginx reaches the API through `127.0.0.1`.
 - Matomo is removed: `stats.vinzenzaubry.com` does not answer any more.
+- Cyberia (the Unity WebGL world, compiled build only, no source) is served at `/cyberia/`:
+  on the server, `~/futurevoices-gencomp/static/cyberia` is a symlink to
+  `~/cyberia.futurevoices.radio` (190 MB, not in git). Its built-in text still names futurevoices.radio.
+- Contact address: tutorengencomp@gmail.com.
 - `client/package.json` and the lock files match what is installed on the server
   (Node 14.15.3, `sass ~1.32.12`, `js-yaml ^3`). Newer versions do not build with Node 14.
 

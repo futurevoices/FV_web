@@ -33,7 +33,7 @@
           <p @click="activateStream()">Listen</p>
           <nuxt-link to="/contribute">Contribute</nuxt-link>
           <a
-            href="mailto:?subject=Future%20Voices%20Radio&body=Hello%2CI'd%20like%20to%20invite%20you%20to%20participate%20with%20a%20recording%20about%20the%20future%20at%20https%3A%2F%2Ffuturevoices.radio%2F.%20Enjoy!"
+            href="mailto:?subject=Future%20Voices%20Radio&body=Hello%2CI'd%20like%20to%20invite%20you%20to%20participate%20with%20a%20recording%20about%20the%20future%20at%20https%3A%2F%2Ffuturevoices.s4ntp.org%2F.%20Enjoy!"
             >Share</a
           >
         </div>
@@ -80,7 +80,7 @@
           </h3>
           <br />
 
-          <a href="http://cyberia.futurevoices.radio/" target="_blank">
+          <a href="/cyberia/" target="_blank">
             <img
               class="link-image-game"
               src="/gameimage.png"
