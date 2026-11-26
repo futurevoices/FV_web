@@ -85,6 +85,7 @@ export default {
 
       // slightly from above, so the flat ring reads as a ring while it turns
       this.camera.position.set(0, 35, 95);
+      this.cameraDistance = this.camera.position.length(); // kept by fitCamera()
       this.camera.lookAt(0, 0, 0);
 
       this.scene = new Scene();
@@ -125,42 +126,42 @@ export default {
     // fillHeight of the canvas. Direction and height angle of the camera stay.
     // The camera looks down at the strip, so its picture is not centred in
     // the canvas; a view offset moves it to the vertical centre of the stage.
+    // The camera keeps its original position (distance and height angle), so
+    // the perspective looks the same on every screen; only the zoom changes.
     fitCamera() {
       if (!this.fitPoints || !this.camera) return;
       const cam = this.camera;
       const [w, h] = this.mData.rendererSize;
       cam.clearViewOffset();
+      cam.zoom = 1;
+      cam.updateProjectionMatrix();
       const dir = cam.position.clone().normalize();
-      const v = new Vector3();
-      let distance = cam.position.length();
-      let centreY = 0;
-      for (let pass = 0; pass < 4; pass++) {
-        cam.position.copy(dir).multiplyScalar(distance);
-        cam.lookAt(0, 0, 0);
-        cam.updateMatrixWorld();
-        let halfX = 0;
-        let minY = Infinity;
-        let maxY = -Infinity;
-        for (let k = 0; k < 12; k++) {
-          const a = (k * Math.PI) / 6;
-          const c = Math.cos(a);
-          const sn = Math.sin(a);
-          for (const p of this.fitPoints) {
-            v.set(c * p.x + sn * p.z, p.y, -sn * p.x + c * p.z).project(cam);
-            halfX = Math.max(halfX, Math.abs(v.x));
-            minY = Math.min(minY, v.y);
-            maxY = Math.max(maxY, v.y);
-          }
-        }
-        centreY = (minY + maxY) / 2;
-        if (pass === 3) break; // last pass only measures the centre
-        distance *= Math.max(
-          halfX / this.mData.moebius.fillWidth,
-          (maxY - minY) / 2 / this.mData.moebius.fillHeight
-        );
-      }
-      cam.position.copy(dir).multiplyScalar(distance);
+      cam.position.copy(dir).multiplyScalar(this.cameraDistance);
       cam.lookAt(0, 0, 0);
+      cam.updateMatrixWorld();
+      const v = new Vector3();
+      let halfX = 0;
+      let minY = Infinity;
+      let maxY = -Infinity;
+      for (let k = 0; k < 12; k++) {
+        const a = (k * Math.PI) / 6;
+        const c = Math.cos(a);
+        const sn = Math.sin(a);
+        for (const p of this.fitPoints) {
+          v.set(c * p.x + sn * p.z, p.y, -sn * p.x + c * p.z).project(cam);
+          halfX = Math.max(halfX, Math.abs(v.x));
+          minY = Math.min(minY, v.y);
+          maxY = Math.max(maxY, v.y);
+        }
+      }
+      // zoom scales the projected image linearly around the canvas centre
+      const zoom = Math.min(
+        this.mData.moebius.fillWidth / halfX,
+        this.mData.moebius.fillHeight / ((maxY - minY) / 2)
+      );
+      cam.zoom = zoom;
+      cam.updateProjectionMatrix();
+      const centreY = ((minY + maxY) / 2) * zoom;
       if (w && h) cam.setViewOffset(w, h, 0, (-centreY * h) / 2, w, h);
       if (this.controls) this.controls.update();
     },
