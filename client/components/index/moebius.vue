@@ -26,7 +26,9 @@ import {
   Mesh,
   Color,
   TextureLoader,
-  Vector3
+  Vector3,
+  Matrix4,
+  Group
 } from 'three';
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
@@ -42,7 +44,7 @@ export default {
         rendererSize: [0, 0],
         moebius: {
           scale: 0.08,
-          autoRotateSpeed: 1
+          spinSpeed: 0.1 // radians per second, turning in the plane of the screen
         }
       }
     };
@@ -74,8 +76,8 @@ export default {
         1000
       );
 
-      // slightly from above, so the flat ring reads as a ring while it turns
-      this.camera.position.set(0, 35, 95);
+      // far enough that the loop also fits when it stands upright during the spin
+      this.camera.position.set(0, 0, 135);
       this.camera.lookAt(0, 0, 0);
 
       this.scene = new Scene();
@@ -87,8 +89,6 @@ export default {
     },
     addControls() {
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-      this.controls.autoRotate = true;
-      this.controls.autoRotateSpeed = this.mData.moebius.autoRotateSpeed;
       this.controls.rotateSpeed = 0.4;
       this.controls.enableDamping = true;
       this.controls.dampingFactor = 0.1;
@@ -139,19 +139,29 @@ export default {
           that.mData.moebius.scale
         );
 
-        // The model's ring plane is tilted in moebius.fbx (normal measured with
-        // a PCA of its vertices). Turn that normal to +Y so the ring lies flat
-        // and the auto-rotation turns it like a carousel.
-        object.quaternion.setFromUnitVectors(
-          new Vector3(-0.52, 0.65, -0.555).normalize(),
-          new Vector3(0, 1, 0)
+        // moebius.fbx stores the loop tilted. Its axes, measured with a PCA of
+        // the vertices: longest extent `long`, plane normal `normal`. Turn the
+        // loop so it faces the camera as an infinity sign (long axis
+        // horizontal); the pivot then spins it in the plane of the screen.
+        const long = new Vector3(0.854, 0.396, -0.337).normalize();
+        const normal = new Vector3(0.52, -0.65, 0.555).normalize();
+        const side = new Vector3().crossVectors(normal, long).normalize();
+        object.quaternion.setFromRotationMatrix(
+          new Matrix4().makeBasis(long, side, normal).transpose()
         );
 
-        that.scene.add(object);
+        that.pivot = new Group();
+        that.pivot.add(object);
+        that.scene.add(that.pivot);
       });
     },
-    render() {
+    render(now) {
       requestAnimationFrame(this.render);
+      if (this.pivot && this.lastFrame !== undefined) {
+        const seconds = Math.min((now - this.lastFrame) / 1000, 0.1);
+        this.pivot.rotation.z -= this.mData.moebius.spinSpeed * seconds;
+      }
+      this.lastFrame = now;
       this.controls.update();
       this.renderer.render(this.scene, this.camera);
     }
