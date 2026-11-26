@@ -1,6 +1,39 @@
 # futurevoices.radio
 
-## Frontend Server
+## Current setup: futurevoices.s4ntp.org (since November 2026)
+
+The domain `futurevoices.radio` expired on 29.10.2026. The site now runs at
+[https://futurevoices.s4ntp.org/](https://futurevoices.s4ntp.org/), on the same server
+(`gencomp.medienhaus.udk-berlin.de`, SSH port 2222). `*.s4ntp.org` has a wildcard DNS record
+to this server, so a new subdomain needs no DNS change.
+
+| Part | Where | Port |
+|---|---|---|
+| Frontend (this branch, `client/`) | `~/futurevoices-gencomp`, pm2 `future voices frontend (gencomp /futurevoices)` | 8097 |
+| Old frontend (`main`, for `futurevoices.radio`) | `~/zukunftsmusik.radio/public`, pm2 `future voices frontend` | 8096 |
+| API server (`server/`) | `~/zukunftsmusik.radio/node`, pm2 `future voices backend + db` | 8094 |
+
+- nginx: `/etc/nginx/sites-available/futurevoices-s4ntp` (certificate by certbot).
+  `/manager`, `/fileupload` and `/audio/private` use basic auth with
+  `~/zukunftsmusik.radio/.htpasswd`.
+- `https://gencomp.medienhaus.udk-berlin.de/futurevoices/` redirects to the new address
+  (`/etc/nginx/snippets/futurevoices.conf`, included in the gencomp block of
+  `/etc/nginx/sites-available/s4ntp`).
+- Port 8094 is blocked from outside by the systemd unit `futurevoices-block-8094`
+  (iptables). Before that, the private API was reachable without auth on
+  `:8094/audio/private/...`. nginx reaches the API through `127.0.0.1`.
+- Matomo is removed: `stats.vinzenzaubry.com` does not answer any more.
+- `client/package.json` and the lock files match what is installed on the server
+  (Node 14.15.3, `sass ~1.32.12`, `js-yaml ^3`). Newer versions do not build with Node 14.
+
+### Deploy the frontend
+
+1. Copy `client/` without `node_modules`, `.nuxt` and `ecosystem.config.js` to
+   `~/futurevoices-gencomp` (the folder keeps its own `ecosystem.config.js` with `PORT: 8097`).
+2. On the server: `cd ~/futurevoices-gencomp && ./node_modules/.bin/nuxt build`
+3. `pm2 restart "future voices frontend (gencomp /futurevoices)"`
+
+## Frontend Server (futurevoices.radio, until 2026)
 
 ### Deployment
 

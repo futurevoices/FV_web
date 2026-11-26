@@ -40,18 +40,6 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
     '@nuxtjs/router-extras',
-    [
-      'nuxt-matomo',
-      {
-        matomoUrl: 'https://stats.vinzenzaubry.com/',
-        siteId: 5,
-        cookies: false,
-        trackerUrl: 'https://stats.vinzenzaubry.com/vinni.php?',
-        scriptUrl: 'https://stats.vinzenzaubry.com/vinni.js'
-        // debug: true,
-        // verbose: true,
-      }
-    ]
   ],
 
   bootstrapVue: {
@@ -84,7 +72,7 @@ export default {
   },
 
   server: {
-    port: 8096, // default: 3000
+    port: process.env.PORT || 8096, // default: 3000
     host: '127.0.0.1' // default: localhost 0.0.0.0 for sharing // 127.0.0.1 for online
   },
 
