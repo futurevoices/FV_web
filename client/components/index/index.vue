@@ -59,21 +59,17 @@
             <thead>
               <tr>
                 <th class="tg-0lax">Recordings</th>
-                <th class="tg-0lax">soon</th>
+                <th class="tg-0lax">{{ stats.recordings }}</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td class="tg-0lax">Languages</td>
-                <td class="tg-0lax">soon</td>
+                <td class="tg-0lax">{{ stats.languages }}</td>
               </tr>
-              <tr>
-                <td class="tg-0lax">Current Language</td>
-                <td class="tg-0lax">soon</td>
-              </tr>
-              <tr>
+              <tr v-if="stats.composition">
                 <td class="tg-0lax">Current Composition<br /></td>
-                <td class="tg-0lax">soon</td>
+                <td class="tg-0lax">{{ stats.composition }}</td>
               </tr>
             </tbody>
           </table>
@@ -111,10 +107,47 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      stats: {
+        recordings: '…',
+        languages: '…',
+        composition: null
+      }
+    };
   },
   computed: {},
   methods: {
+    async loadStats() {
+      try {
+        const all = await this.$axios.$get('/audio');
+        // same rule as the explore page: approved recordings plus the newest one
+        const newest = all[all.length - 1];
+        const shown = all.filter(a => a.approved || a === newest);
+        const languages = new Set(
+          shown
+            .map(a => (a.language || '').trim().toLowerCase())
+            .filter(l => l)
+        );
+        this.stats.recordings = shown.length;
+        this.stats.languages = languages.size;
+      } catch (err) {
+        this.stats.recordings = '-';
+        this.stats.languages = '-';
+      }
+      // the stream sends a title only if the composition software sets one
+      try {
+        const res = await fetch(
+          'https://gencomp.medienhaus.udk-berlin.de:8443/status-json.xsl'
+        );
+        const json = await res.json();
+        let sources = json.icestats.source || [];
+        if (!Array.isArray(sources)) sources = [sources];
+        const live = sources.find(s => /\/future\.mp3$/.test(s.listenurl || ''));
+        this.stats.composition = (live && live.title) || null;
+      } catch (err) {
+        this.stats.composition = null;
+      }
+    },
     resize() {
       // resize the background image
       // let height = document.getElementById('introText').offsetHeight;
@@ -141,6 +174,7 @@ export default {
     }
   },
   mounted() {
+    this.loadStats();
     this.resize();
     window.addEventListener('resize', this.resize);
   },
