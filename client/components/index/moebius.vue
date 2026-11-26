@@ -1,17 +1,19 @@
 <template>
-  <section class="">
+  <section class="moebius-root">
     <div id="canvasWrapper"></div>
   </section>
 </template>
 
 <style lang="scss" scoped>
+// fills the stage box of the landing page; the camera fits the strip into it
+.moebius-root,
 #canvasWrapper {
-  display: inline-block;
-  max-width: 900px;
-  max-height: 900px;
-  width: 100vw;
-  height: 100vw;
-  // border: 1px solid black;
+  width: 100%;
+  height: 100%;
+}
+#canvasWrapper {
+  position: relative;
+  overflow: hidden;
 }
 </style>
 
@@ -42,7 +44,9 @@ export default {
         rendererSize: [0, 0],
         moebius: {
           scale: 0.08,
-          autoRotateSpeed: 1
+          autoRotateSpeed: 1,
+          fillWidth: 0.9, // share of the stage the strip may use over a full turn
+          fillHeight: 0.85
         }
       }
     };
@@ -51,6 +55,10 @@ export default {
   methods: {
     addEventListeners() {
       window.addEventListener('resize', this.resize);
+      if (window.ResizeObserver) {
+        this.resizeObserver = new ResizeObserver(() => this.resize());
+        this.resizeObserver.observe(this.wrapper);
+      }
     },
     loadTextures() {
       this.textureLoader = new TextureLoader();
@@ -59,7 +67,8 @@ export default {
     init() {
       this.wrapper = document.getElementById('canvasWrapper');
       this.renderer = new WebGLRenderer({ antialias: true, alpha: true });
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.renderer.setPixelRatio(window.devicePixelRatio);
+      this.renderer.setSize(this.wrapper.clientWidth, this.wrapper.clientHeight);
       this.wrapper.appendChild(this.renderer.domElement);
 
       this.mData.rendererSize = [
@@ -98,20 +107,62 @@ export default {
       // this.controls.minPolarAngle = Math.PI / 2;
     },
     resize() {
-      this.mData.rendererSize = [
-        this.wrapper.clientWidth,
-        this.wrapper.clientHeight
-      ];
+      const w = this.wrapper.clientWidth;
+      const h = this.wrapper.clientHeight;
+      if (!w || !h) return;
+      if (w === this.mData.rendererSize[0] && h === this.mData.rendererSize[1]) return;
+      this.mData.rendererSize = [w, h];
 
-      this.camera.aspect = this.wrapper.clientWidth / this.wrapper.clientHeight;
+      this.camera.aspect = w / h;
       this.camera.updateProjectionMatrix();
-
-      this.renderer.setSize(
-        this.mData.rendererSize[0],
-        this.mData.rendererSize[1]
-      );
-
       this.renderer.setPixelRatio(window.devicePixelRatio);
+      this.renderer.setSize(w, h);
+      this.fitCamera();
+    },
+    // Sets the camera distance so the strip fills the stage on every screen:
+    // it measures the projected strip over a full turn (the auto-rotation turns
+    // the camera around Y) and keeps the largest extent inside fillWidth /
+    // fillHeight of the canvas. Direction and height angle of the camera stay.
+    // The camera looks down at the strip, so its picture is not centred in
+    // the canvas; a view offset moves it to the vertical centre of the stage.
+    fitCamera() {
+      if (!this.fitPoints || !this.camera) return;
+      const cam = this.camera;
+      const [w, h] = this.mData.rendererSize;
+      cam.clearViewOffset();
+      const dir = cam.position.clone().normalize();
+      const v = new Vector3();
+      let distance = cam.position.length();
+      let centreY = 0;
+      for (let pass = 0; pass < 4; pass++) {
+        cam.position.copy(dir).multiplyScalar(distance);
+        cam.lookAt(0, 0, 0);
+        cam.updateMatrixWorld();
+        let halfX = 0;
+        let minY = Infinity;
+        let maxY = -Infinity;
+        for (let k = 0; k < 12; k++) {
+          const a = (k * Math.PI) / 6;
+          const c = Math.cos(a);
+          const sn = Math.sin(a);
+          for (const p of this.fitPoints) {
+            v.set(c * p.x + sn * p.z, p.y, -sn * p.x + c * p.z).project(cam);
+            halfX = Math.max(halfX, Math.abs(v.x));
+            minY = Math.min(minY, v.y);
+            maxY = Math.max(maxY, v.y);
+          }
+        }
+        centreY = (minY + maxY) / 2;
+        if (pass === 3) break; // last pass only measures the centre
+        distance *= Math.max(
+          halfX / this.mData.moebius.fillWidth,
+          (maxY - minY) / 2 / this.mData.moebius.fillHeight
+        );
+      }
+      cam.position.copy(dir).multiplyScalar(distance);
+      cam.lookAt(0, 0, 0);
+      if (w && h) cam.setViewOffset(w, h, 0, (-centreY * h) / 2, w, h);
+      if (this.controls) this.controls.update();
     },
     loadMoebius() {
       const that = this;
@@ -148,6 +199,24 @@ export default {
         );
 
         that.scene.add(object);
+
+        // a sample of the strip's points, used to fit the camera
+        object.updateMatrixWorld(true);
+        const points = [];
+        object.traverse(function(child) {
+          if (!child.isMesh) return;
+          const pos = child.geometry.attributes.position;
+          const step = Math.max(1, Math.floor(pos.count / 1500));
+          for (let i = 0; i < pos.count; i += step) {
+            points.push(
+              new Vector3(pos.getX(i), pos.getY(i), pos.getZ(i)).applyMatrix4(
+                child.matrixWorld
+              )
+            );
+          }
+        });
+        that.fitPoints = points;
+        that.fitCamera();
       });
     },
     render() {
@@ -157,9 +226,9 @@ export default {
     }
   },
   mounted() {
-    this.addEventListeners();
     this.loadTextures();
     this.init();
+    this.addEventListeners();
     this.addControls();
     this.resize();
     this.render();
@@ -168,6 +237,7 @@ export default {
   created() {},
   destroyed() {
     window.removeEventListener('resize', this.resize);
+    if (this.resizeObserver) this.resizeObserver.disconnect();
   }
 };
 </script>

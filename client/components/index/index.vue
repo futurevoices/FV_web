@@ -12,9 +12,9 @@
       ></video>
     </div>
     <div class="contentWrapper">
-      <div id="moebius" class="moebius"><Moebius /></div>
       <div id="introText" class="content">
-        <div id="moebius-placeholder"></div>
+        <!-- the 3D strip sits in the page flow, between the menu and the text -->
+        <div class="moebius-stage"><Moebius /></div>
         <div v-if="data.data">
           <div class="news-summary" v-if="data.data.summarynews !== ''">
             <div class="news-summary-background"></div>
@@ -148,40 +148,15 @@ export default {
         this.stats.composition = null;
       }
     },
-    resize() {
-      // resize the background image
-      // let height = document.getElementById('introText').offsetHeight;
-      // height += 100;
-      // document.getElementById('background').style.height = height + 'px';
-      // console.log(height);
-
-      // resize moebius placeholder
-      // let height = document.getElementById('moebius').offsetHeight;
-      let height;
-      if (window.innerWidth >= '900') {
-        height = 650;
-      } else if (window.innerWidth < '900' && window.innerWidth > 480) {
-        height = 650; // to do
-      } else {
-        height = window.innerWidth * 0.8;
-      }
-
-      document.getElementById('moebius-placeholder').style.height =
-        height + 'px';
-    },
     activateStream() {
       this.$nuxt.$emit('start-stream');
     }
   },
   mounted() {
     this.loadStats();
-    this.resize();
-    window.addEventListener('resize', this.resize);
   },
   created() {},
-  destroyed() {
-    window.removeEventListener('resize', this.resize);
-  }
+  destroyed() {}
 };
 </script>
 
@@ -230,18 +205,15 @@ section {
     z-index: 1;
   }
 }
-.moebius {
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  // background-color: yellow;
+.moebius-stage {
+  // Height between the menu and the start of the text. The strip is fitted
+  // into this box by the camera (see components/index/moebius.vue).
+  position: relative;
   width: 100%;
-  height: auto;
-  top: 0;
-  left: 0;
+  height: unquote('clamp(220px, min(52vh, 80vw), 600px)');
+  margin-bottom: 16px;
+  pointer-events: none;
   z-index: 3;
-  margin-top: -18vh;
-  z-index: 101;
 }
 
 .contentWrapper {
@@ -401,18 +373,17 @@ section {
   }
 }
 
+
+/* Tablets: the content is as wide as the screen, keep the text off the faded edge */
 @media only screen and (max-width: 900px) {
-  .moebius {
-    margin-top: -5vw;
+  section {
+    padding-left: 32px;
+    padding-right: 32px;
   }
 }
 
 /* Extra Small Devices, Phones */
 @media only screen and (max-width: 480px) {
-  .moebius {
-    transform: translateX(-20px);
-  }
-
   #background {
     width: calc(100vw + 60px);
     left: -30px;
